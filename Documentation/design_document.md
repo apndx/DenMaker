@@ -20,13 +20,13 @@ Initial ideas for algorithms and estimates for time / space requirements:
 
 ## Datastructures
 
-Here are the initial ideas for datastructures needed. I will start by using the structures offered by Java, and gradually replace them with my own
+Here are the initial ideas for datastructures needed and initial estimations of their space requirements (n is the amount of tiles on the area). I will start by using the structures offered by Java, and gradually replace them with my own.
 
-* Array to keep track of the tiles - space requirements O(n)
-* List for the neighbourgs
-* Datastructure that keeps track of the seperate areas - a spanning tree 
-* Minimum heap for the tiles that have a random weight 
-* Queue for the Prim
+* Array to keep track of the tiles - space O(n)
+* List for the neighbourgs of each tile - space  O(n)
+* Datastructure that keeps track of the seperate areas, a spanning tree -space  O(n)
+* Minimum heap for the tiles that have a random weight - space O(n)
+* Queue for the Prim - space O(n)
 
 
 ## Input
