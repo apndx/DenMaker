@@ -1,5 +1,5 @@
 # DenMaker
-Project for datastructure and algorithm course at the University of Helsinki. DenMaker creates random dungeons that the user can adjust with some parametres. DenMaker will be created using the method described by Bob Nystrom in his [blog entry](http://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/).
+Project for datastructure and algorithm course at the University of Helsinki. DenMaker constructs random dungeons that the user can adjust with some parametres. DenMaker will be created using the method described by Bob Nystrom in his [blog entry](http://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/).
 
 ## Documents and links
 

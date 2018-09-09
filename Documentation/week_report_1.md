@@ -1,6 +1,6 @@
 # Week 1
 
-[Hour list](https://github.com/apndx/DenMaker/blob/Documentation/hours.md)
+[Hour list](https://github.com/apndx/DenMaker/blob/master/Documentation/hours.md)
 
 ## What has happened during week 1
 

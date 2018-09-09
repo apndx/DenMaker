@@ -48,7 +48,7 @@ The resulting dungeon will be demonstrated in seperate files that portray the co
 
 ## Sources:
 
-http://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/
-https://en.wikipedia.org/wiki/Maze_generation_algorithm
-[Tirakirja](https://github.com/pllk/tirakirja/blob/master/tirakirja.pdf) by Antti Laaksonen
-Course material by Jyrki Kivinen for Datastructures and algorithms course Spring 2018
+* [Rooms and Mazes](http://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/)
+* [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm)
+* [Tirakirja](https://github.com/pllk/tirakirja/blob/master/tirakirja.pdf) by Antti Laaksonen
+* Course material by Jyrki Kivinen for Datastructures and algorithms course Spring 2018
