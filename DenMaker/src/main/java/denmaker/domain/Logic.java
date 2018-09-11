@@ -5,6 +5,8 @@
  */
 package denmaker.domain;
 
+import java.util.Random;
+
 /**
  *
  * @author apndx
@@ -13,10 +15,33 @@ public class Logic {
 
     public Tile[][] tiles;
 
-    public void Logic() {
-        tiles = new Tile[300][300];
-    }
-    
-    
+    public Logic() {
+        tiles = new Tile[50][150];
 
+        // initialising the array with tiles   
+        for (int y = 0; y < tiles.length; y++) {
+            for (int x = 0; x < tiles[y].length; x++) {
+                tiles[y][x] = new Tile("#");
+            }
+        }
+    }
+
+    public void drawArea() {
+
+        for (int y = 0; y <tiles.length; y++) {
+            StringBuilder stringBuilder = new StringBuilder();
+
+            for (int x = 0; x < tiles[y].length; x++) {
+                stringBuilder.append(tiles[y][x].getContent());
+            }
+
+//            if (stringBuilder.toString().trim().isEmpty()) {
+//                continue;
+//            }
+            System.out.println(stringBuilder);
+        }
+    }
+
+    
+    
 }
