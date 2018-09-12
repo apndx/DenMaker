@@ -53,16 +53,32 @@ public class DenMakerUi {
 
     public static void menu1(Scanner reader, Logic logic) {
         //todo 1. Create a new Den
-        //String chosen = reader.nextLine();
-        //System.out.println("How many room adding attempts?");
-        //System.out.println("Please type a number that is  between 10 and 999");
-        
-        //if (chosen.matches("(\\d){2,3}")) {
-        //    int amount = Integer.parseInt(chosen);
-            
-            logic.drawArea();
-        //}
 
+        System.out.println("Let's make the dungeon map, please give measurements.");
+        System.out.println("Height? (50 is the default)");
+        String areaHeight = reader.nextLine();
+        int height = 50;
+        if (areaHeight.matches("(\\d){2,3}")) {
+            height = Integer.parseInt(areaHeight);
+        }
+        System.out.println("Width? (150 is the default)");
+        String areaWidth = reader.nextLine();
+        int width = 150;
+        if (areaHeight.matches("(\\d){2,3}")) {
+            width = Integer.parseInt(areaWidth);
+        }
+        System.out.println("How many room adding attempts?  (Please type a number that is  between 10 and 999)");
+        int attempts = 100;
+        String roomAttempts = reader.nextLine();
+        if (roomAttempts.matches("(\\d){2,3}")) {
+            attempts = Integer.parseInt(roomAttempts);
+        }
+        logic.changeArea(height, width);
+        System.out.println("Dungeon just plain wall");
+        logic.drawArea();
+        logic.buildRooms(attempts);
+        System.out.println("Dungeon with rooms");
+        logic.drawArea();
     }
 
     public static void menu2() {

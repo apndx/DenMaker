@@ -19,11 +19,13 @@ public class Room {
     public int starty;
     public int startx;
 
-    public Room() {
+    public Room(int areaHeight, int areaWidth) {
         this.random = new Random();
         this.height = 15 - random.nextInt(11); //height between 5-15
         this.width = 15 - random.nextInt(11); //width between 5-15
+        this.starty = random.nextInt(areaHeight);
+        this.startx = random.nextInt(areaWidth);
+
     }
 
-    
 }

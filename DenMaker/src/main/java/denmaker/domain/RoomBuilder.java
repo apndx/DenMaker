@@ -11,29 +11,47 @@ package denmaker.domain;
  */
 public class RoomBuilder {
 
-    public int attempts;
 
-    public RoomBuilder(int attempts) {
+    public Area dungeonArea;
 
-        this.attempts = attempts;
+    public RoomBuilder(Area dungeonArea) {
+
+        this.dungeonArea = dungeonArea;
 
     }
 
-    public void build() {
+    public Area addRooms(int attempts) {
 
+        for (int i = 0; i < attempts; i++) {
+
+            Room roomAttempt = new Room(dungeonArea.areaHeight, dungeonArea.areaWidth);
+
+            if (!collisionCheck(roomAttempt)) {
+                // does not collide, let's put it in!
+                for (int y = roomAttempt.starty; y < roomAttempt.starty + roomAttempt.height-1; y++) {
+                    for (int x = roomAttempt.startx; x < roomAttempt.startx + roomAttempt.width-1; x++) {
+                        dungeonArea.tiles[y][x].content= " ";  
+                    }
+                }
+            }
+        }
+        
+        return dungeonArea;
     }
 
     /**
-     * @param tiles is the dungeon area, height and width room measurements
-     * @param startY room starting coordinates
-     * @param startX room starting coordinates
-     * @param height room height
-     * @param width room width
+     * @param roomAttempt room that is tested
      * @return true if there is a collision, false if not
      */
-    public boolean collisionCheck(Tile[][] tiles, int startY, int startX, int height, int width) {
+    public boolean collisionCheck(Room roomAttempt) {
 
-        if (startY + height > 50 || startX + width > 150) {
+        Tile[][] tiles = dungeonArea.tiles;
+        int startY = roomAttempt.starty;
+        int startX = roomAttempt.startx;
+        int height = roomAttempt.height;
+        int width = roomAttempt.width;
+
+        if (startY + height > dungeonArea.areaHeight || startX + width > dungeonArea.areaWidth) {
             return true;
         }
 
