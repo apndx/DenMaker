@@ -11,7 +11,6 @@ package denmaker.domain;
  */
 public class RoomBuilder {
 
-
     public Area dungeonArea;
 
     public RoomBuilder(Area dungeonArea) {
@@ -20,6 +19,11 @@ public class RoomBuilder {
 
     }
 
+     /**
+     * @param attempts Amount of room adding attempts, all the rooms that do not
+     * collide with borders and each other will be added
+     * @return Area returns the dungeon area with the rooms that now have been added to it
+     */
     public Area addRooms(int attempts) {
 
         for (int i = 0; i < attempts; i++) {
@@ -28,19 +32,19 @@ public class RoomBuilder {
 
             if (!collisionCheck(roomAttempt)) {
                 // does not collide, let's put it in!
-                for (int y = roomAttempt.starty; y < roomAttempt.starty + roomAttempt.height-1; y++) {
-                    for (int x = roomAttempt.startx; x < roomAttempt.startx + roomAttempt.width-1; x++) {
-                        dungeonArea.tiles[y][x].content= " ";  
+                for (int y = roomAttempt.starty; y < roomAttempt.starty + roomAttempt.height - 1; y++) {
+                    for (int x = roomAttempt.startx; x < roomAttempt.startx + roomAttempt.width - 1; x++) {
+                        dungeonArea.tiles[y][x].content = " ";
                     }
                 }
             }
         }
-        
+
         return dungeonArea;
     }
 
     /**
-     * @param roomAttempt room that is tested
+     * @param roomAttempt the room that is tested
      * @return true if there is a collision, false if not
      */
     public boolean collisionCheck(Room roomAttempt) {
@@ -51,7 +55,11 @@ public class RoomBuilder {
         int height = roomAttempt.height;
         int width = roomAttempt.width;
 
-        if (startY + height > dungeonArea.areaHeight-1 || startX + width > dungeonArea.areaWidth-1)  {
+        if (startY + height > dungeonArea.areaHeight - 1 || startX + width > dungeonArea.areaWidth - 1) {
+            return true;
+        }
+
+        if (startY == 0 || startX == 0) {
             return true;
         }
 
