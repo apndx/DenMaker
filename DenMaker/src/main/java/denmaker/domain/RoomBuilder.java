@@ -51,7 +51,7 @@ public class RoomBuilder {
         int height = roomAttempt.height;
         int width = roomAttempt.width;
 
-        if (startY + height > dungeonArea.areaHeight || startX + width > dungeonArea.areaWidth) {
+        if (startY + height > dungeonArea.areaHeight-1 || startX + width > dungeonArea.areaWidth-1)  {
             return true;
         }
 

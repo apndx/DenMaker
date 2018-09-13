@@ -55,27 +55,28 @@ public class DenMakerUi {
         //todo 1. Create a new Den
 
         System.out.println("Let's make the dungeon map, please give measurements.");
-        System.out.println("Height? (50 is the default)");
+        System.out.println("Do you want to change the default height 50?");
+        System.out.println("If yes, please type a number that is  between 10 and 999.");
         String areaHeight = reader.nextLine();
         int height = 50;
         if (areaHeight.matches("(\\d){2,3}")) {
             height = Integer.parseInt(areaHeight);
         }
-        System.out.println("Width? (150 is the default)");
+        System.out.println("Do you want to change the default width 150?");
+        System.out.println("If yes, please type a number that is  between 10 and 999.");
         String areaWidth = reader.nextLine();
         int width = 150;
         if (areaHeight.matches("(\\d){2,3}")) {
             width = Integer.parseInt(areaWidth);
         }
-        System.out.println("How many room adding attempts?  (Please type a number that is  between 10 and 999)");
-        int attempts = 100;
+        System.out.println("Do you want to change the default 20 room adding attempts?");
+        System.out.println("If yes, please type a number that is  between 10 and 999.");
+        int attempts = 20;
         String roomAttempts = reader.nextLine();
         if (roomAttempts.matches("(\\d){2,3}")) {
             attempts = Integer.parseInt(roomAttempts);
         }
         logic.changeArea(height, width);
-        System.out.println("Dungeon just plain wall");
-        logic.drawArea();
         logic.buildRooms(attempts);
         System.out.println("Dungeon with rooms");
         logic.drawArea();

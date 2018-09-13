@@ -21,10 +21,10 @@ public class Room {
 
     public Room(int areaHeight, int areaWidth) {
         this.random = new Random();
-        this.height = 15 - random.nextInt(11); //height between 5-15
-        this.width = 15 - random.nextInt(11); //width between 5-15
-        this.starty = random.nextInt(areaHeight);
-        this.startx = random.nextInt(areaWidth);
+        this.height = 13 - random.nextInt(11); //height between 3-15
+        this.width = 20 - random.nextInt(16); //width between 5-20
+        this.starty = random.nextInt(areaHeight-1)+1;
+        this.startx = random.nextInt(areaWidth-1)+1;
 
     }
 

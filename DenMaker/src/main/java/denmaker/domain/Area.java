@@ -20,7 +20,7 @@ public class Area {
         this.areaWidth = 150;
         this.tiles = new Tile[50][150];
         
-         // initialising the array with tiles   
+        //  initialising the array with tiles   
         for (int y = 0; y < tiles.length; y++) {
             for (int x = 0; x < tiles[y].length; x++) {
                 tiles[y][x] = new Tile("#");
