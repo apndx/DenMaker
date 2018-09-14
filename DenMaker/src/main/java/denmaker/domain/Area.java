@@ -8,7 +8,7 @@ package denmaker.domain;
 /**
  * Makes a new dungeon area
  * There is a constructor for default area of height 50 and width 150 
- * And a constructor for an area that takes height and width as parameters
+ * and a constructor for an area that takes height and width as parameters
  *
  * @author apndx
  */

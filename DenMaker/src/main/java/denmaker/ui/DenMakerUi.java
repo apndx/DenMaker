@@ -9,6 +9,7 @@ import denmaker.domain.Logic;
 import java.util.Scanner;
 
 /**
+ * TextUserInterface for the DenMaker
  *
  * @author apndx
  */
@@ -44,6 +45,9 @@ public class DenMakerUi {
         }
     }
 
+    /**
+     * Main menu
+     */
     public static void printMenu() {
         System.out.println(" ");
         System.out.println("What to do next?");
@@ -51,8 +55,14 @@ public class DenMakerUi {
         System.out.println("2. Quit");
     }
 
+    /**
+     * Menu option 1 - Create a new Den
+     *
+     * @param reader Scanner for reading the user input
+     * @param logic Logic to work between UI and domain tools
+     *
+     */
     public static void menu1(Scanner reader, Logic logic) {
-        //todo 1. Create a new Den
 
         System.out.println("Let's make the dungeon map, please give measurements.");
         System.out.println("Do you want to change the default height 50?");
@@ -82,9 +92,11 @@ public class DenMakerUi {
         logic.drawArea();
     }
 
+    /**
+     * Menu option 2 - quits the application
+     */
     public static void menu2() {
 
-        //quits the application
         System.out.println("See you soon!");
     }
 

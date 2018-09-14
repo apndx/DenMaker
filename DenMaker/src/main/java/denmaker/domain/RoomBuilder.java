@@ -8,6 +8,7 @@ package denmaker.domain;
 import java.util.ArrayList;
 
 /**
+ * This tool is used to add rooms to a dungeon area
  *
  * @author apndx
  */
@@ -22,15 +23,14 @@ public class RoomBuilder {
     }
 
     /**
-     * @param attempts Amount of room adding attempts, will generate a list of rooms
+     * @param attempts Amount of room adding attempts, will generate a list of random rooms
      * that is processed in the other addRooms method
      * @return returns the area with rooms that have been added
      */
     public Area addRooms(int attempts) {
         ArrayList<Room> rooms = new ArrayList<>();
         for (int i = 0; i < attempts; i++) {
-            Room roomAttempt = new Room(dungeonArea.areaHeight, dungeonArea.areaWidth);
-            rooms.add(roomAttempt);
+            rooms.add(new Room(dungeonArea.areaHeight, dungeonArea.areaWidth));
         }
         addRooms(rooms);
         return dungeonArea;
@@ -52,7 +52,7 @@ public class RoomBuilder {
     }
 
     private void addRoomHelper(Room roomAttempt) {
-        // does not collide, let's put it in!
+        // room does not collide, let's put it in!
         for (int y = roomAttempt.starty; y < roomAttempt.starty + roomAttempt.height - 1; y++) {
             for (int x = roomAttempt.startx; x < roomAttempt.startx + roomAttempt.width - 1; x++) {
                 dungeonArea.tiles[y][x].content = " ";
@@ -87,7 +87,6 @@ public class RoomBuilder {
                 }
             }
         }
-
         return false;
     }
 

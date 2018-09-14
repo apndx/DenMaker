@@ -9,9 +9,9 @@
 | 11.9 |3 h | Starting the dungeon map and room creation |
 | 12.9 |2 h | Random roomgenarator for the dungeon |
 | 13.9 |3,5 h | UI changes, week report, starting tests and javadoc | 
-| 14.9 |1 h | Improving roombuilder testing | 
+| 14.9 |2 h | Improving roombuilder testing, adding to javadoc, completing week report | 
 
-Tot 16 h 30 min
+Tot 17 h 30 min
 
 
 

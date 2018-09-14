@@ -23,6 +23,7 @@ public class RoomBuilderTest {
     public RoomBuilder testRoomBuilder;
     public Room randomTestRoom; //random testroom
     public Room testRoomCornerDown;
+    public Room testRoomCornerDownOther;
     public Room testRoomCornerUp;
     public Room testRoomMiddle;
     public ArrayList<Room> rooms;
@@ -33,9 +34,10 @@ public class RoomBuilderTest {
         this.testRoomBuilder = new RoomBuilder(testDungeonArea);
         this.randomTestRoom = new Room(testDungeonArea.areaHeight, testDungeonArea.areaWidth);
         this.testRoomCornerDown = new Room(5, 5, 0, 0);
+        this.testRoomCornerDownOther = new Room(5, 5, testDungeonArea.areaHeight, testDungeonArea.areaWidth);
         this.testRoomCornerUp = new Room(5, 5, testDungeonArea.areaHeight - 5, 0);
         this.testRoomMiddle = new Room(5, 5, testDungeonArea.areaHeight - 15, 15);
-        this.rooms = new ArrayList<Room>();
+        this.rooms = new ArrayList<>();
         rooms.add(testRoomCornerDown);
         rooms.add(testRoomCornerUp);
         rooms.add(testRoomMiddle);
@@ -71,6 +73,7 @@ public class RoomBuilderTest {
         // test cases are borders 
 
         assertEquals(true, testRoomBuilder.collisionCheck(testRoomCornerDown));
+        assertEquals(true, testRoomBuilder.collisionCheck(testRoomCornerDownOther));
         assertEquals(true, testRoomBuilder.collisionCheck(testRoomCornerUp));
         assertEquals(false, testRoomBuilder.collisionCheck(testRoomMiddle));
 
@@ -80,11 +83,12 @@ public class RoomBuilderTest {
     public void isRoomAddedCorrectly() {
 
         testRoomBuilder.addRooms(rooms);
-
+        
+        assertEquals(true, testRoomBuilder.collisionCheck(testRoomMiddle));
         assertEquals("#", testDungeonArea.tiles[0][0].content);
         assertEquals("#", testDungeonArea.tiles[testDungeonArea.areaHeight - 5][0].content);
         assertEquals(" ", testDungeonArea.tiles[testDungeonArea.areaHeight - 15][15].content);
 
     }
-
+    
 }

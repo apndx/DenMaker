@@ -8,7 +8,8 @@ package denmaker.ui;
 import java.util.Scanner;
 
 /**
- *
+ * Main class - creates a Scanner and TextUI, starts the application
+ * 
  * @author apndx
  */
 public class Main {
