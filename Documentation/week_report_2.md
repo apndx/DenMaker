@@ -35,12 +35,20 @@ I'm not sure if first creating the default area and then changing it is a good i
 
 creating UI(has to have logic) -> creating logic -> logic has to had an area and a roombuilder -> roombuilder need an area -> area needs measurements that are given as parameters that are asked in the UI
 
+I was trying to do tests for the RoomBuilder, but came across problems of how to deal with all the randomness involved. For example the addRooms -method takes only a parameter of the amount of room adding attempts, and then creates as many random rooms as the input suggests.
+
+I came up with a workaround for this and made another constructor for Room and optional method for roombuilding. The optional methods take parametres instead of creating random measurements or rooms.
+
 ### Questions
 
 If there are any change suggestions about the structure of this program, they would be greatly appreciated.
 
 I'm not sure where I should create the random generator, now both tile and room have their own randoms.
 
+How do I test a method that draws something? Other than look at the picture that is being drawn?
+
 ### Next week
+
+I will make the maze algorithm, and also the door-adding algorithm.
 
 

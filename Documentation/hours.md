@@ -7,10 +7,11 @@
 | 9.9 |3 h   | Reading more about potential algorithms, continuing week report and design document |
 | 10.9 |1,5 h  | Starting textUI and domain classes |
 | 11.9 |3 h | Starting the dungeon map and room creation |
-| 12.9 |2 h | Random roomgenarator for the dungeon|
+| 12.9 |2 h | Random roomgenarator for the dungeon |
+| 13.9 |3,5 h | UI changes, week report, starting tests and javadoc | 
+| 14.9 |1 h | Improving roombuilder testing | 
 
-
-Tot 12 h 30 min 
+Tot 16 h 30 min
 
 
 
