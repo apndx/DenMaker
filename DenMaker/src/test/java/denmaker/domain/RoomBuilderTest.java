@@ -5,6 +5,7 @@
  */
 package denmaker.domain;
 
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -20,13 +21,24 @@ public class RoomBuilderTest {
 
     public Area testDungeonArea;
     public RoomBuilder testRoomBuilder;
-    public Room testRoom; //random testroom
+    public Room randomTestRoom; //random testroom
+    public Room testRoomCornerDown;
+    public Room testRoomCornerUp;
+    public Room testRoomMiddle;
+    public ArrayList<Room> rooms;
 
     public RoomBuilderTest() {
 
         this.testDungeonArea = new Area();
         this.testRoomBuilder = new RoomBuilder(testDungeonArea);
-        this.testRoom = new Room(testDungeonArea.areaHeight, testDungeonArea.areaWidth);
+        this.randomTestRoom = new Room(testDungeonArea.areaHeight, testDungeonArea.areaWidth);
+        this.testRoomCornerDown = new Room(5, 5, 0, 0);
+        this.testRoomCornerUp = new Room(5, 5, testDungeonArea.areaHeight - 5, 0);
+        this.testRoomMiddle = new Room(5, 5, testDungeonArea.areaHeight - 15, 15);
+        this.rooms = new ArrayList<Room>();
+        rooms.add(testRoomCornerDown);
+        rooms.add(testRoomCornerUp);
+        rooms.add(testRoomMiddle);
     }
 
     @BeforeClass
@@ -50,30 +62,29 @@ public class RoomBuilderTest {
     //
     // @Test
     // public void hello() {}
+    //
+    /**
+     * Tests if the room collision is detected
+     */
     @Test
     public void isCollisionDetectedCorrectly() {
         // test cases are borders 
-        
-        Room testRoomCornerDown = testRoom;
-        testRoom.setHeight(5);
-        testRoom.setWidth(5);
-        testRoom.setStarty(0);
-        testRoom.setStartx(0);        
+
         assertEquals(true, testRoomBuilder.collisionCheck(testRoomCornerDown));
-        
-        Room testRoomCornerUp = testRoom;
-        testRoom.setHeight(5);
-        testRoom.setWidth(5);
-        testRoom.setStarty(testDungeonArea.areaHeight-5);
-        testRoom.setStartx(0);  
         assertEquals(true, testRoomBuilder.collisionCheck(testRoomCornerUp));
-        
-        Room testRoomMiddle = testRoom;
-        testRoom.setHeight(5);
-        testRoom.setWidth(5);
-        testRoom.setStarty(testDungeonArea.areaHeight-15);
-        testRoom.setStartx(15);  
         assertEquals(false, testRoomBuilder.collisionCheck(testRoomMiddle));
-        
+
     }
+
+    @Test
+    public void isRoomAddedCorrectly() {
+
+        testRoomBuilder.addRooms(rooms);
+
+        assertEquals("#", testDungeonArea.tiles[0][0].content);
+        assertEquals("#", testDungeonArea.tiles[testDungeonArea.areaHeight - 5][0].content);
+        assertEquals(" ", testDungeonArea.tiles[testDungeonArea.areaHeight - 15][15].content);
+
+    }
+
 }

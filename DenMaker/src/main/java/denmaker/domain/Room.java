@@ -10,9 +10,9 @@ import java.util.Random;
 /**
  * Makes a new room
  * 
- * height: random height between 3-15
- * width: random width between 5-20
- * starty and startx: starting coordinates of the room within the dungeon area
+ * height: either random height between 3-15 or a parameter
+ * width: either random width between 5-20 or a parameter
+ * starty and startx: starting coordinates of the room within the dungeon area, either random or parameters
  * 
  * @author apndx
  */
@@ -23,6 +23,14 @@ public class Room {
     public int width;
     public int starty;
     public int startx;
+    
+    public Room(int height, int width, int starty, int startx) {
+        this.height = height;
+        this.width = width;
+        this.starty = starty;
+        this.startx = startx;    
+    }
+    
 
     public Room(int areaHeight, int areaWidth) {
         this.random = new Random();

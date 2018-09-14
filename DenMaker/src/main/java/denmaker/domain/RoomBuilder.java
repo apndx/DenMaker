@@ -5,6 +5,8 @@
  */
 package denmaker.domain;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author apndx
@@ -19,28 +21,43 @@ public class RoomBuilder {
 
     }
 
-     /**
-     * @param attempts Amount of room adding attempts, all the rooms that do not
-     * collide with borders and each other will be added
-     * @return Area returns the dungeon area with the rooms that now have been added to it
+    /**
+     * @param attempts Amount of room adding attempts, will generate a list of rooms
+     * that is processed in the other addRooms method
+     * @return returns the area with rooms that have been added
      */
     public Area addRooms(int attempts) {
-
+        ArrayList<Room> rooms = new ArrayList<>();
         for (int i = 0; i < attempts; i++) {
-
             Room roomAttempt = new Room(dungeonArea.areaHeight, dungeonArea.areaWidth);
+            rooms.add(roomAttempt);
+        }
+        addRooms(rooms);
+        return dungeonArea;
+    }
 
-            if (!collisionCheck(roomAttempt)) {
-                // does not collide, let's put it in!
-                for (int y = roomAttempt.starty; y < roomAttempt.starty + roomAttempt.height - 1; y++) {
-                    for (int x = roomAttempt.startx; x < roomAttempt.startx + roomAttempt.width - 1; x++) {
-                        dungeonArea.tiles[y][x].content = " ";
-                    }
-                }
+    /**
+     * @param rooms A list of rooms that we try to add to the area, all the
+     * rooms that do not collide with borders and each other will be added
+     * @return Area returns the dungeon area with the rooms that now have been
+     * added to it
+     */
+    public Area addRooms(ArrayList<Room> rooms) {
+        for (int i = 0; i < rooms.size(); i++) {
+            if (!collisionCheck(rooms.get(i))) {
+                addRoomHelper(rooms.get(i));
             }
         }
-
         return dungeonArea;
+    }
+
+    private void addRoomHelper(Room roomAttempt) {
+        // does not collide, let's put it in!
+        for (int y = roomAttempt.starty; y < roomAttempt.starty + roomAttempt.height - 1; y++) {
+            for (int x = roomAttempt.startx; x < roomAttempt.startx + roomAttempt.width - 1; x++) {
+                dungeonArea.tiles[y][x].content = " ";
+            }
+        }
     }
 
     /**
