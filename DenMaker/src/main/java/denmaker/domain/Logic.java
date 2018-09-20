@@ -14,10 +14,12 @@ public class Logic {
 
     public Area dungeonArea;
     public RoomBuilder roomBuilder;
-
+    public MazeBuilder mazeBuilder;
+    
     public Logic() {
         this.dungeonArea = new Area();
         this.roomBuilder = new RoomBuilder(dungeonArea);
+        this.mazeBuilder = new MazeBuilder(dungeonArea);
     }
 
     /**
@@ -41,6 +43,7 @@ public class Logic {
 
             for (int x = 0; x < dungeonArea.tiles[y].length; x++) {
                 stringBuilder.append(dungeonArea.tiles[y][x].content);
+                //stringBuilder.append(" "+dungeonArea.tiles[y][x].weight+" ");
             }
 
 //            if (stringBuilder.toString().trim().isEmpty()) {
@@ -49,6 +52,11 @@ public class Logic {
             System.out.println(stringBuilder);
         }
     }
+    
+    public void buildMaze() {
+        this.dungeonArea= mazeBuilder.build();
+    }
+    
 
     /**
      * Adds rooms to the dungeon area

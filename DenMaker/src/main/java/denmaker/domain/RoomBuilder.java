@@ -27,12 +27,11 @@ public class RoomBuilder {
      * that is processed in the other addRooms method
      * @return returns the area with rooms that have been added
      */
-    public Area addRooms(int attempts) {
-        ArrayList<Room> rooms = new ArrayList<>();
-        for (int i = 0; i < attempts; i++) {
-            rooms.add(new Room(dungeonArea.areaHeight, dungeonArea.areaWidth));
+    public Area addRooms(int attempts) {    
+        for (int i = 0; i < attempts; i++) {          
+            dungeonArea.roomList.add(new Room(dungeonArea.areaHeight, dungeonArea.areaWidth));
         }
-        addRooms(rooms);
+        addRooms(dungeonArea.roomList);
         return dungeonArea;
     }
 
@@ -43,6 +42,7 @@ public class RoomBuilder {
      * added to it
      */
     public Area addRooms(ArrayList<Room> rooms) {
+        dungeonArea.roomList = rooms;
         for (int i = 0; i < rooms.size(); i++) {
             if (!collisionCheck(rooms.get(i))) {
                 addRoomHelper(rooms.get(i));

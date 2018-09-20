@@ -17,8 +17,7 @@ import java.util.Random;
  * @author apndx
  */
 public class Room {
-
-    public Random random;
+    
     public int height;
     public int width;
     public int starty;
@@ -33,7 +32,7 @@ public class Room {
     
 
     public Room(int areaHeight, int areaWidth) {
-        this.random = new Random();
+        Random random = new Random();
         this.height = 13 - random.nextInt(11); 
         this.width = 20 - random.nextInt(16); 
         this.starty = random.nextInt(areaHeight-1)+1;

@@ -8,22 +8,76 @@ package denmaker.domain;
 import java.util.Random;
 
 /**
- * Makes a new Tile
- * content: # wall, " " empty, @ door
- * weight: random weight between 0-999
- * 
+ * Makes a new Tile content: █ wall, " " empty, @ door weight: random weight
+ * between 0-999
+ *
  * @author apndx
  */
+//public class Tile implements Comparable<Tile> {
 public class Tile {
 
-    public String content; 
-    public Random random;
+    public String content;
     public int weight;
+    public int y;
+    public int x;
+    public Tile parent;
 
-    public Tile(String content) {
+    public Tile(String content, int y, int x, Tile parent) {
         this.content = content;
-        this.random = new Random();
-        this.weight = random.nextInt(1000);  
+        Random random = new Random();
+        this.weight = random.nextInt(1000);
+        this.y = y;
+        this.x = x;
+        this.parent = parent;
+    }
+
+     
+//    @Override
+//    public int compareTo(Tile tile1) {
+//
+//        if (this.weight == tile1.weight) {
+//            return -1;
+//        } else if (this.weight < tile1.weight) {
+//            return -1;
+//        } else {
+//            return 1;
+//        }
+//    }
+    public void setParent(Tile parent) {
+        this.parent = parent;
+    }
+
+    public Tile checkOpposite(Area dungeonArea) {
+
+        if (this.parent == null) {
+            return null;
+        }
+
+        int differenceY = this.y-parent.y;
+        int differenceX = this.x-parent.x;
+
+        if (differenceY != 0) {
+            try {
+                return dungeonArea.tiles[this.y + differenceY][this.x];
+
+            } catch (Exception e) {
+                return null;
+            }
+
+        } else if (differenceX != 0) {
+            try {
+                return dungeonArea.tiles[this.y][this.x + differenceX];
+            } catch (Exception e) {
+                return null;
+            }
+
+        } else {
+            return null;
+        }
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 
 }

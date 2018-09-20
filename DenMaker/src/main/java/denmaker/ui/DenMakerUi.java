@@ -90,6 +90,10 @@ public class DenMakerUi {
         logic.buildRooms(attempts);
         System.out.println("Dungeon with rooms");
         logic.drawArea();
+        logic.buildMaze();
+        System.out.println("Dungeon with a maze");
+        logic.drawArea();
+        
     }
 
     /**
