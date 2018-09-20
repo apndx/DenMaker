@@ -13,7 +13,6 @@ import java.util.Random;
  *
  * @author apndx
  */
-//public class Tile implements Comparable<Tile> {
 public class Tile {
 
     public String content;
@@ -31,18 +30,7 @@ public class Tile {
         this.parent = parent;
     }
 
-     
-//    @Override
-//    public int compareTo(Tile tile1) {
-//
-//        if (this.weight == tile1.weight) {
-//            return -1;
-//        } else if (this.weight < tile1.weight) {
-//            return -1;
-//        } else {
-//            return 1;
-//        }
-//    }
+
     public void setParent(Tile parent) {
         this.parent = parent;
     }

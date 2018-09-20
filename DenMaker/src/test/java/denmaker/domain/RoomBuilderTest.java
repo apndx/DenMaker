@@ -85,8 +85,8 @@ public class RoomBuilderTest {
         testRoomBuilder.addRooms(rooms);
         
         assertEquals(true, testRoomBuilder.collisionCheck(testRoomMiddle));
-        assertEquals("#", testDungeonArea.tiles[0][0].content);
-        assertEquals("#", testDungeonArea.tiles[testDungeonArea.areaHeight - 5][0].content);
+        assertEquals("█", testDungeonArea.tiles[0][0].content);
+        assertEquals("█", testDungeonArea.tiles[testDungeonArea.areaHeight - 5][0].content);
         assertEquals(" ", testDungeonArea.tiles[testDungeonArea.areaHeight - 15][15].content);
 
     }

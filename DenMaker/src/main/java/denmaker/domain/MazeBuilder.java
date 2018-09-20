@@ -80,12 +80,10 @@ public class MazeBuilder {
                                     }
                                 } catch (Exception e) {
                                     continue;
-                                }     
+                                }
                                 neighbors.add(neighbor2);
                             }
-
                         }
-
                     }
                 }
 
@@ -96,8 +94,6 @@ public class MazeBuilder {
         return this.dungeonArea;
     }
 
-    
-    
     public Tile emptyFinder(int y, int x) {
 
         if (y < 1 || x < 1 || y > dungeonArea.areaHeight - 2 || x > dungeonArea.areaWidth - 2) {
@@ -109,8 +105,6 @@ public class MazeBuilder {
 
                 Tile tileNow = dungeonArea.tiles[i][j];
 
-                //this.yNow = tileNow.y;
-                //this.xNow = tileNow.x;
                 if (tileNow.content.equals("█")) {
 
                     if (dungeonArea.tiles[i + 1][j].content.equals("█")
@@ -118,8 +112,7 @@ public class MazeBuilder {
                             && dungeonArea.tiles[i][j + 1].content.equals("█")
                             && dungeonArea.tiles[i - 1][j].content.equals("█")) {
 
-                        //this.xNow = j;
-                        //this.yNow = i;
+
                         return tileNow;
                     }
                 }
