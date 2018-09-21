@@ -40,11 +40,12 @@ public class Area {
         this.areaHeight = areaHeight;
         this.areaWidth = areaWidth;
         this.tiles = new Tile[areaHeight][areaWidth];
+        this.roomList = new ArrayList<>();
 
         // initialising the array with tiles   
         for (int y = 0; y < tiles.length; y++) {
             for (int x = 0; x < tiles[y].length; x++) {
-                tiles[y][x] = new Tile("#", y, x, null);
+                tiles[y][x] = new Tile("█", y, x, null);
             }
         }
     }

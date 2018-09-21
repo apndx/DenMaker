@@ -5,44 +5,42 @@
  */
 package denmaker.domain;
 
-import java.util.Random;
-
 /**
- * Makes a new Tile content: █ wall, " " empty, @ door weight: random weight
- * between 0-999
+ * Makes a new Tile. content: █ wall, " " empty, @ door
  *
  * @author apndx
  */
 public class Tile {
 
     public String content;
-    public int weight;
     public int y;
     public int x;
     public Tile parent;
 
     public Tile(String content, int y, int x, Tile parent) {
         this.content = content;
-        Random random = new Random();
-        this.weight = random.nextInt(1000);
         this.y = y;
         this.x = x;
         this.parent = parent;
     }
 
-
     public void setParent(Tile parent) {
         this.parent = parent;
     }
 
+    /**
+     * Finds the next tile to add 
+     * @param dungeonArea get's the maze area that is under construction to pick the tile from there
+     * @return returns the next Tile candidate to be added
+     */
     public Tile checkOpposite(Area dungeonArea) {
 
         if (this.parent == null) {
             return null;
         }
 
-        int differenceY = this.y-parent.y;
-        int differenceX = this.x-parent.x;
+        int differenceY = this.y - parent.y;
+        int differenceX = this.x - parent.x;
 
         if (differenceY != 0) {
             try {

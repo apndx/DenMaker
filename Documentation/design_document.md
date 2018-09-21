@@ -52,3 +52,4 @@ The resulting dungeon will be demonstrated in seperate files that portray the co
 * [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm)
 * [Tirakirja](https://github.com/pllk/tirakirja/blob/master/tirakirja.pdf) by Antti Laaksonen
 * Course material by Jyrki Kivinen for Datastructures and algorithms course Spring 2018
+* [Maze Generation with Prim's Algorithm](http://jonathanzong.com/blog/2012/11/06/maze-generation-with-prims-algorithm)

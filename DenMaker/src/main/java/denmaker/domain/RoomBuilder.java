@@ -19,9 +19,8 @@ public class RoomBuilder {
     public RoomBuilder(Area dungeonArea) {
 
         this.dungeonArea = dungeonArea;
-
     }
-
+    
     /**
      * @param attempts Amount of room adding attempts, will generate a list of random rooms
      * that is processed in the other addRooms method

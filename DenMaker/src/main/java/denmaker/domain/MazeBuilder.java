@@ -6,9 +6,10 @@
 package denmaker.domain;
 
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 
 /**
+ * MazeBuilder carves a maze through the remaining wall matter in the dungeon,
+ * this is done after generating the rooms
  *
  * @author apndx
  */
@@ -20,6 +21,12 @@ public class MazeBuilder {
         this.dungeonArea = dungeonArea;
     }
 
+    /**
+     * Carves a maze through the remaining wall matter in the dungeon, based on
+     * Prim
+     *
+     * @return Area returns the area that was worked on, now with a maze
+     */
     public Area build() {
 
         ArrayList<Tile> neighbors = new ArrayList<>();
@@ -48,23 +55,23 @@ public class MazeBuilder {
                 neighbors.add(neighbor);
             }
         }
-        //Tile last = null;
+        //Tile last = null; we don't need this info yet, but maybe later
         while (!neighbors.isEmpty()) {
 
             Tile next = neighbors.remove((int) (Math.random() * neighbors.size()));
             Tile facing = next.checkOpposite(dungeonArea);
 
             try {
-                // if both walls
+                // if both tiles are wall tiles and not on the edges
                 if (next.content.equals("█")) {
-                    if (facing.content.equals("█")) {
+                    if (facing.content.equals("█") && facing.y < dungeonArea.areaHeight - 1 && facing.x < dungeonArea.areaWidth - 1) {
 
                         next.content = " ";
                         facing.content = " ";
                         facing.setParent(next);
                         dungeonArea.tiles[next.y][next.x].content = " ";
                         dungeonArea.tiles[facing.y][facing.x].content = " ";
-                        //last = facing;
+                        //last = facing; we don't need this info yet, but maybe later
                         for (int k = -1; k <= 1; k++) {
                             for (int l = -1; l <= 1; l++) {
 
@@ -74,7 +81,6 @@ public class MazeBuilder {
                                 Tile neighbor2 = dungeonArea.tiles[facing.y + k][facing.x + l];
                                 neighbor2.setParent(facing);
                                 try {
-
                                     if (neighbor2.content.equals(" ")) {
                                         continue;
                                     }
@@ -86,18 +92,24 @@ public class MazeBuilder {
                         }
                     }
                 }
-
             } catch (Exception e) {
             }
-
         }
         return this.dungeonArea;
     }
 
+    /**
+     * Finds a starting point for the maze, starting point needs to be on the area, not on the edge and not in a room
+     * @param y Suggested starting coordinate y
+     * @param x Suggested starting coordinate x
+     * @return Tile returns the Tile that is the starting point, or null
+     */
     public Tile emptyFinder(int y, int x) {
 
+        //if we get bad parametres, we change them to default starting point
         if (y < 1 || x < 1 || y > dungeonArea.areaHeight - 2 || x > dungeonArea.areaWidth - 2) {
-            return null;
+            y = 1;
+            x = 1;
         }
 
         for (int i = y; i < dungeonArea.tiles.length - 2; i++) {
@@ -111,8 +123,6 @@ public class MazeBuilder {
                             && dungeonArea.tiles[i][j - 1].content.equals("█")
                             && dungeonArea.tiles[i][j + 1].content.equals("█")
                             && dungeonArea.tiles[i - 1][j].content.equals("█")) {
-
-
                         return tileNow;
                     }
                 }

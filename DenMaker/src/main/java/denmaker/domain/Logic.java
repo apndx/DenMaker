@@ -15,11 +15,11 @@ public class Logic {
     public Area dungeonArea;
     public RoomBuilder roomBuilder;
     public MazeBuilder mazeBuilder;
-    
+
     public Logic() {
         this.dungeonArea = new Area();
-        this.roomBuilder = new RoomBuilder(dungeonArea);
-        this.mazeBuilder = new MazeBuilder(dungeonArea);
+        this.roomBuilder = new RoomBuilder(this.dungeonArea);
+        this.mazeBuilder = new MazeBuilder(this.dungeonArea);
     }
 
     /**
@@ -29,7 +29,9 @@ public class Logic {
      * @param width New width for the dungeon area
      */
     public void changeArea(int height, int width) {
-        dungeonArea = new Area(height, width);
+        this.dungeonArea = new Area(height, width);
+        this.roomBuilder.dungeonArea = this.dungeonArea;
+        this.mazeBuilder.dungeonArea = this.dungeonArea;
     }
 
     /**
@@ -52,11 +54,13 @@ public class Logic {
             System.out.println(stringBuilder);
         }
     }
-    
+
+      /**
+     * Builds a maze to the dungeon after the rooms have been added
+     */
     public void buildMaze() {
-        this.dungeonArea= mazeBuilder.build();
+        this.dungeonArea = mazeBuilder.build();
     }
-    
 
     /**
      * Adds rooms to the dungeon area
@@ -65,7 +69,7 @@ public class Logic {
      * collide with borders and each other will be added
      */
     public void buildRooms(int attempts) {
-        dungeonArea = roomBuilder.addRooms(attempts);
+        this.dungeonArea = roomBuilder.addRooms(attempts);
     }
 
 }

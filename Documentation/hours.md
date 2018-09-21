@@ -12,8 +12,9 @@
 | 14.9 |2 h | Improving roombuilder testing, adding to javadoc, completing week report | 
 | 19.9 |4 h | Starting mazebuilder, researching options| 
 | 20.9 |7 h | Making a mazebuilder | 
+| 21.9 |2 h | Starting tests for the mazebuilder, javadoc, week report, improving mazebuilder, fixing area creation | 
 
-Tot 28 h 30 min
+Tot 30 h 30 min
 
 
 

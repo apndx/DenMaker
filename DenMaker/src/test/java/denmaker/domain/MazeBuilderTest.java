@@ -47,7 +47,7 @@ public class MazeBuilderTest {
     public void startingPointDetectedCorrectly() {
         
         testDungeonArea.tiles[2][2].setContent(" ");
-        assertEquals(null, testMazeBuilder.emptyFinder(0, 0));
+        assertEquals(1, testMazeBuilder.emptyFinder(0, 0).x);
         assertEquals(2, testMazeBuilder.emptyFinder(2, 2).y);
         assertEquals(4, testMazeBuilder.emptyFinder(2, 2).x);
         
