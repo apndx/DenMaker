@@ -15,12 +15,12 @@ I learned once again that it is sometimes hard to make things work how I have im
 
 ### Problems
 
-This week I was able to start working on the project a bit later than I would have wanted (on Wednesday), so I was in quite a hurry to get done the things I had scheduled for the week. It took me quite some time to understand how the maze building algorithm works, and even more time to implement it. So, the lack of time and poor scheduling were the biggest problems this week. I wish I could have made final adjustments to the maze builder and more test, but I will start next week by working on these.
+This week I was able to start working on the project a bit later than I would have wanted (on Wednesday), so I was in quite a hurry to get done the things I had scheduled for the week. It took me quite some time to understand how the maze building algorithm works, and even more time to implement it. So, the lack of time and poor scheduling were the biggest problems this week. I wish I could have made final adjustments to the maze builder and more testing, but I will start next week by working on these.
 
 
 ### Questions
 
-Should we test the user interface? I'm not testing that at the moment.
+Should the user interface be tested? At the moment is is not.
 I'm using a lot of trying and catching not to go over the edges or to null pointer in the maze generator, I'm not sure if that's a good idea.
 
 
