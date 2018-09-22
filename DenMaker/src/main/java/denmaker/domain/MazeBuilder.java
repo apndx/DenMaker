@@ -42,17 +42,16 @@ public class MazeBuilder {
                     continue;
                 }
                 Tile neighbor = dungeonArea.tiles[start.y + i][start.x + j];
-                neighbor.setParent(start);
-
+                
                 try {
-
-                    if (neighbor.content.equals(" ")) {
+                    if (neighbor.content.equals(" ") || dungeonArea.roomWalls.contains(neighbor)) {
                         continue;
-                    }
+                    } 
                 } catch (Exception e) {
                     continue;
                 }
                 neighbors.add(neighbor);
+                neighbor.setParent(start);
             }
         }
         //Tile last = null; we don't need this info yet, but maybe later
@@ -64,7 +63,7 @@ public class MazeBuilder {
             try {
                 // if both tiles are wall tiles and not on the edges
                 if (next.content.equals("█")) {
-                    if (facing.content.equals("█") && facing.y < dungeonArea.areaHeight - 1 && facing.x < dungeonArea.areaWidth - 1) {
+                    if (facing.content.equals("█") && facing.y < dungeonArea.areaHeight - 1 && facing.x < dungeonArea.areaWidth - 1 ) {
 
                         next.content = " ";
                         facing.content = " ";
@@ -79,15 +78,16 @@ public class MazeBuilder {
                                     continue;
                                 }
                                 Tile neighbor2 = dungeonArea.tiles[facing.y + k][facing.x + l];
-                                neighbor2.setParent(facing);
+                               
                                 try {
-                                    if (neighbor2.content.equals(" ")) {
+                                    if (neighbor2.content.equals(" ") || dungeonArea.roomWalls.contains(neighbor2) ) {
                                         continue;
                                     }
                                 } catch (Exception e) {
                                     continue;
                                 }
                                 neighbors.add(neighbor2);
+                                neighbor2.setParent(facing);
                             }
                         }
                     }

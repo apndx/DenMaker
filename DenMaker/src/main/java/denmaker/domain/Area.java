@@ -6,6 +6,8 @@
 package denmaker.domain;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Makes a new dungeon area
@@ -20,17 +22,19 @@ public class Area {
     public int areaWidth;
     public Tile[][] tiles;
     public ArrayList<Room> roomList;
+    public Set<Tile> roomWalls;
 
     public Area() {
         this.areaHeight = 50;
         this.areaWidth = 150;
         this.tiles = new Tile[50][150];
         this.roomList = new ArrayList<>();
+        this.roomWalls = new HashSet<>();
         
         //  initialising the array with tiles   
         for (int y = 0; y < tiles.length; y++) {
             for (int x = 0; x < tiles[y].length; x++) {
-                tiles[y][x] = new Tile("█", y, x, null); //█
+                tiles[y][x] = new Tile("█", y, x, null); 
             }
         }     
     }
@@ -41,6 +45,7 @@ public class Area {
         this.areaWidth = areaWidth;
         this.tiles = new Tile[areaHeight][areaWidth];
         this.roomList = new ArrayList<>();
+        this.roomWalls = new HashSet<>();
 
         // initialising the array with tiles   
         for (int y = 0; y < tiles.length; y++) {

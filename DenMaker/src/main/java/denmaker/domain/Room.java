@@ -5,7 +5,9 @@
  */
 package denmaker.domain;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.Set;
 
 /**
  * Makes a new room
@@ -22,12 +24,14 @@ public class Room {
     public int width;
     public int starty;
     public int startx;
+    public ArrayList<Tile> roomWalls;
     
     public Room(int height, int width, int starty, int startx) {
         this.height = height;
         this.width = width;
         this.starty = starty;
         this.startx = startx;    
+        this.roomWalls = new ArrayList<>();
     }
     
 
@@ -37,6 +41,7 @@ public class Room {
         this.width = 20 - random.nextInt(16); 
         this.starty = random.nextInt(areaHeight-1)+1;
         this.startx = random.nextInt(areaWidth-1)+1;
+        this.roomWalls = new ArrayList<>();
     }
 
     public void setStarty(int starty) {
@@ -54,5 +59,26 @@ public class Room {
     public void setWidth(int width) {
         this.width = width;
     }
+    
+    public Area addRoomWalls(Area dungeonArea) {
+
+        // upper and bottom wall
+        for (int i=this.startx; i<startx+this.width-1; i++) {
+            this.roomWalls.add(dungeonArea.tiles[starty-1][i]);
+            dungeonArea.roomWalls.add(dungeonArea.tiles[starty-1][i]);
+            this.roomWalls.add(dungeonArea.tiles[this.starty+this.height][i]);
+            dungeonArea.roomWalls.add(dungeonArea.tiles[this.starty+this.height][i]);
+        }
+
+        // left and right wall
+        for (int i= this.starty; i<this.starty+this.height-1; i++) {
+            this.roomWalls.add(dungeonArea.tiles[i][this.startx-1]);
+            dungeonArea.roomWalls.add(dungeonArea.tiles[i][this.startx-1]);
+            this.roomWalls.add(dungeonArea.tiles[i][this.startx+this.width]);
+            dungeonArea.roomWalls.add(dungeonArea.tiles[i][this.startx+this.width]); 
+        }
+      return dungeonArea;      
+    }
+    
  
 }

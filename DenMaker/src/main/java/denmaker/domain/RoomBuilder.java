@@ -27,8 +27,8 @@ public class RoomBuilder {
      * @return returns the area with rooms that have been added
      */
     public Area addRooms(int attempts) {    
-        for (int i = 0; i < attempts; i++) {          
-            dungeonArea.roomList.add(new Room(dungeonArea.areaHeight, dungeonArea.areaWidth));
+        for (int i = 0; i < attempts; i++) {     
+            dungeonArea.roomList.add(new Room(dungeonArea.areaHeight, dungeonArea.areaWidth));     
         }
         addRooms(dungeonArea.roomList);
         return dungeonArea;
@@ -45,6 +45,8 @@ public class RoomBuilder {
         for (int i = 0; i < rooms.size(); i++) {
             if (!collisionCheck(rooms.get(i))) {
                 addRoomHelper(rooms.get(i));
+                dungeonArea = rooms.get(i).addRoomWalls(dungeonArea);
+                
             }
         }
         return dungeonArea;
@@ -88,5 +90,13 @@ public class RoomBuilder {
         }
         return false;
     }
+    
+//    roomWaller(Room room) {
+//        
+//        
+//        
+//        
+//    }
+    
 
 }
