@@ -91,12 +91,5 @@ public class RoomBuilder {
         return false;
     }
     
-//    roomWaller(Room room) {
-//        
-//        
-//        
-//        
-//    }
-    
 
 }

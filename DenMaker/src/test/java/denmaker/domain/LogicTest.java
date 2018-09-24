@@ -18,11 +18,11 @@ import static org.junit.Assert.*;
  */
 public class LogicTest {
 
-    public Logic logic;
+    public Logic testLogic;
 
     public LogicTest() {
 
-        this.logic = new Logic();
+        this.testLogic = new Logic();
 
     }
 
@@ -50,11 +50,26 @@ public class LogicTest {
     @Test
     public void doesAreaChangeCorrectly() {
 
-        logic.changeArea(20, 30);
+        testLogic.changeArea(20, 30);
 
-        assertEquals(20, logic.dungeonArea.areaHeight);
-        assertEquals(30, logic.dungeonArea.areaWidth);
+        assertEquals(20, testLogic.dungeonArea.areaHeight);
+        assertEquals(30, testLogic.dungeonArea.areaWidth);
 
+    }
+
+    @Test
+    public void doesRoomBuildingWorkCorrectly() {
+
+        testLogic.buildRooms(10);
+        Tile tileToTest = testLogic.dungeonArea.roomList.get(0).roomWalls.get(0);
+        assertEquals("+", tileToTest.content);
+
+    }
+
+    @Test
+    public void doesBuildMazeWorkCorrectly() {
+
+        //logic.buildMaze();
     }
 
 }

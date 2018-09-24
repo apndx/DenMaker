@@ -63,19 +63,23 @@ public class Room {
     public Area addRoomWalls(Area dungeonArea) {
 
         // upper and bottom wall
-        for (int i=this.startx; i<startx+this.width-1; i++) {
-            this.roomWalls.add(dungeonArea.tiles[starty-1][i]);
-            dungeonArea.roomWalls.add(dungeonArea.tiles[starty-1][i]);
-            this.roomWalls.add(dungeonArea.tiles[this.starty+this.height][i]);
-            dungeonArea.roomWalls.add(dungeonArea.tiles[this.starty+this.height][i]);
+        for (int i=this.startx; i<this.startx+this.width-1; i++) {
+            this.roomWalls.add(dungeonArea.tiles[this.starty-1][i]);
+            dungeonArea.roomWalls.add(dungeonArea.tiles[this.starty-1][i]);
+            dungeonArea.tiles[this.starty-1][i].content="+";
+            this.roomWalls.add(dungeonArea.tiles[this.starty+this.height-1][i]);
+            dungeonArea.roomWalls.add(dungeonArea.tiles[this.starty+this.height-1][i]);
+            dungeonArea.tiles[this.starty+this.height-1][i].content="+";
         }
 
         // left and right wall
         for (int i= this.starty; i<this.starty+this.height-1; i++) {
             this.roomWalls.add(dungeonArea.tiles[i][this.startx-1]);
             dungeonArea.roomWalls.add(dungeonArea.tiles[i][this.startx-1]);
-            this.roomWalls.add(dungeonArea.tiles[i][this.startx+this.width]);
-            dungeonArea.roomWalls.add(dungeonArea.tiles[i][this.startx+this.width]); 
+            dungeonArea.tiles[i][this.startx-1].content="+";
+            this.roomWalls.add(dungeonArea.tiles[i][this.startx+this.width-1]);
+            dungeonArea.roomWalls.add(dungeonArea.tiles[i][this.startx+this.width-1]); 
+            dungeonArea.tiles[i][this.startx+this.width-1].content="+";
         }
       return dungeonArea;      
     }

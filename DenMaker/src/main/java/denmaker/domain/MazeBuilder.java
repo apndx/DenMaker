@@ -44,7 +44,7 @@ public class MazeBuilder {
                 Tile neighbor = dungeonArea.tiles[start.y + i][start.x + j];
                 
                 try {
-                    if (neighbor.content.equals(" ") || dungeonArea.roomWalls.contains(neighbor)) {
+                    if (neighbor.content.equals(" ")) {
                         continue;
                     } 
                 } catch (Exception e) {
@@ -80,7 +80,7 @@ public class MazeBuilder {
                                 Tile neighbor2 = dungeonArea.tiles[facing.y + k][facing.x + l];
                                
                                 try {
-                                    if (neighbor2.content.equals(" ") || dungeonArea.roomWalls.contains(neighbor2) ) {
+                                    if (neighbor2.content.equals(" ")) {
                                         continue;
                                     }
                                 } catch (Exception e) {

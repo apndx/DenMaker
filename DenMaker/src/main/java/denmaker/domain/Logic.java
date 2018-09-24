@@ -60,6 +60,7 @@ public class Logic {
      */
     public void buildMaze() {
         this.dungeonArea = mazeBuilder.build();
+        this.dungeonArea.solidifyWalls();
     }
 
     /**
@@ -70,6 +71,10 @@ public class Logic {
      */
     public void buildRooms(int attempts) {
         this.dungeonArea = roomBuilder.addRooms(attempts);
+    }
+    
+    public void getOutOfTheBox() {
+        this.dungeonArea.outOfTheBox();
     }
 
 }

@@ -30,7 +30,7 @@ public class Tile {
 
     /**
      * Finds the next tile to add 
-     * @param dungeonArea get's the maze area that is under construction to pick the tile from there
+     * @param dungeonArea area that is under construction 
      * @return returns the next Tile candidate to be added
      */
     public Tile checkOpposite(Area dungeonArea) {
