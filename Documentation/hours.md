@@ -14,9 +14,9 @@
 | 20.9 |7 h | Making a mazebuilder | 
 | 21.9 |2 h | Starting tests for the mazebuilder, javadoc, week report, improving mazebuilder, fixing area creation | 
 | 22.9 |2,5 h | More tests for mazebuilder, added roomwall set for area and roomwall tile list for room | 
-| 24.9 |1,5 h | More tests for mazebuilder and logic, method to make room entrances | 
+| 24.9 |2 h | More tests for mazebuilder and logic, method to make room entrances, fix to asymmetric outlines | 
 
-Tot 34,5 h
+Tot 35 h
 
 
 

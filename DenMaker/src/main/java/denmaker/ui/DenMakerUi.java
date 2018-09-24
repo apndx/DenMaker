@@ -65,20 +65,31 @@ public class DenMakerUi {
     public static void menu1(Scanner reader, Logic logic) {
 
         System.out.println("Let's make the dungeon map, please give measurements.");
-        System.out.println("Do you want to change the default height 50?");
+        System.out.println("Do you want to change the default height 49?");
         System.out.println("If yes, please type a number that is  between 10 and 999.");
         String areaHeight = reader.nextLine();
-        int height = 50;
+        int height = 49;
         if (areaHeight.matches("(\\d){2,3}")) {
+
             height = Integer.parseInt(areaHeight);
         }
-        System.out.println("Do you want to change the default width 150?");
+
+        if (height % 2 == 0) {
+            height -= 1;
+        }
+        System.out.println("Do you want to change the default width 149?");
         System.out.println("If yes, please type a number that is  between 10 and 999.");
         String areaWidth = reader.nextLine();
-        int width = 150;
-        if (areaHeight.matches("(\\d){2,3}")) {
+        int width = 149;
+
+        if (areaWidth.matches("(\\d){2,3}")) {
             width = Integer.parseInt(areaWidth);
         }
+
+        if (width % 2 == 0) {
+            width -= 1;
+        }
+
         System.out.println("Do you want to change the default 20 room adding attempts?");
         System.out.println("If yes, please type a number that is  between 10 and 999.");
         int attempts = 20;
@@ -96,7 +107,7 @@ public class DenMakerUi {
         System.out.println("Lets open the rooms");
         logic.getOutOfTheBox();
         logic.drawArea();
-        
+
     }
 
     /**
