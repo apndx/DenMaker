@@ -135,8 +135,8 @@ public class MazeBuilder {
 
     public Area deadEndKiller() {
 
-        for (int y = 1; y < this.dungeonArea.areaHeight-2; y++) {
-            for (int x = 1; x < this.dungeonArea.areaWidth-2; x++) {
+        for (int y = 1; y < this.dungeonArea.areaHeight-1; y++) {
+            for (int x = 1; x < this.dungeonArea.areaWidth-1; x++) {
 
                 if (this.dungeonArea.tiles[y][x].content.equals(" ")) {
 
@@ -145,11 +145,12 @@ public class MazeBuilder {
                     while (true) {
                         int deadCount = deadEndHelper(underScrutiny);
                         if (deadCount == 3) {
-                            dungeonArea.tiles[y][x].content = "█";
+                            underScrutiny.content = "█";
+                            underScrutiny = underScrutiny.parent;                      
                         } else {
                             break;
                         }
-                        break;
+                        
                     }
                 }
             }
