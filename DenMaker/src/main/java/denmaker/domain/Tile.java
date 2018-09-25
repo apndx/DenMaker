@@ -6,7 +6,7 @@
 package denmaker.domain;
 
 /**
- * Makes a new Tile. content: █ wall, " " empty, @ door
+ * Makes a new Tile. content: █ solid, " " empty, + wall (of a room)
  *
  * @author apndx
  */

@@ -70,8 +70,8 @@ public class Area {
             for (Tile toMakeEntranceOf : toGetOutOf.roomWalls) {
 
                 try {
-                    int x = toMakeEntranceOf.x;
                     int y = toMakeEntranceOf.y;
+                    int x = toMakeEntranceOf.x;
                     if (this.tiles[y + 1][x].content.equals(" ") && this.tiles[y - 1][x].content.equals(" ")) {
                         potentialEntrances.add(toMakeEntranceOf);
                     }
@@ -80,12 +80,43 @@ public class Area {
                     }
                 } catch (Exception e) {
                 }
-
             }
-
             if (!potentialEntrances.isEmpty()) {
                 Tile entrance = potentialEntrances.get((int) (Math.random() * potentialEntrances.size()));
                 entrance.content = " ";
+            } else {
+                ArrayList<Tile> cornerEntrances = new ArrayList<>();
+                int starty = toGetOutOf.starty;
+                int startx = toGetOutOf.startx;
+
+                try {
+                    if (this.tiles[starty - 1][startx - 1].content.equals(" ")) {
+                        //left upper corner               
+                        cornerEntrances.add(this.tiles[starty - 1][startx]);
+                        cornerEntrances.add(this.tiles[starty][startx - 1]);
+                    }
+                    if (this.tiles[starty - 1][startx + toGetOutOf.width-1].content.equals(" ")) {
+                        //right upper corner                
+                        cornerEntrances.add(this.tiles[starty - 1][startx + toGetOutOf.width - 2]);
+                        cornerEntrances.add(this.tiles[starty][startx + toGetOutOf.width - 1]);
+                    }
+                    if (this.tiles[starty + toGetOutOf.height-1][startx - 1].content.equals(" ")) {
+                        //left down corner                      
+                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 2][startx - 1]);
+                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 1][startx]);
+                    }
+                    if (this.tiles[starty + toGetOutOf.height-1][startx + toGetOutOf.width-1].content.equals(" ")) {
+                        //right down corner                    
+                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 2][startx + toGetOutOf.width - 1]);
+                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 1][startx + toGetOutOf.width - 2]);
+                    }
+                } catch (Exception e) {
+                }
+
+                if (!cornerEntrances.isEmpty()) {
+                    Tile entranceCorner = cornerEntrances.get((int) (Math.random() * cornerEntrances.size()));
+                    entranceCorner.content = " ";
+                }
             }
         }
     }

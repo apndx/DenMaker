@@ -107,6 +107,9 @@ public class DenMakerUi {
         System.out.println("Lets open the rooms");
         logic.getOutOfTheBox();
         logic.drawArea();
+        logic.killDeadEnds();
+        System.out.println("Lets trim some dead ends");
+        logic.drawArea();
 
     }
 

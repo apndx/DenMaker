@@ -76,5 +76,9 @@ public class Logic {
     public void getOutOfTheBox() {
         this.dungeonArea.outOfTheBox();
     }
+    
+    public void killDeadEnds() {
+        this.dungeonArea = mazeBuilder.deadEndKiller();
+    }
 
 }

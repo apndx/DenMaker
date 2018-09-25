@@ -42,11 +42,11 @@ public class MazeBuilder {
                     continue;
                 }
                 Tile neighbor = dungeonArea.tiles[start.y + i][start.x + j];
-                
+
                 try {
                     if (neighbor.content.equals(" ")) {
                         continue;
-                    } 
+                    }
                 } catch (Exception e) {
                     continue;
                 }
@@ -63,7 +63,7 @@ public class MazeBuilder {
             try {
                 // if both tiles are wall tiles and not on the edges
                 if (next.content.equals("█")) {
-                    if (facing.content.equals("█") && facing.y < dungeonArea.areaHeight - 1 && facing.x < dungeonArea.areaWidth - 1 ) {
+                    if (facing.content.equals("█") && facing.y < dungeonArea.areaHeight - 1 && facing.x < dungeonArea.areaWidth - 1) {
 
                         next.content = " ";
                         facing.content = " ";
@@ -78,7 +78,7 @@ public class MazeBuilder {
                                     continue;
                                 }
                                 Tile neighbor2 = dungeonArea.tiles[facing.y + k][facing.x + l];
-                               
+
                                 try {
                                     if (neighbor2.content.equals(" ")) {
                                         continue;
@@ -99,7 +99,9 @@ public class MazeBuilder {
     }
 
     /**
-     * Finds a starting point for the maze, starting point needs to be on the area, not on the edge and not in a room
+     * Finds a starting point for the maze, starting point needs to be on the
+     * area, not on the edge and not in a room
+     *
      * @param y Suggested starting coordinate y
      * @param x Suggested starting coordinate x
      * @return Tile returns the Tile that is the starting point, or null
@@ -129,6 +131,50 @@ public class MazeBuilder {
             }
         }
         return null;
+    }
+
+    public Area deadEndKiller() {
+
+        for (int y = 1; y < this.dungeonArea.areaHeight-2; y++) {
+            for (int x = 1; x < this.dungeonArea.areaWidth-2; x++) {
+
+                if (this.dungeonArea.tiles[y][x].content.equals(" ")) {
+
+                    Tile underScrutiny = this.dungeonArea.tiles[y][x];
+
+                    while (true) {
+                        int deadCount = deadEndHelper(underScrutiny);
+                        if (deadCount == 3) {
+                            dungeonArea.tiles[y][x].content = "█";
+                        } else {
+                            break;
+                        }
+                        break;
+                    }
+                }
+            }
+        }
+        return this.dungeonArea;
+    }
+
+    public int deadEndHelper(Tile underScrutiny) {
+        int deadCount = 0;
+        for (int k = -1; k <= 1; k++) {
+            for (int l = -1; l <= 1; l++) {
+
+                if (k == 0 && l == 0 || k != 0 && l != 0) {
+                    continue;
+                }
+                try {
+                    Tile neighbor = dungeonArea.tiles[underScrutiny.y + k][underScrutiny.x + l];
+                    if (neighbor.content.equals("█")) {
+                        deadCount++;
+                    }
+                } catch (Exception e) {
+                }
+            }
+        }
+        return deadCount;
     }
 
 }
