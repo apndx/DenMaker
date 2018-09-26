@@ -24,12 +24,12 @@ public class MazeBuilderTest {
     public RoomBuilder testRoomBuilder;
     public Room testRoomFull;
     public ArrayList<Room> testRooms;
-    
+
     public MazeBuilderTest() {
         this.testDungeonArea = new Area();
         this.testMazeBuilder = new MazeBuilder(testDungeonArea);
         this.testRoomBuilder = new RoomBuilder(testDungeonArea);
-        this.testRoomFull= new Room(5, 5, 1, 1);
+        this.testRoomFull = new Room(5, 5, 1, 1);
         this.testRooms = new ArrayList<>();
         testRooms.add(testRoomFull);
     }
@@ -64,14 +64,10 @@ public class MazeBuilderTest {
     public void buildMazeTest() {
         testDungeonArea = new Area(10, 10);
         testRoomBuilder.addRooms(testRooms);
-       
-        assertEquals(" ", testMazeBuilder.build().tiles[1][7].content);
-      
+
+        assertEquals(" ", testMazeBuilder.build().tiles[1][8].content);
+
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+
 }

@@ -95,20 +95,20 @@ public class Area {
                         cornerEntrances.add(this.tiles[starty - 1][startx]);
                         cornerEntrances.add(this.tiles[starty][startx - 1]);
                     }
-                    if (this.tiles[starty - 1][startx + toGetOutOf.width-1].content.equals(" ")) {
+                    if (this.tiles[starty - 1][startx + toGetOutOf.width].content.equals(" ")) {
                         //right upper corner                
-                        cornerEntrances.add(this.tiles[starty - 1][startx + toGetOutOf.width - 2]);
-                        cornerEntrances.add(this.tiles[starty][startx + toGetOutOf.width - 1]);
+                        cornerEntrances.add(this.tiles[starty - 1][startx + toGetOutOf.width - 1]);
+                        cornerEntrances.add(this.tiles[starty][startx + toGetOutOf.width]);
                     }
-                    if (this.tiles[starty + toGetOutOf.height-1][startx - 1].content.equals(" ")) {
+                    if (this.tiles[starty + toGetOutOf.height][startx - 1].content.equals(" ")) {
                         //left down corner                      
-                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 2][startx - 1]);
-                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 1][startx]);
+                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 1][startx - 1]);
+                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height ][startx]);
                     }
                     if (this.tiles[starty + toGetOutOf.height-1][startx + toGetOutOf.width-1].content.equals(" ")) {
                         //right down corner                    
-                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 2][startx + toGetOutOf.width - 1]);
-                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 1][startx + toGetOutOf.width - 2]);
+                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 1][startx + toGetOutOf.width ]);
+                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height ][startx + toGetOutOf.width - 1]);
                     }
                 } catch (Exception e) {
                 }

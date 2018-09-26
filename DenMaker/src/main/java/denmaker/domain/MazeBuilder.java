@@ -29,73 +29,81 @@ public class MazeBuilder {
      */
     public Area build() {
 
-        ArrayList<Tile> neighbors = new ArrayList<>();
+        while (true) {
 
-        Tile start = emptyFinder(1, 1);
-        dungeonArea.tiles[start.y][start.x].setContent(" ");
+            ArrayList<Tile> neighbors = new ArrayList<>();
 
-        //neighbour check  
-        for (int i = -1; i <= 1; i++) {
-            for (int j = -1; j <= 1; j++) {
+            Tile start = emptyFinder(1, 1);
+            dungeonArea.tiles[start.y][start.x].setContent(" ");
 
-                if (i == 0 && j == 0 || i != 0 && j != 0) {
-                    continue;
-                }
-                Tile neighbor = dungeonArea.tiles[start.y + i][start.x + j];
+            //neighbour check  
+            for (int i = -1; i <= 1; i++) {
+                for (int j = -1; j <= 1; j++) {
 
-                try {
-                    if (neighbor.content.equals(" ")) {
+                    if (i == 0 && j == 0 || i != 0 && j != 0) {
                         continue;
                     }
-                } catch (Exception e) {
-                    continue;
+                    Tile neighbor = dungeonArea.tiles[start.y + i][start.x + j];
+
+                    try {
+                        if (neighbor.content.equals(" ")) {
+                            continue;
+                        }
+                    } catch (Exception e) {
+                        continue;
+                    }
+                    neighbors.add(neighbor);
+                    neighbor.setParent(start);
                 }
-                neighbors.add(neighbor);
-                neighbor.setParent(start);
             }
-        }
-        //Tile last = null; we don't need this info yet, but maybe later
-        while (!neighbors.isEmpty()) {
+            Tile last = null;
+            while (!neighbors.isEmpty()) {
 
-            Tile next = neighbors.remove((int) (Math.random() * neighbors.size()));
-            Tile facing = next.checkOpposite(dungeonArea);
+                Tile next = neighbors.remove((int) (Math.random() * neighbors.size()));
+                Tile facing = next.checkOpposite(dungeonArea);
 
-            try {
-                // if both tiles are wall tiles and not on the edges
-                if (next.content.equals("█")) {
-                    if (facing.content.equals("█") && facing.y < dungeonArea.areaHeight - 1 && facing.x < dungeonArea.areaWidth - 1) {
+                try {
+                    // if both tiles are wall tiles and not on the edges
+                    if (next.content.equals("█")) {
+                        if (facing.content.equals("█") && facing.y < dungeonArea.areaHeight - 1 && facing.x < dungeonArea.areaWidth - 1) {
 
-                        next.content = " ";
-                        facing.content = " ";
-                        facing.setParent(next);
-                        dungeonArea.tiles[next.y][next.x].content = " ";
-                        dungeonArea.tiles[facing.y][facing.x].content = " ";
-                        //last = facing; we don't need this info yet, but maybe later
-                        for (int k = -1; k <= 1; k++) {
-                            for (int l = -1; l <= 1; l++) {
+                            next.content = " ";
+                            facing.content = " ";
+                            facing.setParent(next);
+                            dungeonArea.tiles[next.y][next.x].content = " ";
+                            dungeonArea.tiles[facing.y][facing.x].content = " ";
+                            last = facing;
+                            for (int k = -1; k <= 1; k++) {
+                                for (int l = -1; l <= 1; l++) {
 
-                                if (k == 0 && l == 0 || k != 0 && l != 0) {
-                                    continue;
-                                }
-                                Tile neighbor2 = dungeonArea.tiles[facing.y + k][facing.x + l];
-
-                                try {
-                                    if (neighbor2.content.equals(" ")) {
+                                    if (k == 0 && l == 0 || k != 0 && l != 0) {
                                         continue;
                                     }
-                                } catch (Exception e) {
-                                    continue;
+                                    Tile neighbor2 = dungeonArea.tiles[facing.y + k][facing.x + l];
+
+                                    try {
+                                        if (neighbor2.content.equals(" ")) {
+                                            continue;
+                                        }
+                                    } catch (Exception e) {
+                                        continue;
+                                    }
+                                    neighbors.add(neighbor2);
+                                    neighbor2.setParent(facing);
                                 }
-                                neighbors.add(neighbor2);
-                                neighbor2.setParent(facing);
                             }
                         }
                     }
+                } catch (Exception e) {
                 }
-            } catch (Exception e) {
+            }
+            if (emptyFinder(last.y, last.x) == null) {
+                break;
             }
         }
+
         return this.dungeonArea;
+
     }
 
     /**
@@ -135,8 +143,8 @@ public class MazeBuilder {
 
     public Area deadEndKiller() {
 
-        for (int y = 1; y < this.dungeonArea.areaHeight-1; y++) {
-            for (int x = 1; x < this.dungeonArea.areaWidth-1; x++) {
+        for (int y = 1; y < this.dungeonArea.areaHeight - 1; y++) {
+            for (int x = 1; x < this.dungeonArea.areaWidth - 1; x++) {
 
                 if (this.dungeonArea.tiles[y][x].content.equals(" ")) {
 
@@ -146,11 +154,11 @@ public class MazeBuilder {
                         int deadCount = deadEndHelper(underScrutiny);
                         if (deadCount == 3) {
                             underScrutiny.content = "█";
-                            underScrutiny = underScrutiny.parent;                      
+                            underScrutiny = underScrutiny.parent;
                         } else {
                             break;
                         }
-                        
+
                     }
                 }
             }

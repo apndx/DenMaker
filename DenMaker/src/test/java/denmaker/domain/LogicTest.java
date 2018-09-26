@@ -5,6 +5,7 @@
  */
 package denmaker.domain;
 
+import java.util.ArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -66,10 +67,31 @@ public class LogicTest {
 
     }
 
-    @Test
-    public void doesBuildMazeWorkCorrectly() {
+      @Test
+    public void doTheToolsWorkWellTogether() {
 
-        //logic.buildMaze();
+        testLogic.dungeonArea = new Area(10, 10);
+        
+        Room testRoomFull = new Room(5, 5, 1, 1);
+        ArrayList<Room> testRooms = new ArrayList<>();
+        testRooms.add(testRoomFull);
+        
+        testLogic.buildRooms(testRooms);
+        testLogic.buildMaze();
+        testLogic.getOutOfTheBox();
+ 
+        int count = 0;
+
+        for (int i = 0; i < testLogic.dungeonArea.roomList.get(0).roomWalls.size(); i++) {
+
+            if (testLogic.dungeonArea.roomList.get(0).roomWalls.get(i).content.equals(" ")) {
+                count++;
+            }            
+        }
+        assertEquals(20, testLogic.dungeonArea.roomList.get(0).roomWalls.size());
+        assertEquals(1, count);
+        
     }
+
 
 }

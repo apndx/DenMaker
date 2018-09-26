@@ -5,6 +5,8 @@
  */
 package denmaker.domain;
 
+import java.util.ArrayList;
+
 /**
  * Logic has methods working between the domain tools and UI
  *
@@ -55,15 +57,7 @@ public class Logic {
         }
     }
 
-      /**
-     * Builds a maze to the dungeon after the rooms have been added
-     */
-    public void buildMaze() {
-        this.dungeonArea = mazeBuilder.build();
-        this.dungeonArea.solidifyWalls();
-    }
-
-    /**
+     /**
      * Adds rooms to the dungeon area
      *
      * @param attempts Amount of room adding attempts, all the rooms that do not
@@ -71,6 +65,25 @@ public class Logic {
      */
     public void buildRooms(int attempts) {
         this.dungeonArea = roomBuilder.addRooms(attempts);
+    }
+    
+     /**
+     * Adds rooms to the dungeon area
+     *
+     * @param roomList A List of rooms to add, all the rooms that do not
+     * collide with borders and each other will be added
+     * This is method is mainly for testing purposes
+     */
+    public void buildRooms(ArrayList<Room> roomList) {
+        this.dungeonArea = roomBuilder.addRooms(roomList);
+    }
+
+     /**
+     * Builds a maze to the dungeon after the rooms have been added
+     */
+    public void buildMaze() {
+        this.dungeonArea = mazeBuilder.build();
+        this.dungeonArea.solidifyWalls();
     }
     
     public void getOutOfTheBox() {

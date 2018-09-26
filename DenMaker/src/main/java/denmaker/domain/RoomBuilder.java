@@ -56,8 +56,8 @@ public class RoomBuilder {
 
     private void addRoomHelper(Room roomAttempt) {
         // room does not collide, let's put it in!
-        for (int y = roomAttempt.starty; y < roomAttempt.starty + roomAttempt.height - 1; y++) {
-            for (int x = roomAttempt.startx; x < roomAttempt.startx + roomAttempt.width - 1; x++) {
+        for (int y = roomAttempt.starty; y < roomAttempt.starty + roomAttempt.height; y++) {
+            for (int x = roomAttempt.startx; x < roomAttempt.startx + roomAttempt.width; x++) {
                 dungeonArea.tiles[y][x].content = " ";
             }
         }
@@ -85,7 +85,7 @@ public class RoomBuilder {
 
         for (int i = startY; i < startY + height; i++) {
             for (int j = startX; j < startX + width; j++) {
-                if (" ".equals(tiles[i][j].content)) {
+                if (" ".equals(tiles[i][j].content) || "+".equals(tiles[i][j].content)) {
                     return true;
                 }
             }
