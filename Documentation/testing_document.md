@@ -1,6 +1,6 @@
 # Unit testing
 
-Unit testing coverage can be checked [here](https://github.com/apndx/DenMaker/blob/master/Documentation/jacoco/index.html). The unit tests need to be improved, more test cases need to be tested, especially the logic tests (integration) need improving.
+[Unit testing 28th September 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco280918.jpg). Unit tests need to be improved, more test cases need to be created, especially the logic tests (integration) are still lacking in depth and usefulness.
 
 # Manual testing
 
