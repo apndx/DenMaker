@@ -6,8 +6,6 @@
 package denmaker.domain;
 
 import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Makes a new dungeon area There is a constructor for default area of height 50
@@ -22,14 +20,12 @@ public class Area {
     public int areaWidth;
     public Tile[][] tiles;
     public ArrayList<Room> roomList;
-    public Set<Tile> roomWalls;
 
     public Area() {
         this.areaHeight = 50;
         this.areaWidth = 150;
         this.tiles = new Tile[50][150];
         this.roomList = new ArrayList<>();
-        this.roomWalls = new HashSet<>();
 
         //  initialising the array with tiles   
         for (int y = 0; y < tiles.length; y++) {
@@ -45,7 +41,6 @@ public class Area {
         this.areaWidth = areaWidth;
         this.tiles = new Tile[areaHeight][areaWidth];
         this.roomList = new ArrayList<>();
-        this.roomWalls = new HashSet<>();
 
         // initialising the array with tiles   
         for (int y = 0; y < tiles.length; y++) {
@@ -55,13 +50,23 @@ public class Area {
         }
     }
 
+    /**
+     * Changes the wall tiles back to solid form
+     *
+     */
     public void solidifyWalls() {
 
-        for (Tile toSolidify : this.roomWalls) {
-            toSolidify.content = "█";
+        for (Room roomtoCheck : this.roomList) {
+            for (Tile toSolidify : roomtoCheck.roomWalls) {
+                toSolidify.content = "█";
+            }
         }
-    }
-
+    }    
+        /**
+         * Finds entrances out of every room that has something to connect to in
+         * it's vicinity (no further than one tile apart)
+         *
+         */
     public void outOfTheBox() {
 
         for (Room toGetOutOf : this.roomList) {
@@ -69,18 +74,52 @@ public class Area {
 
             for (Tile toMakeEntranceOf : toGetOutOf.roomWalls) {
 
+                int y = toMakeEntranceOf.y;
+                int x = toMakeEntranceOf.x;
+
                 try {
-                    int y = toMakeEntranceOf.y;
-                    int x = toMakeEntranceOf.x;
-                    if (this.tiles[y + 1][x].content.equals(" ") && this.tiles[y - 1][x].content.equals(" ")) {
+                    // does top roomtile has a corridor behind the wall?
+                    if (this.tiles[y + 1][x].content.equals(".") && this.tiles[y - 1][x].content.equals(" ")) {
                         potentialEntrances.add(toMakeEntranceOf);
                     }
-                    if (this.tiles[y][x + 1].content.equals(" ") && this.tiles[y][x - 1].content.equals(" ")) {
+                    // left room, corridor?
+                    if (this.tiles[y][x + 1].content.equals(".") && this.tiles[y][x - 1].content.equals(" ")) {
+                        potentialEntrances.add(toMakeEntranceOf);
+                    }
+                    // bottom room, corridor?
+                    if (this.tiles[y + 1][x].content.equals(".") && this.tiles[y - 1][x].content.equals(" ")) {
+                        potentialEntrances.add(toMakeEntranceOf);
+                    }
+                    // right room, corridor
+                    if (this.tiles[y][x - 1].content.equals(".") && this.tiles[y][x + 1].content.equals(" ")) {
                         potentialEntrances.add(toMakeEntranceOf);
                     }
                 } catch (Exception e) {
                 }
+
+                if (potentialEntrances.isEmpty()) {
+                    try {
+                        // does room have another room behind the wall?
+                        if (this.tiles[y + 1][x].content.equals(".") && this.tiles[y - 1][x].content.equals(".")) {
+                            potentialEntrances.add(toMakeEntranceOf);
+                        }
+                        if (this.tiles[y][x + 1].content.equals(".") && this.tiles[y][x - 1].content.equals(".")) {
+                            potentialEntrances.add(toMakeEntranceOf);
+                        }
+                        if (this.tiles[y + 1][x].content.equals(".") && this.tiles[y - 1][x].content.equals(".")) {
+                            potentialEntrances.add(toMakeEntranceOf);
+                        }
+                        if (this.tiles[y][x - 1].content.equals(".") && this.tiles[y][x + 1].content.equals(".")) {
+                            potentialEntrances.add(toMakeEntranceOf);
+                        }
+
+                    } catch (Exception e) {
+                    }
+
+                }
+
             }
+            // corner cases, these are checked if the previous ones do not work
             if (!potentialEntrances.isEmpty()) {
                 Tile entrance = potentialEntrances.get((int) (Math.random() * potentialEntrances.size()));
                 entrance.content = " ";
@@ -103,12 +142,12 @@ public class Area {
                     if (this.tiles[starty + toGetOutOf.height][startx - 1].content.equals(" ")) {
                         //left down corner                      
                         cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 1][startx - 1]);
-                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height ][startx]);
+                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height][startx]);
                     }
-                    if (this.tiles[starty + toGetOutOf.height-1][startx + toGetOutOf.width-1].content.equals(" ")) {
+                    if (this.tiles[starty + toGetOutOf.height - 1][startx + toGetOutOf.width - 1].content.equals(" ")) {
                         //right down corner                    
-                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 1][startx + toGetOutOf.width ]);
-                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height ][startx + toGetOutOf.width - 1]);
+                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 1][startx + toGetOutOf.width]);
+                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height][startx + toGetOutOf.width - 1]);
                     }
                 } catch (Exception e) {
                 }

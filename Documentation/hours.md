@@ -16,9 +16,10 @@
 | 22.9 |2,5 h | More tests for mazebuilder, added roomwall set for area and roomwall tile list for room | 
 | 24.9 |2 h | More tests for mazebuilder and logic, method to make room entrances, fix to asymmetric outlines | 
 | 25.9 |4,5 h | Entrances also for rooms that have only near corridor in corner, algorigh for the dead end trimmer | 
-| 26.9 |2 h | Fixing overlapping rooms and partial maze, fixing room creating measurements, JUnit-testing, starting documentation | 
+| 26.9 |2 h | Fixing overlapping rooms and partial maze, fixing room creating measurements, JUnit-testing, continuing documentation | 
+| 28.9 |4 h | Continuing testing document. Making entrance opening to prefere opening entrances to corridors. Starting own ArrayList. Weekreport.| 
 
-Tot 41,5 h
+Tot 45,5 h
 
 
 

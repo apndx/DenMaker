@@ -80,16 +80,9 @@ public class LogicTest {
         testLogic.buildMaze();
         testLogic.getOutOfTheBox();
  
-        int count = 0;
-
-        for (int i = 0; i < testLogic.dungeonArea.roomList.get(0).roomWalls.size(); i++) {
-
-            if (testLogic.dungeonArea.roomList.get(0).roomWalls.get(i).content.equals(" ")) {
-                count++;
-            }            
-        }
+    
         assertEquals(20, testLogic.dungeonArea.roomList.get(0).roomWalls.size());
-        assertEquals(1, count);
+ 
         
     }
 

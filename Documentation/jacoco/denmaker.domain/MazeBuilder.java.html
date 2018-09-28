@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MazeBuilder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DenMaker</a> &gt; <a href="index.source.html" class="el_package">denmaker.domain</a> &gt; <span class="el_source">MazeBuilder.java</span></div><h1>MazeBuilder.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package denmaker.domain;
+
+import java.util.ArrayList;
+
+/**
+ * MazeBuilder carves a maze through the remaining wall matter in the dungeon,
+ * this is done after generating the rooms
+ *
+ * @author apndx
+ */
+public class MazeBuilder {
+
+    public Area dungeonArea;
+    public int ynow;
+    public int xnow;
+
+<span class="fc" id="L22">    public MazeBuilder(Area dungeonArea) {</span>
+<span class="fc" id="L23">        this.dungeonArea = dungeonArea;</span>
+<span class="fc" id="L24">        this.ynow = 1;</span>
+<span class="fc" id="L25">        this.xnow = 1;</span>
+<span class="fc" id="L26">    }</span>
+
+    /**
+     * Carves a maze through the remaining wall matter in the dungeon, based on
+     * Prim
+     *
+     * @return Area returns the area that was worked on, now with a maze
+     */
+    public Area build() {
+
+        while (true) {
+
+<span class="fc" id="L38">            ArrayList&lt;Tile&gt; neighbors = new ArrayList&lt;&gt;();</span>
+
+<span class="fc" id="L40">            Tile start = emptyFinder(ynow, xnow);</span>
+<span class="fc" id="L41">            dungeonArea.tiles[start.y][start.x].setContent(&quot; &quot;);</span>
+
+            //neighbour check  
+<span class="fc bfc" id="L44" title="All 2 branches covered.">            for (int i = -1; i &lt;= 1; i++) {</span>
+<span class="fc bfc" id="L45" title="All 2 branches covered.">                for (int j = -1; j &lt;= 1; j++) {</span>
+
+<span class="fc bfc" id="L47" title="All 8 branches covered.">                    if (i == 0 &amp;&amp; j == 0 || i != 0 &amp;&amp; j != 0) {</span>
+<span class="fc" id="L48">                        continue;</span>
+                    }
+<span class="fc" id="L50">                    Tile neighbor = dungeonArea.tiles[start.y + i][start.x + j];</span>
+
+                    try {
+<span class="pc bpc" id="L53" title="1 of 2 branches missed.">                        if (neighbor.content.equals(&quot; &quot;)) {</span>
+<span class="nc" id="L54">                            continue;</span>
+                        }
+<span class="nc" id="L56">                    } catch (Exception e) {</span>
+<span class="nc" id="L57">                        continue;</span>
+<span class="fc" id="L58">                    }</span>
+<span class="fc" id="L59">                    neighbors.add(neighbor);</span>
+<span class="fc" id="L60">                    neighbor.setParent(start);</span>
+                }
+            }
+<span class="fc" id="L63">            Tile last = null;</span>
+<span class="fc bfc" id="L64" title="All 2 branches covered.">            while (!neighbors.isEmpty()) {</span>
+
+<span class="fc" id="L66">                Tile next = neighbors.remove((int) (Math.random() * neighbors.size()));</span>
+<span class="fc" id="L67">                Tile facing = next.checkOpposite(dungeonArea);</span>
+
+                try {
+                    // if both tiles are wall tiles and not on the edges
+<span class="fc bfc" id="L71" title="All 2 branches covered.">                    if (next.content.equals(&quot;█&quot;)) {</span>
+<span class="pc bpc" id="L72" title="1 of 6 branches missed.">                        if (facing.content.equals(&quot;█&quot;) &amp;&amp; facing.y &lt; dungeonArea.areaHeight - 1 &amp;&amp; facing.x &lt; dungeonArea.areaWidth - 1) {</span>
+
+<span class="fc" id="L74">                            next.content = &quot; &quot;;</span>
+<span class="fc" id="L75">                            facing.content = &quot; &quot;;</span>
+<span class="fc" id="L76">                            facing.setParent(next);</span>
+<span class="fc" id="L77">                            dungeonArea.tiles[next.y][next.x].content = &quot; &quot;;</span>
+<span class="fc" id="L78">                            dungeonArea.tiles[facing.y][facing.x].content = &quot; &quot;;</span>
+<span class="fc" id="L79">                            last = facing;</span>
+<span class="fc bfc" id="L80" title="All 2 branches covered.">                            for (int k = -1; k &lt;= 1; k++) {</span>
+<span class="fc bfc" id="L81" title="All 2 branches covered.">                                for (int l = -1; l &lt;= 1; l++) {</span>
+
+<span class="fc bfc" id="L83" title="All 8 branches covered.">                                    if (k == 0 &amp;&amp; l == 0 || k != 0 &amp;&amp; l != 0) {</span>
+<span class="fc" id="L84">                                        continue;</span>
+                                    }
+<span class="fc" id="L86">                                    Tile neighbor2 = dungeonArea.tiles[facing.y + k][facing.x + l];</span>
+
+                                    try {
+<span class="fc bfc" id="L89" title="All 2 branches covered.">                                        if (neighbor2.content.equals(&quot; &quot;)) {</span>
+<span class="fc" id="L90">                                            continue;</span>
+                                        }
+<span class="nc" id="L92">                                    } catch (Exception e) {</span>
+<span class="nc" id="L93">                                        continue;</span>
+<span class="fc" id="L94">                                    }</span>
+<span class="fc" id="L95">                                    neighbors.add(neighbor2);</span>
+<span class="fc" id="L96">                                    neighbor2.setParent(facing);</span>
+                                }
+                            }
+                        }
+                    }
+<span class="fc" id="L101">                } catch (Exception e) {</span>
+<span class="fc" id="L102">                }</span>
+<span class="fc" id="L103">            }</span>
+<span class="pc bpc" id="L104" title="1 of 2 branches missed.">            if (emptyFinder(ynow, xnow) == null) {</span>
+<span class="fc" id="L105">                break;</span>
+            }
+<span class="nc" id="L107">        }</span>
+
+<span class="fc" id="L109">        return this.dungeonArea;</span>
+
+    }
+
+    /**
+     * Finds a starting point for the maze, starting point needs to be on the
+     * area, not on the edge and not in a room
+     *
+     * @param y Suggested starting coordinate y
+     * @param x Suggested starting coordinate x
+     * @return Tile returns the Tile that is the starting point, or null
+     */
+    public Tile emptyFinder(int y, int x) {
+
+        //if we get bad parametres, we change them to default starting point
+<span class="pc bpc" id="L124" title="3 of 8 branches missed.">        if (y &lt; 1 || x &lt; 1 || y &gt; dungeonArea.areaHeight - 2 || x &gt; dungeonArea.areaWidth - 2) {</span>
+<span class="fc" id="L125">            y = 1;</span>
+<span class="fc" id="L126">            x = 1;</span>
+        }
+
+<span class="fc bfc" id="L129" title="All 2 branches covered.">        for (int i = y; i &lt; dungeonArea.tiles.length - 2; i++) {</span>
+<span class="fc bfc" id="L130" title="All 2 branches covered.">            for (int j = x; j &lt; dungeonArea.tiles[i].length - 2; j++) {</span>
+
+<span class="fc" id="L132">                Tile tileNow = dungeonArea.tiles[i][j];</span>
+
+<span class="fc bfc" id="L134" title="All 2 branches covered.">                if (tileNow.content.equals(&quot;█&quot;)) {</span>
+
+<span class="fc bfc" id="L136" title="All 2 branches covered.">                    if (dungeonArea.tiles[i + 1][j].content.equals(&quot;█&quot;)</span>
+<span class="fc bfc" id="L137" title="All 2 branches covered.">                            &amp;&amp; dungeonArea.tiles[i][j - 1].content.equals(&quot;█&quot;)</span>
+<span class="fc bfc" id="L138" title="All 2 branches covered.">                            &amp;&amp; dungeonArea.tiles[i][j + 1].content.equals(&quot;█&quot;)</span>
+<span class="fc bfc" id="L139" title="All 2 branches covered.">                            &amp;&amp; dungeonArea.tiles[i - 1][j].content.equals(&quot;█&quot;)</span>
+<span class="fc bfc" id="L140" title="All 2 branches covered.">                            &amp;&amp; dungeonArea.tiles[i - 1][j - 1].content.equals(&quot;█&quot;)</span>
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">                            &amp;&amp; dungeonArea.tiles[i - 1][j + 1].content.equals(&quot;█&quot;)</span>
+<span class="fc bfc" id="L142" title="All 2 branches covered.">                            &amp;&amp; dungeonArea.tiles[i + 1][j - 1].content.equals(&quot;█&quot;)</span>
+<span class="fc bfc" id="L143" title="All 2 branches covered.">                            &amp;&amp; dungeonArea.tiles[i + 1][j + 1].content.equals(&quot;█&quot;)) {</span>
+<span class="fc" id="L144">                        ynow = y;</span>
+<span class="fc" id="L145">                        xnow = x;</span>
+<span class="fc" id="L146">                        return tileNow;</span>
+                    }
+                }
+            }
+        }
+<span class="fc" id="L151">        return null;</span>
+    }
+
+    public Area deadEndKiller() {
+
+<span class="nc bnc" id="L156" title="All 2 branches missed.">        for (int y = 1; y &lt; this.dungeonArea.areaHeight - 1; y++) {</span>
+<span class="nc bnc" id="L157" title="All 2 branches missed.">            for (int x = 1; x &lt; this.dungeonArea.areaWidth - 1; x++) {</span>
+
+<span class="nc bnc" id="L159" title="All 2 branches missed.">                if (this.dungeonArea.tiles[y][x].content.equals(&quot; &quot;)) {</span>
+
+<span class="nc" id="L161">                    Tile underScrutiny = this.dungeonArea.tiles[y][x];</span>
+
+                    while (true) {
+<span class="nc" id="L164">                        int deadCount = deadEndHelper(underScrutiny);</span>
+<span class="nc bnc" id="L165" title="All 2 branches missed.">                        if (deadCount == 3) {</span>
+<span class="nc" id="L166">                            underScrutiny.content = &quot;█&quot;;</span>
+<span class="nc" id="L167">                            underScrutiny = underScrutiny.parent;</span>
+                        } else {
+                            break;
+                        }
+
+<span class="nc" id="L172">                    }</span>
+                }
+            }
+        }
+<span class="nc" id="L176">        return this.dungeonArea;</span>
+    }
+
+    public int deadEndHelper(Tile underScrutiny) {
+<span class="nc" id="L180">        int deadCount = 0;</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">        for (int k = -1; k &lt;= 1; k++) {</span>
+<span class="nc bnc" id="L182" title="All 2 branches missed.">            for (int l = -1; l &lt;= 1; l++) {</span>
+
+<span class="nc bnc" id="L184" title="All 8 branches missed.">                if (k == 0 &amp;&amp; l == 0 || k != 0 &amp;&amp; l != 0) {</span>
+<span class="nc" id="L185">                    continue;</span>
+                }
+                try {
+<span class="nc" id="L188">                    Tile neighbor = dungeonArea.tiles[underScrutiny.y + k][underScrutiny.x + l];</span>
+<span class="nc bnc" id="L189" title="All 2 branches missed.">                    if (neighbor.content.equals(&quot;█&quot;)) {</span>
+<span class="nc" id="L190">                        deadCount++;</span>
+                    }
+<span class="nc" id="L192">                } catch (Exception e) {</span>
+<span class="nc" id="L193">                }</span>
+            }
+        }
+<span class="nc" id="L196">        return deadCount;</span>
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

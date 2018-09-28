@@ -82,8 +82,10 @@ public class Logic {
      * Builds a maze to the dungeon after the rooms have been added
      */
     public void buildMaze() {
+        
         this.dungeonArea = mazeBuilder.build();
         this.dungeonArea.solidifyWalls();
+        
     }
     
     public void getOutOfTheBox() {

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Area.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DenMaker</a> &gt; <a href="index.source.html" class="el_package">denmaker.domain</a> &gt; <span class="el_source">Area.java</span></div><h1>Area.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package denmaker.domain;
+
+import java.util.ArrayList;
+
+/**
+ * Makes a new dungeon area There is a constructor for default area of height 50
+ * and width 150 and a constructor for an area that takes height and width as
+ * parameters
+ *
+ * @author apndx
+ */
+public class Area {
+
+    public int areaHeight;
+    public int areaWidth;
+    public Tile[][] tiles;
+    public ArrayList&lt;Room&gt; roomList;
+
+<span class="fc" id="L24">    public Area() {</span>
+<span class="fc" id="L25">        this.areaHeight = 50;</span>
+<span class="fc" id="L26">        this.areaWidth = 150;</span>
+<span class="fc" id="L27">        this.tiles = new Tile[50][150];</span>
+<span class="fc" id="L28">        this.roomList = new ArrayList&lt;&gt;();</span>
+
+        //  initialising the array with tiles   
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        for (int y = 0; y &lt; tiles.length; y++) {</span>
+<span class="fc bfc" id="L32" title="All 2 branches covered.">            for (int x = 0; x &lt; tiles[y].length; x++) {</span>
+<span class="fc" id="L33">                tiles[y][x] = new Tile(&quot;█&quot;, y, x, null);</span>
+            }
+        }
+<span class="fc" id="L36">    }</span>
+
+<span class="fc" id="L38">    public Area(int areaHeight, int areaWidth) {</span>
+
+<span class="fc" id="L40">        this.areaHeight = areaHeight;</span>
+<span class="fc" id="L41">        this.areaWidth = areaWidth;</span>
+<span class="fc" id="L42">        this.tiles = new Tile[areaHeight][areaWidth];</span>
+<span class="fc" id="L43">        this.roomList = new ArrayList&lt;&gt;();</span>
+
+        // initialising the array with tiles   
+<span class="fc bfc" id="L46" title="All 2 branches covered.">        for (int y = 0; y &lt; tiles.length; y++) {</span>
+<span class="fc bfc" id="L47" title="All 2 branches covered.">            for (int x = 0; x &lt; tiles[y].length; x++) {</span>
+<span class="fc" id="L48">                tiles[y][x] = new Tile(&quot;█&quot;, y, x, null);</span>
+            }
+        }
+<span class="fc" id="L51">    }</span>
+
+    /**
+     * Changes the wall tiles back to solid form
+     *
+     */
+    public void solidifyWalls() {
+
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        for (Room roomtoCheck : this.roomList) {</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">            for (Tile toSolidify : roomtoCheck.roomWalls) {</span>
+<span class="fc" id="L61">                toSolidify.content = &quot;█&quot;;</span>
+<span class="fc" id="L62">            }</span>
+<span class="fc" id="L63">        }</span>
+<span class="fc" id="L64">    }    </span>
+        /**
+         * Finds entrances out of every room that has something to connect to in
+         * it's vicinity (no further than one tile apart)
+         *
+         */
+    public void outOfTheBox() {
+
+<span class="fc bfc" id="L72" title="All 2 branches covered.">        for (Room toGetOutOf : this.roomList) {</span>
+<span class="fc" id="L73">            ArrayList&lt;Tile&gt; potentialEntrances = new ArrayList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L75" title="All 2 branches covered.">            for (Tile toMakeEntranceOf : toGetOutOf.roomWalls) {</span>
+
+<span class="fc" id="L77">                int y = toMakeEntranceOf.y;</span>
+<span class="fc" id="L78">                int x = toMakeEntranceOf.x;</span>
+
+                try {
+                    // does top roomtile has a corridor behind the wall?
+<span class="pc bpc" id="L82" title="3 of 4 branches missed.">                    if (this.tiles[y + 1][x].content.equals(&quot;.&quot;) &amp;&amp; this.tiles[y - 1][x].content.equals(&quot; &quot;)) {</span>
+<span class="nc" id="L83">                        potentialEntrances.add(toMakeEntranceOf);</span>
+                    }
+                    // left room, corridor?
+<span class="pc bpc" id="L86" title="3 of 4 branches missed.">                    if (this.tiles[y][x + 1].content.equals(&quot;.&quot;) &amp;&amp; this.tiles[y][x - 1].content.equals(&quot; &quot;)) {</span>
+<span class="nc" id="L87">                        potentialEntrances.add(toMakeEntranceOf);</span>
+                    }
+                    // bottom room, corridor?
+<span class="pc bpc" id="L90" title="3 of 4 branches missed.">                    if (this.tiles[y + 1][x].content.equals(&quot;.&quot;) &amp;&amp; this.tiles[y - 1][x].content.equals(&quot; &quot;)) {</span>
+<span class="nc" id="L91">                        potentialEntrances.add(toMakeEntranceOf);</span>
+                    }
+                    // right room, corridor
+<span class="pc bpc" id="L94" title="1 of 4 branches missed.">                    if (this.tiles[y][x - 1].content.equals(&quot;.&quot;) &amp;&amp; this.tiles[y][x + 1].content.equals(&quot; &quot;)) {</span>
+<span class="nc" id="L95">                        potentialEntrances.add(toMakeEntranceOf);</span>
+                    }
+<span class="fc" id="L97">                } catch (Exception e) {</span>
+<span class="fc" id="L98">                }</span>
+
+<span class="pc bpc" id="L100" title="1 of 2 branches missed.">                if (potentialEntrances.isEmpty()) {</span>
+                    try {
+                        // does room have another room behind the wall?
+<span class="pc bpc" id="L103" title="3 of 4 branches missed.">                        if (this.tiles[y + 1][x].content.equals(&quot;.&quot;) &amp;&amp; this.tiles[y - 1][x].content.equals(&quot;.&quot;)) {</span>
+<span class="nc" id="L104">                            potentialEntrances.add(toMakeEntranceOf);</span>
+                        }
+<span class="pc bpc" id="L106" title="3 of 4 branches missed.">                        if (this.tiles[y][x + 1].content.equals(&quot;.&quot;) &amp;&amp; this.tiles[y][x - 1].content.equals(&quot;.&quot;)) {</span>
+<span class="nc" id="L107">                            potentialEntrances.add(toMakeEntranceOf);</span>
+                        }
+<span class="pc bpc" id="L109" title="3 of 4 branches missed.">                        if (this.tiles[y + 1][x].content.equals(&quot;.&quot;) &amp;&amp; this.tiles[y - 1][x].content.equals(&quot;.&quot;)) {</span>
+<span class="nc" id="L110">                            potentialEntrances.add(toMakeEntranceOf);</span>
+                        }
+<span class="pc bpc" id="L112" title="1 of 4 branches missed.">                        if (this.tiles[y][x - 1].content.equals(&quot;.&quot;) &amp;&amp; this.tiles[y][x + 1].content.equals(&quot;.&quot;)) {</span>
+<span class="nc" id="L113">                            potentialEntrances.add(toMakeEntranceOf);</span>
+                        }
+
+<span class="fc" id="L116">                    } catch (Exception e) {</span>
+<span class="fc" id="L117">                    }</span>
+
+                }
+
+<span class="fc" id="L121">            }</span>
+            // corner cases, these are checked if the previous ones do not work
+<span class="pc bpc" id="L123" title="1 of 2 branches missed.">            if (!potentialEntrances.isEmpty()) {</span>
+<span class="nc" id="L124">                Tile entrance = potentialEntrances.get((int) (Math.random() * potentialEntrances.size()));</span>
+<span class="nc" id="L125">                entrance.content = &quot; &quot;;</span>
+<span class="nc" id="L126">            } else {</span>
+<span class="fc" id="L127">                ArrayList&lt;Tile&gt; cornerEntrances = new ArrayList&lt;&gt;();</span>
+<span class="fc" id="L128">                int starty = toGetOutOf.starty;</span>
+<span class="fc" id="L129">                int startx = toGetOutOf.startx;</span>
+
+                try {
+<span class="pc bpc" id="L132" title="1 of 2 branches missed.">                    if (this.tiles[starty - 1][startx - 1].content.equals(&quot; &quot;)) {</span>
+                        //left upper corner               
+<span class="nc" id="L134">                        cornerEntrances.add(this.tiles[starty - 1][startx]);</span>
+<span class="nc" id="L135">                        cornerEntrances.add(this.tiles[starty][startx - 1]);</span>
+                    }
+<span class="pc bpc" id="L137" title="1 of 2 branches missed.">                    if (this.tiles[starty - 1][startx + toGetOutOf.width].content.equals(&quot; &quot;)) {</span>
+                        //right upper corner                
+<span class="nc" id="L139">                        cornerEntrances.add(this.tiles[starty - 1][startx + toGetOutOf.width - 1]);</span>
+<span class="nc" id="L140">                        cornerEntrances.add(this.tiles[starty][startx + toGetOutOf.width]);</span>
+                    }
+<span class="pc bpc" id="L142" title="1 of 2 branches missed.">                    if (this.tiles[starty + toGetOutOf.height][startx - 1].content.equals(&quot; &quot;)) {</span>
+                        //left down corner                      
+<span class="nc" id="L144">                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 1][startx - 1]);</span>
+<span class="nc" id="L145">                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height][startx]);</span>
+                    }
+<span class="pc bpc" id="L147" title="1 of 2 branches missed.">                    if (this.tiles[starty + toGetOutOf.height - 1][startx + toGetOutOf.width - 1].content.equals(&quot; &quot;)) {</span>
+                        //right down corner                    
+<span class="nc" id="L149">                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 1][startx + toGetOutOf.width]);</span>
+<span class="nc" id="L150">                        cornerEntrances.add(this.tiles[starty + toGetOutOf.height][startx + toGetOutOf.width - 1]);</span>
+                    }
+<span class="nc" id="L152">                } catch (Exception e) {</span>
+<span class="fc" id="L153">                }</span>
+
+<span class="pc bpc" id="L155" title="1 of 2 branches missed.">                if (!cornerEntrances.isEmpty()) {</span>
+<span class="nc" id="L156">                    Tile entranceCorner = cornerEntrances.get((int) (Math.random() * cornerEntrances.size()));</span>
+<span class="nc" id="L157">                    entranceCorner.content = &quot; &quot;;</span>
+                }
+            }
+<span class="fc" id="L160">        }</span>
+<span class="fc" id="L161">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

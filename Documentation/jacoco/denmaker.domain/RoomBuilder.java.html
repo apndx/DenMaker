@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RoomBuilder.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">DenMaker</a> &gt; <a href="index.source.html" class="el_package">denmaker.domain</a> &gt; <span class="el_source">RoomBuilder.java</span></div><h1>RoomBuilder.java</h1><pre class="source lang-java linenums">/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package denmaker.domain;
+
+import java.util.ArrayList;
+
+/**
+ * This tool is used to add rooms to a dungeon area
+ *
+ * @author apndx
+ */
+public class RoomBuilder {
+
+    public Area dungeonArea;
+
+<span class="fc" id="L19">    public RoomBuilder(Area dungeonArea) {</span>
+
+<span class="fc" id="L21">        this.dungeonArea = dungeonArea;</span>
+<span class="fc" id="L22">    }</span>
+    
+    /**
+     * @param attempts Amount of room adding attempts, will generate a list of random rooms
+     * that is processed in the other addRooms method
+     * @return returns the area with rooms that have been added
+     */
+    public Area addRooms(int attempts) { 
+<span class="fc" id="L30">        ArrayList&lt;Room&gt; roomAttempts = new ArrayList&lt;&gt;();</span>
+        
+<span class="fc bfc" id="L32" title="All 2 branches covered.">        for (int i = 0; i &lt; attempts; i++) {     </span>
+<span class="fc" id="L33">            roomAttempts.add(new Room(dungeonArea.areaHeight, dungeonArea.areaWidth));     </span>
+        }
+<span class="fc" id="L35">        addRooms(roomAttempts);</span>
+<span class="fc" id="L36">        return dungeonArea;</span>
+    }
+
+    /**
+     * @param rooms A list of rooms that we try to add to the area, all the
+     * rooms that do not collide with borders and each other will be added
+     * @return Area returns the dungeon area with the rooms that now have been
+     * added to it
+     */
+    public Area addRooms(ArrayList&lt;Room&gt; rooms) {
+        
+<span class="fc bfc" id="L47" title="All 2 branches covered.">        for (int i = 0; i &lt; rooms.size(); i++) {</span>
+<span class="fc bfc" id="L48" title="All 2 branches covered.">            if (!collisionCheck(rooms.get(i))) {</span>
+<span class="fc" id="L49">                addRoomHelper(rooms.get(i));</span>
+<span class="fc" id="L50">                dungeonArea.roomList.add(rooms.get(i));</span>
+<span class="fc" id="L51">                dungeonArea = rooms.get(i).addRoomWalls(dungeonArea);         </span>
+            }
+        }
+<span class="fc" id="L54">        return dungeonArea;</span>
+    }
+
+    private void addRoomHelper(Room roomAttempt) {
+        // room does not collide, let's put it in!
+<span class="fc bfc" id="L59" title="All 2 branches covered.">        for (int y = roomAttempt.starty; y &lt; roomAttempt.starty + roomAttempt.height; y++) {</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">            for (int x = roomAttempt.startx; x &lt; roomAttempt.startx + roomAttempt.width; x++) {</span>
+<span class="fc" id="L61">                dungeonArea.tiles[y][x].content = &quot;.&quot;;</span>
+            }
+        }
+<span class="fc" id="L64">    }</span>
+
+    /**
+     * @param roomAttempt the room that is tested
+     * @return true if there is a collision, false if not
+     */
+    public boolean collisionCheck(Room roomAttempt) {
+
+<span class="fc" id="L72">        Tile[][] tiles = dungeonArea.tiles;</span>
+<span class="fc" id="L73">        int startY = roomAttempt.starty;</span>
+<span class="fc" id="L74">        int startX = roomAttempt.startx;</span>
+<span class="fc" id="L75">        int height = roomAttempt.height;</span>
+<span class="fc" id="L76">        int width = roomAttempt.width;</span>
+
+<span class="fc bfc" id="L78" title="All 4 branches covered.">        if (startY + height &gt; dungeonArea.areaHeight - 1 || startX + width &gt; dungeonArea.areaWidth - 1) {</span>
+<span class="fc" id="L79">            return true;</span>
+        }
+
+<span class="pc bpc" id="L82" title="1 of 4 branches missed.">        if (startY == 0 || startX == 0) {</span>
+<span class="fc" id="L83">            return true;</span>
+        }
+
+<span class="fc bfc" id="L86" title="All 2 branches covered.">        for (int i = startY; i &lt; startY + height; i++) {</span>
+<span class="fc bfc" id="L87" title="All 2 branches covered.">            for (int j = startX; j &lt; startX + width; j++) {</span>
+<span class="pc bpc" id="L88" title="1 of 6 branches missed.">                if (&quot; &quot;.equals(tiles[i][j].content) || &quot;+&quot;.equals(tiles[i][j].content) ||  &quot;.&quot;.equals(tiles[i][j].content)) {</span>
+<span class="fc" id="L89">                    return true;</span>
+                }
+            }
+        }
+<span class="fc" id="L93">        return false;</span>
+    }
+    
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.0.201801022044</span></div></body></html>

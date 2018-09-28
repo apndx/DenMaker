@@ -1,0 +1,8 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+DenMaker,denmaker.domain,Area,244,375,27,35,22,55,21,14,0,4
+DenMaker,denmaker.domain,Room,16,190,0,4,8,26,4,5,4,3
+DenMaker,denmaker.domain,RoomBuilder,0,203,2,26,0,32,2,17,0,5
+DenMaker,denmaker.domain,Tile,4,72,2,4,2,21,2,5,0,4
+DenMaker,denmaker.domain,Logic,47,67,4,0,8,18,4,6,2,6
+DenMaker,denmaker.domain,MazeBuilder,113,413,29,63,27,64,20,31,2,3
+DenMaker,denmaker.datastructures,OwnArrayList,59,0,4,0,13,0,5,0,3,0

@@ -16,9 +16,13 @@ import java.util.ArrayList;
 public class MazeBuilder {
 
     public Area dungeonArea;
+    public int ynow;
+    public int xnow;
 
     public MazeBuilder(Area dungeonArea) {
         this.dungeonArea = dungeonArea;
+        this.ynow = 1;
+        this.xnow = 1;
     }
 
     /**
@@ -33,7 +37,7 @@ public class MazeBuilder {
 
             ArrayList<Tile> neighbors = new ArrayList<>();
 
-            Tile start = emptyFinder(1, 1);
+            Tile start = emptyFinder(ynow, xnow);
             dungeonArea.tiles[start.y][start.x].setContent(" ");
 
             //neighbour check  
@@ -97,7 +101,7 @@ public class MazeBuilder {
                 } catch (Exception e) {
                 }
             }
-            if (emptyFinder(last.y, last.x) == null) {
+            if (emptyFinder(ynow, xnow) == null) {
                 break;
             }
         }
@@ -132,7 +136,13 @@ public class MazeBuilder {
                     if (dungeonArea.tiles[i + 1][j].content.equals("█")
                             && dungeonArea.tiles[i][j - 1].content.equals("█")
                             && dungeonArea.tiles[i][j + 1].content.equals("█")
-                            && dungeonArea.tiles[i - 1][j].content.equals("█")) {
+                            && dungeonArea.tiles[i - 1][j].content.equals("█")
+                            && dungeonArea.tiles[i - 1][j - 1].content.equals("█")
+                            && dungeonArea.tiles[i - 1][j + 1].content.equals("█")
+                            && dungeonArea.tiles[i + 1][j - 1].content.equals("█")
+                            && dungeonArea.tiles[i + 1][j + 1].content.equals("█")) {
+                        ynow = y;
+                        xnow = x;
                         return tileNow;
                     }
                 }
