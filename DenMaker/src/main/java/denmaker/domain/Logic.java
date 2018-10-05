@@ -36,6 +36,7 @@ public class Logic {
         this.dungeonArea = new Area(height, width);
         this.roomBuilder.dungeonArea = this.dungeonArea;
         this.mazeBuilder.dungeonArea = this.dungeonArea;
+        this.performance = new ArrayList<>();
     }
 
     /**

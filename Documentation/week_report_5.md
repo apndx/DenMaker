@@ -1,4 +1,4 @@
-# Week 3
+# Week 5
 
 [Hour list](https://github.com/apndx/DenMaker/blob/master/Documentation/hours.md)
 
@@ -14,7 +14,7 @@ Also there is now a seperate testing option in the main menu. It takes dungeon m
 
 ### What did I learn?
 
-While doing performance tests and checking out the results, I noticed that there might be now something fishy about the entrance making algoright, as it starts to perform very poorly when the area size gets bigger. 
+While doing performance tests and checking out the results, I noticed that there might be now something fishy about the entrance making algorithm, as it starts to perform very poorly when the area size gets bigger. 
 
 ### Problems
 
@@ -22,5 +22,5 @@ Making sure there are now isolated rooms will take some extra work, I hope I wil
 
 ### Next week
 
-I will see what is slowing down the entrace making. I will continue implementation and testing documents. I will finish my own array list and make a random generator, and also start using these. I will continue testing, and also test performance with the new datastructures.
+I will see what is slowing down the entrace making. I will continue implementation and testing documents and also user manual. I will finish my own array list and make a random generator, and also start using these. I will continue testing, and also test performance with the new datastructures.
 

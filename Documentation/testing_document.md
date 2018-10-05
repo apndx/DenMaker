@@ -12,6 +12,8 @@ First I wanted to get some test results, before I replace the ArrayList and Rand
 
 I made a testing option to the text UI. It takes dungeon measurements, the amount of rooms and amount of test rounds as parametres.
 
+## Test results
+
 These performance resulst are from tests that have been made 5.10.2018 using imported Java ArrayList and Random generator.
 
 ---------------
@@ -79,7 +81,6 @@ Trimming dead ends: 51.0 ms
 The opening entrances algorithm seems to be working quite slowly when the area size gets bigger. This is something I will analyse further next week.
 
 ## Screen shots of results
-
 
 
 # How to re-test

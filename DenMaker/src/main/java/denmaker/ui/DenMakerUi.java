@@ -10,6 +10,8 @@ import java.util.Scanner;
 
 /**
  * TextUserInterface for the DenMaker
+ * 
+ * Menu options: 1. Create a new Den, 2. Test mode, 3. Quit
  *
  * @author apndx
  */
@@ -76,14 +78,13 @@ public class DenMakerUi {
 
         logic.changeArea(height, width);
         logic.buildRooms(attempts);
-
         System.out.println("Dungeon with rooms");
         logic.drawArea();
         logic.buildMaze();
         System.out.println("Dungeon with a maze");
-        logic.drawArea();
-        System.out.println("Lets open the rooms");
+        logic.drawArea();    
         logic.getOutOfTheBox();
+        System.out.println("Lets open the rooms");
         logic.drawArea();
         logic.killDeadEnds();
         System.out.println("Lets trim the dead ends");
