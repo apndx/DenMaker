@@ -20,6 +20,7 @@ public class Area {
     public int areaWidth;
     public Tile[][] tiles;
     public ArrayList<Room> roomList;
+    public int seperateRooms;
 
     public Area() {
         this.areaHeight = 50;
@@ -61,12 +62,13 @@ public class Area {
                 toSolidify.content = "█";
             }
         }
-    }    
-        /**
-         * Finds entrances out of every room that has something to connect to in
-         * it's vicinity (no further than one tile apart)
-         *
-         */
+    }
+
+    /**
+     * Finds entrances out of every room that has something to connect to in
+     * it's vicinity (no further than one tile apart)
+     *
+     */
     public void outOfTheBox() {
 
         for (Room toGetOutOf : this.roomList) {
@@ -78,52 +80,43 @@ public class Area {
                 int x = toMakeEntranceOf.x;
 
                 try {
-                    // does top roomtile has a corridor behind the wall?
-                    if (this.tiles[y + 1][x].content.equals(".") && this.tiles[y - 1][x].content.equals(" ")) {
+                    // do top roomtile have other region empty behind the wall?
+                    if (this.tiles[y + 1][x].content.equals(" ") && this.tiles[y - 1][x].content.equals(" ")
+                            && this.tiles[y + 1][x].region != this.tiles[y - 1][x].region) {
+                        toMakeEntranceOf.region = this.tiles[y - 1][x].region;
+                        potentialEntrances.add(toMakeEntranceOf);
+
+                    }
+                    // left
+                    else if (this.tiles[y][x + 1].content.equals(" ") && this.tiles[y][x - 1].content.equals(" ")
+                            && this.tiles[y][x + 1].region != this.tiles[y][x - 1].region) {
+                        toMakeEntranceOf.region = this.tiles[y][x - 1].region;
                         potentialEntrances.add(toMakeEntranceOf);
                     }
-                    // left room, corridor?
-                    if (this.tiles[y][x + 1].content.equals(".") && this.tiles[y][x - 1].content.equals(" ")) {
+                    // bottom 
+                    else if (this.tiles[y + 1][x].content.equals(" ") && this.tiles[y - 1][x].content.equals(" ")
+                            && this.tiles[y + 1][x].region != this.tiles[y - 1][x].region) {
+                        toMakeEntranceOf.region = this.tiles[y - 1][x].region;
                         potentialEntrances.add(toMakeEntranceOf);
                     }
-                    // bottom room, corridor?
-                    if (this.tiles[y + 1][x].content.equals(".") && this.tiles[y - 1][x].content.equals(" ")) {
-                        potentialEntrances.add(toMakeEntranceOf);
-                    }
-                    // right room, corridor
-                    if (this.tiles[y][x - 1].content.equals(".") && this.tiles[y][x + 1].content.equals(" ")) {
+                    // right
+                    else if (this.tiles[y][x - 1].content.equals(" ") && this.tiles[y][x + 1].content.equals(" ")
+                            && this.tiles[y][x - 1].region != this.tiles[y][x + 1].region) {
+                        toMakeEntranceOf.region = this.tiles[y][x + 1].region;
                         potentialEntrances.add(toMakeEntranceOf);
                     }
                 } catch (Exception e) {
                 }
 
-                if (potentialEntrances.isEmpty()) {
-                    try {
-                        // does room have another room behind the wall?
-                        if (this.tiles[y + 1][x].content.equals(".") && this.tiles[y - 1][x].content.equals(".")) {
-                            potentialEntrances.add(toMakeEntranceOf);
-                        }
-                        if (this.tiles[y][x + 1].content.equals(".") && this.tiles[y][x - 1].content.equals(".")) {
-                            potentialEntrances.add(toMakeEntranceOf);
-                        }
-                        if (this.tiles[y + 1][x].content.equals(".") && this.tiles[y - 1][x].content.equals(".")) {
-                            potentialEntrances.add(toMakeEntranceOf);
-                        }
-                        if (this.tiles[y][x - 1].content.equals(".") && this.tiles[y][x + 1].content.equals(".")) {
-                            potentialEntrances.add(toMakeEntranceOf);
-                        }
-
-                    } catch (Exception e) {
-                    }
-
-                }
-
             }
-            // corner cases, these are checked if the previous ones do not work
+            
             if (!potentialEntrances.isEmpty()) {
                 Tile entrance = potentialEntrances.get((int) (Math.random() * potentialEntrances.size()));
                 entrance.content = " ";
+                regionChanger(entrance.region, this.tiles[toGetOutOf.starty][toGetOutOf.startx].region);
+
             } else {
+                // corner cases, these are checked if the previous ones do not work
                 ArrayList<Tile> cornerEntrances = new ArrayList<>();
                 int starty = toGetOutOf.starty;
                 int startx = toGetOutOf.startx;
@@ -139,12 +132,12 @@ public class Area {
                         cornerEntrances.add(this.tiles[starty - 1][startx + toGetOutOf.width - 1]);
                         cornerEntrances.add(this.tiles[starty][startx + toGetOutOf.width]);
                     }
-                    if (this.tiles[starty + toGetOutOf.height][startx - 1].content.equals(" ")) {
+                    if (this.tiles[starty + toGetOutOf.height][startx].content.equals(" ")) {
                         //left down corner                      
                         cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 1][startx - 1]);
                         cornerEntrances.add(this.tiles[starty + toGetOutOf.height][startx]);
                     }
-                    if (this.tiles[starty + toGetOutOf.height - 1][startx + toGetOutOf.width - 1].content.equals(" ")) {
+                    if (this.tiles[starty + toGetOutOf.height][startx + toGetOutOf.width].content.equals(" ")) {
                         //right down corner                    
                         cornerEntrances.add(this.tiles[starty + toGetOutOf.height - 1][startx + toGetOutOf.width]);
                         cornerEntrances.add(this.tiles[starty + toGetOutOf.height][startx + toGetOutOf.width - 1]);
@@ -155,8 +148,26 @@ public class Area {
                 if (!cornerEntrances.isEmpty()) {
                     Tile entranceCorner = cornerEntrances.get((int) (Math.random() * cornerEntrances.size()));
                     entranceCorner.content = " ";
+                    regionChanger(entranceCorner.region, this.tiles[toGetOutOf.starty][toGetOutOf.startx].region);                   
                 }
             }
         }
     }
+
+    public void regionChanger(int regionToRemove, int regionToSpread) {
+
+        for (int i = 1; i < this.tiles.length - 2; i++) {
+            for (int j = 1; j < this.tiles[i].length - 2; j++) {
+
+                if (this.tiles[i][j].region == regionToRemove) {
+                    this.tiles[i][j].region = regionToSpread;
+                }
+            }
+        }
+        if (regionToRemove>0) {
+            seperateRooms--;
+        }
+    }
+    
+    
 }

@@ -18,11 +18,13 @@ public class MazeBuilder {
     public Area dungeonArea;
     public int ynow;
     public int xnow;
-
+    public int mazeRegion;
+    
     public MazeBuilder(Area dungeonArea) {
         this.dungeonArea = dungeonArea;
         this.ynow = 1;
         this.xnow = 1;
+        this.mazeRegion = 0;
     }
 
     /**
@@ -38,8 +40,9 @@ public class MazeBuilder {
             ArrayList<Tile> neighbors = new ArrayList<>();
 
             Tile start = emptyFinder(ynow, xnow);
-            dungeonArea.tiles[start.y][start.x].setContent(" ");
-
+            mazeRegion--;
+            dungeonArea.tiles[start.y][start.x].content = " ";
+            dungeonArea.tiles[start.y][start.x].region = mazeRegion;
             //neighbour check  
             for (int i = -1; i <= 1; i++) {
                 for (int j = -1; j <= 1; j++) {
@@ -72,10 +75,11 @@ public class MazeBuilder {
                         if (facing.content.equals("█") && facing.y < dungeonArea.areaHeight - 1 && facing.x < dungeonArea.areaWidth - 1) {
 
                             next.content = " ";
+                            next.region = mazeRegion;
                             facing.content = " ";
+                            facing.region = mazeRegion;
+                            
                             facing.setParent(next);
-                            dungeonArea.tiles[next.y][next.x].content = " ";
-                            dungeonArea.tiles[facing.y][facing.x].content = " ";
                             last = facing;
                             for (int k = -1; k <= 1; k++) {
                                 for (int l = -1; l <= 1; l++) {
@@ -105,9 +109,7 @@ public class MazeBuilder {
                 break;
             }
         }
-
         return this.dungeonArea;
-
     }
 
     /**
@@ -162,7 +164,7 @@ public class MazeBuilder {
 
                     while (true) {
                         int deadCount = deadEndHelper(underScrutiny);
-                        if (deadCount == 3) {
+                        if (deadCount == 3 || deadCount == 4 ) {
                             underScrutiny.content = "█";
                             underScrutiny = underScrutiny.parent;
                         } else {

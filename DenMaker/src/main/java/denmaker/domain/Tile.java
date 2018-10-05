@@ -6,7 +6,8 @@
 package denmaker.domain;
 
 /**
- * Makes a new Tile. content: "█"=solid, " "=corridor, "."=room, "+"=wall (of a room)
+ * Makes a new Tile. content: "█"=solid, " "=corridor or room,  "+"=wall (of a
+ * room)
  *
  * @author apndx
  */
@@ -16,12 +17,14 @@ public class Tile {
     public int y;
     public int x;
     public Tile parent;
+    public int region;
 
     public Tile(String content, int y, int x, Tile parent) {
         this.content = content;
         this.y = y;
         this.x = x;
         this.parent = parent;
+        this.region = 0; // 0: no region, negative: lonely corridor, positive: connected to room
     }
 
     public void setParent(Tile parent) {
@@ -29,8 +32,9 @@ public class Tile {
     }
 
     /**
-     * Finds the next tile to add 
-     * @param dungeonArea area that is under construction 
+     * Finds the next tile to add
+     *
+     * @param dungeonArea area that is under construction
      * @return returns the next Tile candidate to be added
      */
     public Tile checkOpposite(Area dungeonArea) {

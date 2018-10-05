@@ -18,8 +18,12 @@
 | 25.9 |4,5 h | Entrances also for rooms that have only near corridor in corner, algorigh for the dead end trimmer | 
 | 26.9 |2 h | Fixing overlapping rooms and partial maze, fixing room creating measurements, JUnit-testing, continuing documentation | 
 | 28.9 |4 h | Continuing testing document. Making entrance opening to prefere opening entrances to corridors. Starting own ArrayList. Week report.| 
+| 2.10 |2,5 h | Debugging entrance algorithm | 
+| 4.10 |1 h | Demoing to pals, getting performance testing ideas, starting performance testing | 
+| 5.10 |4,5 h | Continuing performance testing, testing mode to UI, documentation, week report, testing document| 
 
-Tot 45,5 h
+
+Tot 53,5 h
 
 
 

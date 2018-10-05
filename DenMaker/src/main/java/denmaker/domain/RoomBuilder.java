@@ -20,17 +20,17 @@ public class RoomBuilder {
 
         this.dungeonArea = dungeonArea;
     }
-    
+
     /**
-     * @param attempts Amount of room adding attempts, will generate a list of random rooms
-     * that is processed in the other addRooms method
+     * @param attempts Amount of room adding attempts, will generate a list of
+     * random rooms that is processed in the other addRooms method
      * @return returns the area with rooms that have been added
      */
-    public Area addRooms(int attempts) { 
+    public Area addRooms(int attempts) {
         ArrayList<Room> roomAttempts = new ArrayList<>();
-        
-        for (int i = 0; i < attempts; i++) {     
-            roomAttempts.add(new Room(dungeonArea.areaHeight, dungeonArea.areaWidth));     
+
+        for (int i = 0; i < attempts; i++) {
+            roomAttempts.add(new Room(dungeonArea.areaHeight, dungeonArea.areaWidth));
         }
         addRooms(roomAttempts);
         return dungeonArea;
@@ -43,12 +43,12 @@ public class RoomBuilder {
      * added to it
      */
     public Area addRooms(ArrayList<Room> rooms) {
-        
+
         for (int i = 0; i < rooms.size(); i++) {
             if (!collisionCheck(rooms.get(i))) {
-                addRoomHelper(rooms.get(i));
                 dungeonArea.roomList.add(rooms.get(i));
-                dungeonArea = rooms.get(i).addRoomWalls(dungeonArea);         
+                addRoomHelper(rooms.get(i));
+                dungeonArea = rooms.get(i).addRoomWalls(dungeonArea);
             }
         }
         return dungeonArea;
@@ -56,9 +56,11 @@ public class RoomBuilder {
 
     private void addRoomHelper(Room roomAttempt) {
         // room does not collide, let's put it in!
+        dungeonArea.seperateRooms++;
         for (int y = roomAttempt.starty; y < roomAttempt.starty + roomAttempt.height; y++) {
             for (int x = roomAttempt.startx; x < roomAttempt.startx + roomAttempt.width; x++) {
-                dungeonArea.tiles[y][x].content = ".";
+                dungeonArea.tiles[y][x].content = " ";
+                dungeonArea.tiles[y][x].region = dungeonArea.roomList.size();
             }
         }
     }
@@ -85,13 +87,12 @@ public class RoomBuilder {
 
         for (int i = startY; i < startY + height; i++) {
             for (int j = startX; j < startX + width; j++) {
-                if (" ".equals(tiles[i][j].content) || "+".equals(tiles[i][j].content) ||  ".".equals(tiles[i][j].content)) {
+                if (" ".equals(tiles[i][j].content) || "+".equals(tiles[i][j].content)) {
                     return true;
                 }
             }
         }
         return false;
     }
-    
 
 }
