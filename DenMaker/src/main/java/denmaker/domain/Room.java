@@ -63,17 +63,17 @@ public class Room {
         // upper and bottom wall
         for (int i = this.startx; i < this.startx + this.width; i++) {
             this.roomWalls.add(dungeonArea.tiles[this.starty - 1][i]);
-            dungeonArea.tiles[this.starty - 1][i].content = "+";
+            dungeonArea.tiles[this.starty - 1][i].content = "w";
             this.roomWalls.add(dungeonArea.tiles[this.starty + this.height][i]);
-            dungeonArea.tiles[this.starty + this.height][i].content = "+";
+            dungeonArea.tiles[this.starty + this.height][i].content = "w";
         }
 
         // left and right wall
         for (int i = this.starty; i < this.starty + this.height; i++) {
             this.roomWalls.add(dungeonArea.tiles[i][this.startx - 1]);
-            dungeonArea.tiles[i][this.startx - 1].content = "+";
+            dungeonArea.tiles[i][this.startx - 1].content = "w";
             this.roomWalls.add(dungeonArea.tiles[i][this.startx + this.width]);
-            dungeonArea.tiles[i][this.startx + this.width].content = "+";
+            dungeonArea.tiles[i][this.startx + this.width].content = "w";
         }
         return dungeonArea;
     }

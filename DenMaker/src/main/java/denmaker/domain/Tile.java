@@ -6,7 +6,7 @@
 package denmaker.domain;
 
 /**
- * Makes a new Tile. content: "Unicode \u2588"=solid, " "=corridor or room,  "+"=wall (of a
+ * Makes a new Tile. content: "Unicode \u2588"=solid, " "=corridor or room,  "w"=wall (of a
  * room)
  *
  * @author apndx

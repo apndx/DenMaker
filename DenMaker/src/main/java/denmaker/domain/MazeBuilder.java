@@ -19,7 +19,7 @@ public class MazeBuilder {
     public int ynow;
     public int xnow;
     public int mazeRegion;
-    
+
     public MazeBuilder(Area dungeonArea) {
         this.dungeonArea = dungeonArea;
         this.ynow = 1;
@@ -40,6 +40,8 @@ public class MazeBuilder {
             ArrayList<Tile> neighbors = new ArrayList<>();
 
             Tile start = emptyFinder(ynow, xnow);
+            
+            
             mazeRegion--;
             dungeonArea.tiles[start.y][start.x].content = " ";
             dungeonArea.tiles[start.y][start.x].region = mazeRegion;
@@ -78,7 +80,7 @@ public class MazeBuilder {
                             next.region = mazeRegion;
                             facing.content = " ";
                             facing.region = mazeRegion;
-                            
+
                             facing.setParent(next);
                             last = facing;
                             for (int k = -1; k <= 1; k++) {
@@ -135,14 +137,14 @@ public class MazeBuilder {
 
                 if (tileNow.content.equals("█")) {
 
-                    if (dungeonArea.tiles[i + 1][j].content.equals("█")
-                            && dungeonArea.tiles[i][j - 1].content.equals("█")
-                            && dungeonArea.tiles[i][j + 1].content.equals("█")
-                            && dungeonArea.tiles[i - 1][j].content.equals("█")
-                            && dungeonArea.tiles[i - 1][j - 1].content.equals("█")
-                            && dungeonArea.tiles[i - 1][j + 1].content.equals("█")
-                            && dungeonArea.tiles[i + 1][j - 1].content.equals("█")
-                            && dungeonArea.tiles[i + 1][j + 1].content.equals("█")) {
+                    if (dungeonArea.tiles[i + 1][j].content.matches("█|w")
+                            && dungeonArea.tiles[i][j - 1].content.matches("█|w")
+                            && dungeonArea.tiles[i][j + 1].content.matches("█|w")
+                            && dungeonArea.tiles[i - 1][j].content.matches("█|w")
+                            && dungeonArea.tiles[i - 1][j - 1].content.matches("█|w")
+                            && dungeonArea.tiles[i - 1][j + 1].content.matches("█|w")
+                            && dungeonArea.tiles[i + 1][j - 1].content.matches("█|w")
+                            && dungeonArea.tiles[i + 1][j + 1].content.matches("█|w")) {
                         ynow = y;
                         xnow = x;
                         return tileNow;
@@ -164,7 +166,7 @@ public class MazeBuilder {
 
                     while (true) {
                         int deadCount = deadEndHelper(underScrutiny);
-                        if (deadCount == 3 || deadCount == 4 ) {
+                        if (deadCount == 3 || deadCount == 4) {
                             underScrutiny.content = "█";
                             underScrutiny = underScrutiny.parent;
                         } else {

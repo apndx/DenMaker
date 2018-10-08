@@ -91,7 +91,7 @@ public class RoomBuilderTest {
         assertEquals(block, testDungeonArea.tiles[0][0].content);
         assertEquals(block, testDungeonArea.tiles[testDungeonArea.areaHeight - 5][0].content); 
         assertEquals(" ", testDungeonArea.tiles[testDungeonArea.areaHeight - 15][15].content);
-        assertEquals("+", testDungeonArea.tiles[testDungeonArea.areaHeight - 16][15].content); 
+        assertEquals("w", testDungeonArea.tiles[testDungeonArea.areaHeight - 16][15].content); 
         assertEquals(block, testDungeonArea.tiles[testDungeonArea.areaHeight - 17][15].content); 
 
     }

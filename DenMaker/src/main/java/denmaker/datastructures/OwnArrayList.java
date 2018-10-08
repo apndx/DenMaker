@@ -70,4 +70,16 @@ public class OwnArrayList<T> {
         this.counter--;
     }
 
+    public T value(int index) {
+        if (index < 0 || index >= this.counter) {
+            throw new ArrayIndexOutOfBoundsException("Index " + index + " outside [0, " + this.counter + "] area.");
+        }
+
+        return this.values[index];
+    }
+
+    public int koko() {
+        return this.counter;
+    }
+
 }

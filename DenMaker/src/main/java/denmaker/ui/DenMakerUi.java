@@ -10,7 +10,7 @@ import java.util.Scanner;
 
 /**
  * TextUserInterface for the DenMaker
- * 
+ *
  * Menu options: 1. Create a new Den, 2. Test mode, 3. Quit
  *
  * @author apndx
@@ -82,7 +82,7 @@ public class DenMakerUi {
         logic.drawArea();
         logic.buildMaze();
         System.out.println("Dungeon with a maze");
-        logic.drawArea();    
+        logic.drawArea();
         logic.getOutOfTheBox();
         System.out.println("Lets open the rooms");
         logic.drawArea();
@@ -120,13 +120,21 @@ public class DenMakerUi {
         System.out.println("Let's make the dungeon map, please give measurements.");
         System.out.println("Do you want to change the default height 49?");
         System.out.println("If yes, please type a number that is  between 10 and 999.");
-        String areaHeight = reader.nextLine();
         int height = 49;
 
-        if (areaHeight.matches("(\\d){2,3}")) {
-            height = Integer.parseInt(areaHeight);
-        }
+        while (true) {
+            String areaHeight = reader.nextLine();
 
+            if (areaHeight.matches("(\\d){2,3}")) {
+                height = Integer.parseInt(areaHeight);
+                break;
+            } else if (areaHeight.matches("")) {
+                height = 49;
+                break;
+            } else {
+                System.out.println("Please type a valid number or <enter>");
+            }
+        }
         if (height % 2 == 0) {
             height -= 1;
         }
@@ -136,13 +144,21 @@ public class DenMakerUi {
     private static int menuHelperWidth(Scanner reader) {
         System.out.println("Do you want to change the default width 149?");
         System.out.println("If yes, please type a number that is  between 10 and 999.");
-        String areaWidth = reader.nextLine();
         int width = 149;
 
-        if (areaWidth.matches("(\\d){2,3}")) {
-            width = Integer.parseInt(areaWidth);
-        }
+        while (true) {
+            String areaWidth = reader.nextLine();
 
+            if (areaWidth.matches("(\\d){2,3}")) {
+                width = Integer.parseInt(areaWidth);
+                break;
+            } else if (areaWidth.matches("")) {
+                width = 149;
+                break;
+            } else {
+                System.out.println("Please type a valid number or <enter>");
+            }
+        }
         if (width % 2 == 0) {
             width -= 1;
         }
