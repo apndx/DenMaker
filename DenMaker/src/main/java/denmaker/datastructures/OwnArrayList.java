@@ -34,8 +34,40 @@ public class OwnArrayList<T> {
         for (int i = 0; i < this.values.length; i++) {
             biggerOne[i] = this.values[i];
         }
-
         this.values = biggerOne;
+    }
+
+    public boolean includes(T value) {
+        for (int i = 0; i < this.counter; i++) {
+            if (value == this.values[i] || this.values[i].equals(value)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public int valueIndex(T value) {
+        for (int i = 0; i < this.counter; i++) {
+            if (value == this.values[i] || this.values[i].equals(value)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private void moveToLeft(int fromIndex) {
+        for (int i = fromIndex; i < this.counter - 1; i++) {
+            this.values[i] = this.values[i + 1];
+        }
+    }
+
+    public void remove(T value) {
+        int valueIndex = valueIndex(value);
+        if (valueIndex < 0) {
+            return; // not found
+        }
+        moveToLeft(valueIndex);
+        this.counter--;
     }
 
 }

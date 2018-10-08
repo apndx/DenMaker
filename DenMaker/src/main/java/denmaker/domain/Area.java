@@ -23,15 +23,18 @@ public class Area {
     public int seperateRooms;
 
     public Area() {
-        this.areaHeight = 50;
-        this.areaWidth = 150;
-        this.tiles = new Tile[50][150];
+        this.areaHeight = 49;
+        this.areaWidth = 149;
+        this.tiles = new Tile[49][149];
         this.roomList = new ArrayList<>();
+        
+        char uniChar = '\u2588';
+        String block = String.valueOf(uniChar);
 
         //  initialising the array with tiles   
         for (int y = 0; y < tiles.length; y++) {
             for (int x = 0; x < tiles[y].length; x++) {
-                tiles[y][x] = new Tile("█", y, x, null);
+                tiles[y][x] = new Tile(block, y, x, null);
             }
         }
     }
@@ -43,10 +46,13 @@ public class Area {
         this.tiles = new Tile[areaHeight][areaWidth];
         this.roomList = new ArrayList<>();
 
+        char uniChar = '\u2588';
+        String block = String.valueOf(uniChar);
+        
         // initialising the array with tiles   
         for (int y = 0; y < tiles.length; y++) {
             for (int x = 0; x < tiles[y].length; x++) {
-                tiles[y][x] = new Tile("█", y, x, null);
+                tiles[y][x] = new Tile(block, y, x, null);
             }
         }
     }
@@ -56,10 +62,13 @@ public class Area {
      *
      */
     public void solidifyWalls() {
+        
+        char uniChar = '\u2588';
+        String block = String.valueOf(uniChar);
 
         for (Room roomtoCheck : this.roomList) {
             for (Tile toSolidify : roomtoCheck.roomWalls) {
-                toSolidify.content = "█";
+                toSolidify.content = block;
             }
         }
     }

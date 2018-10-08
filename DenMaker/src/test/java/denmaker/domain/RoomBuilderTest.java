@@ -84,10 +84,15 @@ public class RoomBuilderTest {
 
         testRoomBuilder.addRooms(rooms);
         
+        char uniChar = '\u2588';
+        String block = String.valueOf(uniChar);
+        
         assertEquals(true, testRoomBuilder.collisionCheck(testRoomMiddle));
-        assertEquals("█", testDungeonArea.tiles[0][0].content);
-        assertEquals("█", testDungeonArea.tiles[testDungeonArea.areaHeight - 5][0].content);
-        assertEquals(".", testDungeonArea.tiles[testDungeonArea.areaHeight - 15][15].content);
+        assertEquals(block, testDungeonArea.tiles[0][0].content);
+        assertEquals(block, testDungeonArea.tiles[testDungeonArea.areaHeight - 5][0].content); 
+        assertEquals(" ", testDungeonArea.tiles[testDungeonArea.areaHeight - 15][15].content);
+        assertEquals("+", testDungeonArea.tiles[testDungeonArea.areaHeight - 16][15].content); 
+        assertEquals(block, testDungeonArea.tiles[testDungeonArea.areaHeight - 17][15].content); 
 
     }
     

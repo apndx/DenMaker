@@ -21,9 +21,9 @@
 | 2.10 |2,5 h | Debugging entrance algorithm | 
 | 4.10 |1 h | Demoing to pals, getting performance testing ideas, starting performance testing | 
 | 5.10 |5 h | Continuing performance testing, testing mode to UI, documentation, week report, testing document| 
+| 8.10 |1,5 min | Reading peer review, (hopefully) fixing ASCII block to a more generally working solution, fixing room tests, own arraylist | 
 
-
-Tot 54 h
+Tot 55,5 h
 
 
 
