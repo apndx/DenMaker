@@ -5,7 +5,8 @@
  */
 package denmaker.domain;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import denmaker.datastructures.OwnArrayList;
 
 /**
  * Logic has methods working between the domain tools and UI
@@ -17,13 +18,39 @@ public class Logic {
     public Area dungeonArea;
     public RoomBuilder roomBuilder;
     public MazeBuilder mazeBuilder;
-    public ArrayList<Double> performance; // 0 rooms, 1 maze, 2 entrances, 3 trimming
+    public OwnArrayList<Double> performance; // 0 rooms, 1 maze, 2 entrances, 3 trimming
 
     public Logic() {
         this.dungeonArea = new Area();
         this.roomBuilder = new RoomBuilder(this.dungeonArea);
         this.mazeBuilder = new MazeBuilder(this.dungeonArea);
-        this.performance = new ArrayList<>();
+        this.performance = new OwnArrayList<>();
+    }
+
+    public String[][] contentToString(Area denArea) {
+
+        String[][] denWithStrings = new String[denArea.areaHeight][denArea.areaWidth];
+        char uniChar = '\u2588';
+        String block = String.valueOf(uniChar);
+
+        for (int y = 0; y < denArea.tiles.length; y++) {;
+
+            for (int x = 0; x < denArea.tiles[y].length; x++) {
+
+                switch (denArea.tiles[y][x].content) {
+                    case 0:
+                        denWithStrings[y][x] = block;
+                        break;
+                    case 1:
+                        denWithStrings[y][x] = " ";
+                        break;
+                    default:
+                        denWithStrings[y][x] = "+";
+                        break;
+                }
+            }
+        }
+        return denWithStrings;
     }
 
     /**
@@ -36,22 +63,24 @@ public class Logic {
         this.dungeonArea = new Area(height, width);
         this.roomBuilder.dungeonArea = this.dungeonArea;
         this.mazeBuilder.dungeonArea = this.dungeonArea;
-        this.performance = new ArrayList<>();
+        this.performance = new OwnArrayList<>();
     }
 
     /**
-     * Draws the dungeon area according to what content each tile of the area
-     * array has
+     * Draws the dungeon area according to what String content each tile of the
+     * area array has (0 = solid, 1 = corridor/room, 2 = roomwall)
+     *
      */
     public void drawArea() {
 
-        for (int y = 0; y < dungeonArea.tiles.length; y++) {
+        String[][] stringDen = contentToString(this.dungeonArea);
+
+        for (int y = 0; y < stringDen.length; y++) {
             StringBuilder stringBuilder = new StringBuilder();
 
-            for (int x = 0; x < dungeonArea.tiles[y].length; x++) {
-                stringBuilder.append(dungeonArea.tiles[y][x].content);
+            for (int x = 0; x < stringDen[y].length; x++) {
+                stringBuilder.append(stringDen[y][x]);
             }
-
             System.out.println(stringBuilder);
         }
     }
@@ -76,7 +105,7 @@ public class Logic {
      * with borders and each other will be added This is method is mainly for
      * testing purposes
      */
-    public void buildRooms(ArrayList<Room> roomList) {
+    public void buildRooms(OwnArrayList<Room> roomList) {
         long start = System.currentTimeMillis();
         this.dungeonArea = roomBuilder.addRooms(roomList);
         long stop = System.currentTimeMillis();
@@ -122,8 +151,8 @@ public class Logic {
 
     public void testRound(int attempts, int howMany, int height, int width) {
 
-        ArrayList<ArrayList> testResults = new ArrayList<>();
-        ArrayList<Double> averagePerformance = new ArrayList<>();
+        OwnArrayList<OwnArrayList> testResults = new OwnArrayList<>();
+        OwnArrayList<Double> averagePerformance = new OwnArrayList<>();
         double averageRoom = 0;
         double averageMaze = 0;
         double averageEntrance = 0;
@@ -139,7 +168,7 @@ public class Logic {
         }
 
         for (int i = 0; i < testResults.size(); i++) {
-            ArrayList<Double> listToCheck = testResults.get(i);
+            OwnArrayList<Double> listToCheck = testResults.get(i);
 
             averageRoom += listToCheck.get(0);
             averageMaze += listToCheck.get(1);
@@ -157,7 +186,7 @@ public class Logic {
         System.out.println(testResults(averagePerformance));
     }
 
-    public String testResults(ArrayList<Double> results) {
+    public String testResults(OwnArrayList<Double> results) {
 
         return "Adding rooms: " + results.get(0) + " ms" + "\n"
                 + "Making maze: " + results.get(1) + " ms" + "\n"

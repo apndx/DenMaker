@@ -5,7 +5,8 @@
  */
 package denmaker.domain;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import denmaker.datastructures.OwnArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -26,7 +27,7 @@ public class RoomBuilderTest {
     public Room testRoomCornerDownOther;
     public Room testRoomCornerUp;
     public Room testRoomMiddle;
-    public ArrayList<Room> rooms;
+    public OwnArrayList<Room> rooms;
 
     public RoomBuilderTest() {
 
@@ -37,7 +38,7 @@ public class RoomBuilderTest {
         this.testRoomCornerDownOther = new Room(5, 5, testDungeonArea.areaHeight, testDungeonArea.areaWidth);
         this.testRoomCornerUp = new Room(5, 5, testDungeonArea.areaHeight - 5, 0);
         this.testRoomMiddle = new Room(5, 5, testDungeonArea.areaHeight - 15, 15);
-        this.rooms = new ArrayList<>();
+        this.rooms = new OwnArrayList<>();
         rooms.add(testRoomCornerDown);
         rooms.add(testRoomCornerUp);
         rooms.add(testRoomMiddle);

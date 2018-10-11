@@ -5,7 +5,8 @@
  */
 package denmaker.domain;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import denmaker.datastructures.OwnArrayList;
 
 /**
  * MazeBuilder carves a maze through the remaining wall matter in the dungeon,
@@ -37,13 +38,12 @@ public class MazeBuilder {
 
         while (true) {
 
-            ArrayList<Tile> neighbors = new ArrayList<>();
+            OwnArrayList<Tile> neighbors = new OwnArrayList<>();
 
             Tile start = emptyFinder(ynow, xnow);
-            
-            
+
             mazeRegion--;
-            dungeonArea.tiles[start.y][start.x].content = " ";
+            dungeonArea.tiles[start.y][start.x].content = 1;
             dungeonArea.tiles[start.y][start.x].region = mazeRegion;
             //neighbour check  
             for (int i = -1; i <= 1; i++) {
@@ -55,7 +55,7 @@ public class MazeBuilder {
                     Tile neighbor = dungeonArea.tiles[start.y + i][start.x + j];
 
                     try {
-                        if (neighbor.content.equals(" ")) {
+                        if (neighbor.content == 1) {
                             continue;
                         }
                     } catch (Exception e) {
@@ -66,19 +66,20 @@ public class MazeBuilder {
                 }
             }
             Tile last = null;
-            while (!neighbors.isEmpty()) {
+            while (neighbors.size() != 0) {
 
-                Tile next = neighbors.remove((int) (Math.random() * neighbors.size()));
+                Tile next = neighbors.get((int) (Math.random() * neighbors.size()));
+                neighbors.remove(next);
                 Tile facing = next.checkOpposite(dungeonArea);
 
                 try {
                     // if both tiles are wall tiles and not on the edges
-                    if (next.content.equals("█")) {
-                        if (facing.content.equals("█") && facing.y < dungeonArea.areaHeight - 1 && facing.x < dungeonArea.areaWidth - 1) {
+                    if (next.content == 0) {
+                        if (facing.content == 0 && facing.y < dungeonArea.areaHeight - 1 && facing.x < dungeonArea.areaWidth - 1) {
 
-                            next.content = " ";
+                            next.content = 1;
                             next.region = mazeRegion;
-                            facing.content = " ";
+                            facing.content = 1;
                             facing.region = mazeRegion;
 
                             facing.setParent(next);
@@ -92,7 +93,7 @@ public class MazeBuilder {
                                     Tile neighbor2 = dungeonArea.tiles[facing.y + k][facing.x + l];
 
                                     try {
-                                        if (neighbor2.content.equals(" ")) {
+                                        if (neighbor2.content == 1) {
                                             continue;
                                         }
                                     } catch (Exception e) {
@@ -135,16 +136,16 @@ public class MazeBuilder {
 
                 Tile tileNow = dungeonArea.tiles[i][j];
 
-                if (tileNow.content.equals("█")) {
+                if (tileNow.content == 0) {
 
-                    if (dungeonArea.tiles[i + 1][j].content.matches("█|w")
-                            && dungeonArea.tiles[i][j - 1].content.matches("█|w")
-                            && dungeonArea.tiles[i][j + 1].content.matches("█|w")
-                            && dungeonArea.tiles[i - 1][j].content.matches("█|w")
-                            && dungeonArea.tiles[i - 1][j - 1].content.matches("█|w")
-                            && dungeonArea.tiles[i - 1][j + 1].content.matches("█|w")
-                            && dungeonArea.tiles[i + 1][j - 1].content.matches("█|w")
-                            && dungeonArea.tiles[i + 1][j + 1].content.matches("█|w")) {
+                    if (dungeonArea.tiles[i + 1][j].content == 0
+                            && dungeonArea.tiles[i][j - 1].content == 0
+                            && dungeonArea.tiles[i][j + 1].content == 0
+                            && dungeonArea.tiles[i - 1][j].content == 0
+                            && dungeonArea.tiles[i - 1][j - 1].content == 0
+                            && dungeonArea.tiles[i - 1][j + 1].content == 0
+                            && dungeonArea.tiles[i + 1][j - 1].content == 0
+                            && dungeonArea.tiles[i + 1][j + 1].content == 0) {
                         ynow = y;
                         xnow = x;
                         return tileNow;
@@ -160,14 +161,14 @@ public class MazeBuilder {
         for (int y = 1; y < this.dungeonArea.areaHeight - 1; y++) {
             for (int x = 1; x < this.dungeonArea.areaWidth - 1; x++) {
 
-                if (this.dungeonArea.tiles[y][x].content.equals(" ")) {
+                if (this.dungeonArea.tiles[y][x].content == 1) {
 
                     Tile underScrutiny = this.dungeonArea.tiles[y][x];
 
                     while (true) {
                         int deadCount = deadEndHelper(underScrutiny);
                         if (deadCount == 3 || deadCount == 4) {
-                            underScrutiny.content = "█";
+                            underScrutiny.content = 0;
                             underScrutiny = underScrutiny.parent;
                         } else {
                             break;
@@ -190,7 +191,7 @@ public class MazeBuilder {
                 }
                 try {
                     Tile neighbor = dungeonArea.tiles[underScrutiny.y + k][underScrutiny.x + l];
-                    if (neighbor.content.equals("█")) {
+                    if (neighbor.content == 0) {
                         deadCount++;
                     }
                 } catch (Exception e) {

@@ -5,7 +5,8 @@
  */
 package denmaker.domain;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import denmaker.datastructures.OwnArrayList;
 
 /**
  * This tool is used to add rooms to a dungeon area
@@ -27,7 +28,7 @@ public class RoomBuilder {
      * @return returns the area with rooms that have been added
      */
     public Area addRooms(int attempts) {
-        ArrayList<Room> roomAttempts = new ArrayList<>();
+        OwnArrayList<Room> roomAttempts = new OwnArrayList<>();
 
         for (int i = 0; i < attempts; i++) {
             roomAttempts.add(new Room(dungeonArea.areaHeight, dungeonArea.areaWidth));
@@ -42,7 +43,7 @@ public class RoomBuilder {
      * @return Area returns the dungeon area with the rooms that now have been
      * added to it
      */
-    public Area addRooms(ArrayList<Room> rooms) {
+    public Area addRooms(OwnArrayList<Room> rooms) {
 
         for (int i = 0; i < rooms.size(); i++) {
             if (!collisionCheck(rooms.get(i))) {
@@ -59,7 +60,7 @@ public class RoomBuilder {
         dungeonArea.seperateRooms++;
         for (int y = roomAttempt.starty; y < roomAttempt.starty + roomAttempt.height; y++) {
             for (int x = roomAttempt.startx; x < roomAttempt.startx + roomAttempt.width; x++) {
-                dungeonArea.tiles[y][x].content = " ";
+                dungeonArea.tiles[y][x].content = 1;
                 dungeonArea.tiles[y][x].region = dungeonArea.roomList.size();
             }
         }
@@ -87,7 +88,7 @@ public class RoomBuilder {
 
         for (int i = startY; i < startY + height; i++) {
             for (int j = startX; j < startX + width; j++) {
-                if (" ".equals(tiles[i][j].content) || "+".equals(tiles[i][j].content)) {
+                if (tiles[i][j].content == 1 || tiles[i][j].content == 2) {
                     return true;
                 }
             }

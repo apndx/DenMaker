@@ -5,7 +5,8 @@
  */
 package denmaker.domain;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import denmaker.datastructures.OwnArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -23,14 +24,14 @@ public class MazeBuilderTest {
     public MazeBuilder testMazeBuilder;
     public RoomBuilder testRoomBuilder;
     public Room testRoomFull;
-    public ArrayList<Room> testRooms;
+    public OwnArrayList<Room> testRooms;
 
     public MazeBuilderTest() {
         this.testDungeonArea = new Area();
         this.testMazeBuilder = new MazeBuilder(testDungeonArea);
         this.testRoomBuilder = new RoomBuilder(testDungeonArea);
         this.testRoomFull = new Room(5, 5, 1, 1);
-        this.testRooms = new ArrayList<>();
+        this.testRooms = new OwnArrayList<>();
         testRooms.add(testRoomFull);
     }
 
@@ -68,6 +69,5 @@ public class MazeBuilderTest {
         assertEquals(" ", testMazeBuilder.build().tiles[1][8].content);
 
     }
-
 
 }

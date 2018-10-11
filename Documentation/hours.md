@@ -21,9 +21,13 @@
 | 2.10 |2,5 h | Debugging entrance algorithm | 
 | 4.10 |1 h | Demoing to pals, getting performance testing ideas, starting performance testing | 
 | 5.10 |5 h | Continuing performance testing, testing mode to UI, documentation, week report, testing document| 
-| 8.10 |1,5 min | Reading peer review, (hopefully) fixing ASCII block to a more generally working solution, fixing room tests, own arraylist | 
+| 8.10 |2 h | Reading peer review, (hopefully) fixing ASCII block to a more generally working solution, fixing room tests, own arraylist, UI change | 
+| 9.10 |1 h | Replacing default arraylist with myt OwnArraylist  |
+| 10.10 | 2,5 h| Testing OwnArrayList performance, randomgenerator |
+| 11.10 | 1 h| Changing tile content to integer to optimise |
 
-Tot 55,5 h
+
+Tot 58,5 h
 
 
 

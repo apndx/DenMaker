@@ -5,7 +5,8 @@
  */
 package denmaker.domain;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
+import denmaker.datastructures.OwnArrayList;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -73,7 +74,7 @@ public class LogicTest {
         testLogic.dungeonArea = new Area(10, 10);
         
         Room testRoomFull = new Room(5, 5, 1, 1);
-        ArrayList<Room> testRooms = new ArrayList<>();
+        OwnArrayList<Room> testRooms = new OwnArrayList<>();
         testRooms.add(testRoomFull);
         
         testLogic.buildRooms(testRooms);

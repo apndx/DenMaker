@@ -9,25 +9,38 @@ package denmaker.datastructures;
  * This will be my own ArrayList
  *
  * @author apndx
+ * @param <T> object type to store
  */
 public class OwnArrayList<T> {
 
     private T[] values;
-    private int counter;
+    private int size;
+    private int removeCount;
 
     public OwnArrayList() {
         this.values = (T[]) new Object[10];
+        this.removeCount = 0;
     }
 
+    /**
+     * Adds object in the end of the list, grows the list if needed
+     *
+     * @param value object to add
+     */
     public void add(T value) {
-        if (this.counter == this.values.length) {
+        if (this.size == this.values.length) {
             grow();
         }
 
-        this.values[this.counter] = value;
-        this.counter++;
+        this.values[this.size] = value;
+        this.size++;
     }
 
+    /**
+     * Grows the list
+     *
+     * @param value object to add
+     */
     private void grow() {
 
         T[] biggerOne = (T[]) new Object[this.values.length * 3 / 2 + 1];
@@ -37,8 +50,13 @@ public class OwnArrayList<T> {
         this.values = biggerOne;
     }
 
+    /**
+     * Grows the list
+     *
+     * @param value object to add
+     */
     public boolean includes(T value) {
-        for (int i = 0; i < this.counter; i++) {
+        for (int i = 0; i < this.size; i++) {
             if (value == this.values[i] || this.values[i].equals(value)) {
                 return true;
             }
@@ -46,8 +64,14 @@ public class OwnArrayList<T> {
         return false;
     }
 
+    /**
+     * Checks the index for the object
+     *
+     * @return value returns the index of the object
+     * @param value object to check
+     */
     public int valueIndex(T value) {
-        for (int i = 0; i < this.counter; i++) {
+        for (int i = 0; i < this.size; i++) {
             if (value == this.values[i] || this.values[i].equals(value)) {
                 return i;
             }
@@ -55,31 +79,49 @@ public class OwnArrayList<T> {
         return -1;
     }
 
+    /**
+     * Moves all objects to left
+     *
+     * @param fromIndex How many steps we move
+     */
     private void moveToLeft(int fromIndex) {
-        for (int i = fromIndex; i < this.counter - 1; i++) {
+        for (int i = fromIndex; i < this.size - 1; i++) {
             this.values[i] = this.values[i + 1];
         }
     }
 
     public void remove(T value) {
+
         int valueIndex = valueIndex(value);
         if (valueIndex < 0) {
             return; // not found
         }
         moveToLeft(valueIndex);
-        this.counter--;
-    }
+        this.size--;
 
-    public T value(int index) {
-        if (index < 0 || index >= this.counter) {
-            throw new ArrayIndexOutOfBoundsException("Index " + index + " outside [0, " + this.counter + "] area.");
+        if (size / 10 < removeCount && size <= 100) {
+
+            T[] newValues = (T[]) new Object[size];
+
+            for (int i = 0; i < size; i++) {
+                newValues[i] = values[i];
+            }
+            this.values = newValues;
+            removeCount = 0;
+
         }
 
+    }
+
+    public T get(int index) {
+        if (index < 0 || index >= this.size) {
+            throw new ArrayIndexOutOfBoundsException("Index " + index + " outside [0, " + this.size + "] area.");
+        }
         return this.values[index];
     }
 
-    public int koko() {
-        return this.counter;
+    public int size() {
+        return this.size;
     }
 
 }

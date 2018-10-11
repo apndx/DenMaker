@@ -6,20 +6,20 @@
 package denmaker.domain;
 
 /**
- * Makes a new Tile. content: "Unicode \u2588"=solid, " "=corridor or room,  "w"=wall (of a
+ * Makes a new Tile. Content (first int, when printing string): 0 or "Unicode \u2588"=solid, 1 or " "=corridor or room,  2 or "w"=wall (of a
  * room)
  *
  * @author apndx
  */
 public class Tile {
 
-    public String content;
+    public int content;
     public int y;
     public int x;
     public Tile parent;
     public int region;
 
-    public Tile(String content, int y, int x, Tile parent) {
+    public Tile(int content, int y, int x, Tile parent) {
         this.content = content;
         this.y = y;
         this.x = x;
@@ -66,7 +66,7 @@ public class Tile {
         }
     }
 
-    public void setContent(String content) {
+    public void setContent(int content) {
         this.content = content;
     }
 
