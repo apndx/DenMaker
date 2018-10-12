@@ -19,6 +19,7 @@ public class OwnArrayList<T> {
 
     public OwnArrayList() {
         this.values = (T[]) new Object[10];
+        this.size = 0;
         this.removeCount = 0;
     }
 
@@ -97,9 +98,10 @@ public class OwnArrayList<T> {
             return; // not found
         }
         moveToLeft(valueIndex);
+        this.removeCount++;
         this.size--;
 
-        if (size / 10 < removeCount && size <= 100) {
+        if ((size / 10) < removeCount && size <= 100) {
 
             T[] newValues = (T[]) new Object[size];
 
@@ -124,4 +126,13 @@ public class OwnArrayList<T> {
         return this.size;
     }
 
+    public int removeCount() {
+        return this.removeCount;
+    }
+
+      public int valuesLenght() {
+        return this.valuesLenght();
+    }
+
+    
 }
