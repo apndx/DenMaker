@@ -90,7 +90,7 @@ public class DenMakerUi {
         System.out.println("Lets trim the dead ends");
         logic.drawArea();
         System.out.println(logic.toString());
-        System.out.println(logic.testResults(logic.performance));
+        System.out.println(logic.benchmark.printResults(logic.dungeonArea.performance));
     }
 
     /**
@@ -100,11 +100,40 @@ public class DenMakerUi {
      * @param logic Logic to work between UI and domain tools
      */
     public static void menu2(Scanner reader, Logic logic) {
-        int height = menuHelperHeight(reader); // default 49
-        int width = menuHelperWidth(reader);  // default 149
-        int attempts = menuHelperRoomAttempts(reader);  // default 20
-        int testRounds = menuHelperTestAmount(reader);  // default 5
-        logic.testRound(attempts, testRounds, height, width);
+
+        System.out.println("1. Default test mode");
+        System.out.println("2. Manual test mode");
+
+        
+        while (true) {
+            String chosen = reader.nextLine();
+            if (chosen.matches("1")) {
+
+                System.out.println("Running default test round... Please wait for the results." + "\n");
+                System.out.println("Next two rounds: 5 different dens are created with these parametres: 20 room adding attempts, height 49, width 149." + "\n");
+                logic.testRound(20, 5, 49, 149);
+                logic.testRound(20, 5, 49, 149);
+                System.out.println("Next two rounds: 5 different dens are created with these parametres: 100 room adding attempts, height 99, width 199."+ "\n");
+                logic.testRound(100, 5, 99, 199);
+                logic.testRound(100, 5, 99, 199);
+                System.out.println("Next round: 5 different dens are created with these parametres: 999 room adding attempts, height 999, width 999.");
+                System.out.println("(This might take a while)."+ "\n");
+                logic.testRound(999, 5, 999, 999);
+                break;
+
+            } else if (chosen.matches("2")) {
+                int height = menuHelperHeight(reader); // default 49
+                int width = menuHelperWidth(reader);  // default 149
+                int attempts = menuHelperRoomAttempts(reader);  // default 20
+                int testRounds = menuHelperTestAmount(reader);  // default 5
+
+                logic.testRound(attempts, testRounds, height, width);
+                break;
+
+            } else {
+                System.out.println("Please type a number mentioned in the menu.");
+            }
+        }
     }
 
     /**

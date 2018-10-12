@@ -54,7 +54,7 @@ public class MazeBuilderTest {
     @Test
     public void startingPointDetectedCorrectly() {
 
-        testDungeonArea.tiles[2][2].setContent(" ");
+        testDungeonArea.tiles[2][2].setContent(1);
         assertEquals(4, testMazeBuilder.emptyFinder(0, 0).x);
         assertEquals(2, testMazeBuilder.emptyFinder(2, 2).y);
         assertEquals(4, testMazeBuilder.emptyFinder(2, 2).x);
@@ -66,7 +66,7 @@ public class MazeBuilderTest {
         testDungeonArea = new Area(10, 10);
         testRoomBuilder.addRooms(testRooms);
 
-        assertEquals(" ", testMazeBuilder.build().tiles[1][8].content);
+        assertEquals(1, testMazeBuilder.build().tiles[1][8].content);
 
     }
 

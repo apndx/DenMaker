@@ -64,7 +64,7 @@ public class LogicTest {
 
         testLogic.buildRooms(10);
         Tile tileToTest = testLogic.dungeonArea.roomList.get(0).roomWalls.get(0);
-        assertEquals("+", tileToTest.content);
+        assertEquals(2, tileToTest.content);
 
     }
 

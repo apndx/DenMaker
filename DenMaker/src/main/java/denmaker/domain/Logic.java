@@ -14,29 +14,30 @@ import denmaker.datastructures.OwnArrayList;
  * @author apndx
  */
 public class Logic {
-
+    
     public Area dungeonArea;
     public RoomBuilder roomBuilder;
     public MazeBuilder mazeBuilder;
-    public OwnArrayList<Double> performance; // 0 rooms, 1 maze, 2 entrances, 3 trimming
-
+    public Benchmark benchmark;
+    
     public Logic() {
         this.dungeonArea = new Area();
         this.roomBuilder = new RoomBuilder(this.dungeonArea);
         this.mazeBuilder = new MazeBuilder(this.dungeonArea);
-        this.performance = new OwnArrayList<>();
+        this.benchmark = new Benchmark(this);
+        
     }
-
+    
     public String[][] contentToString(Area denArea) {
-
+        
         String[][] denWithStrings = new String[denArea.areaHeight][denArea.areaWidth];
         char uniChar = '\u2588';
-        String block = String.valueOf(uniChar);
+        String block = String.valueOf(uniChar); // ascii block
 
         for (int y = 0; y < denArea.tiles.length; y++) {;
-
+            
             for (int x = 0; x < denArea.tiles[y].length; x++) {
-
+                
                 switch (denArea.tiles[y][x].content) {
                     case 0:
                         denWithStrings[y][x] = block;
@@ -63,21 +64,20 @@ public class Logic {
         this.dungeonArea = new Area(height, width);
         this.roomBuilder.dungeonArea = this.dungeonArea;
         this.mazeBuilder.dungeonArea = this.dungeonArea;
-        this.performance = new OwnArrayList<>();
     }
 
     /**
      * Draws the dungeon area according to what String content each tile of the
-     * area array has (0 = solid, 1 = corridor/room, 2 = roomwall)
+     * area array has (0 = solid, 1 = corridor/room, 2 = room wall)
      *
      */
     public void drawArea() {
-
+        
         String[][] stringDen = contentToString(this.dungeonArea);
-
+        
         for (int y = 0; y < stringDen.length; y++) {
             StringBuilder stringBuilder = new StringBuilder();
-
+            
             for (int x = 0; x < stringDen[y].length; x++) {
                 stringBuilder.append(stringDen[y][x]);
             }
@@ -95,6 +95,7 @@ public class Logic {
         long start = System.currentTimeMillis();
         this.dungeonArea = roomBuilder.addRooms(attempts);
         long stop = System.currentTimeMillis();
+        this.dungeonArea.performance.add(dungeonArea.roomList.size() * 1.0);
         howLong("Roombuilding, ", start, stop);
     }
 
@@ -109,6 +110,7 @@ public class Logic {
         long start = System.currentTimeMillis();
         this.dungeonArea = roomBuilder.addRooms(roomList);
         long stop = System.currentTimeMillis();
+        this.dungeonArea.performance.add(dungeonArea.roomList.size() * 1.0);
         howLong("Roombuilding, ", start, stop);
     }
 
@@ -121,7 +123,7 @@ public class Logic {
         this.dungeonArea.solidifyWalls();
         long stop = System.currentTimeMillis();
         howLong("Mazebuilding, ", start, stop);
-
+        
     }
 
     /**
@@ -143,64 +145,23 @@ public class Logic {
         long stop = System.currentTimeMillis();
         howLong("Trimming, ", start, stop);
     }
-
+    
     public void howLong(String what, long start, long stop) {
-        this.performance.add((double) (stop - start));
-        //System.out.println(what + (stop - start) + "ms");
+        this.dungeonArea.performance.add((double) (stop - start));
     }
-
-    public void testRound(int attempts, int howMany, int height, int width) {
-
-        OwnArrayList<OwnArrayList> testResults = new OwnArrayList<>();
-        OwnArrayList<Double> averagePerformance = new OwnArrayList<>();
-        double averageRoom = 0;
-        double averageMaze = 0;
-        double averageEntrance = 0;
-        double averageTrim = 0;
-
-        for (int i = 0; i < howMany; i++) {
-            changeArea(height, width);
-            buildRooms(attempts);
-            buildMaze();
-            getOutOfTheBox();
-            killDeadEnds();
-            testResults.add(this.performance);
-        }
-
-        for (int i = 0; i < testResults.size(); i++) {
-            OwnArrayList<Double> listToCheck = testResults.get(i);
-
-            averageRoom += listToCheck.get(0);
-            averageMaze += listToCheck.get(1);
-            averageEntrance += listToCheck.get(2);
-            averageTrim += listToCheck.get(3);
-        }
-
-        averagePerformance.add(averageRoom / howMany);
-        averagePerformance.add(averageMaze / howMany);
-        averagePerformance.add(averageEntrance / howMany);
-        averagePerformance.add(averageTrim / howMany);
-
-        System.out.println(toString());
-        System.out.println("This result is the average result of " + howMany + " testrounds.");
-        System.out.println(testResults(averagePerformance));
+    
+    public void testRound(int attempts, int testRounds, int height, int width) {
+        this.benchmark = new Benchmark(this);
+        benchmark.testRound(attempts, testRounds, height, width);
     }
-
-    public String testResults(OwnArrayList<Double> results) {
-
-        return "Adding rooms: " + results.get(0) + " ms" + "\n"
-                + "Making maze: " + results.get(1) + " ms" + "\n"
-                + "Opening entrances: " + results.get(2) + " ms" + "\n"
-                + "Trimming dead ends: " + results.get(3) + " ms";
-    }
-
+    
     @Override
     public String toString() {
-
+        
         return "Area height: " + dungeonArea.areaHeight + "\n"
                 + "Area width: " + dungeonArea.areaWidth + "\n"
-                + "Room count: " + dungeonArea.roomList.size() + "\n";
-
+                + "Room count: " + dungeonArea.roomList.size();
+        
     }
-
+    
 }

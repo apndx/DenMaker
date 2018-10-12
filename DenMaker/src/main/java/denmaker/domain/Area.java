@@ -5,7 +5,6 @@
  */
 package denmaker.domain;
 
-//import java.util.ArrayList;
 import denmaker.datastructures.OwnArrayList;
 
 /**
@@ -20,23 +19,12 @@ public class Area {
     public int areaHeight;
     public int areaWidth;
     public Tile[][] tiles;
-    //public ArrayList<Room> roomList;
     public OwnArrayList<Room> roomList;
     public int seperateRooms;
+    public OwnArrayList<Double> performance; // 0 rooms, 1 maze, 2 entrances, 3 trimming
 
     public Area() {
-        this.areaHeight = 49;
-        this.areaWidth = 149;
-        this.tiles = new Tile[49][149];
-        //this.roomList = new ArrayList<>();
-        this.roomList = new OwnArrayList<>();
-
-        //  initialising the array with tiles   
-        for (int y = 0; y < tiles.length; y++) {
-            for (int x = 0; x < tiles[y].length; x++) {
-                tiles[y][x] = new Tile(0, y, x, null);
-            }
-        }
+        this(49, 149);
     }
 
     public Area(int areaHeight, int areaWidth) {
@@ -44,8 +32,8 @@ public class Area {
         this.areaHeight = areaHeight;
         this.areaWidth = areaWidth;
         this.tiles = new Tile[areaHeight][areaWidth];
-        //this.roomList = new ArrayList<>();
         this.roomList = new OwnArrayList<>();
+        this.performance = new OwnArrayList<>();
 
         // initialising the array with tiles   
         for (int y = 0; y < tiles.length; y++) {
@@ -77,9 +65,6 @@ public class Area {
      */
     public void outOfTheBox() {
 
-        //    for (Room toGetOutOf : this.roomList) {
-        //         ArrayList<Tile> potentialEntrances = new ArrayList<>();
-        //           for (Tile toMakeEntranceOf : toGetOutOf.roomWalls) {
         for (int i = 0; i < this.roomList.size(); i++) {
             Room toGetOutOf = this.roomList.get(i);
             OwnArrayList<Tile> potentialEntrances = new OwnArrayList<>();

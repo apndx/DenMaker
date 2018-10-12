@@ -25,9 +25,9 @@
 | 9.10 |1 h | Replacing default arraylist with myt OwnArraylist  |
 | 10.10 | 2,5 h| Testing OwnArrayList performance, randomgenerator |
 | 11.10 | 1 h| Changing tile content to integer to optimise |
+| 12.10 | 2,5 h| Reading peer review, fixing tests, making a class for default performancetest option |
 
-
-Tot 58,5 h
+Tot 61 h
 
 
 

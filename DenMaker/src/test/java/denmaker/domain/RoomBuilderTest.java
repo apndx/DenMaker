@@ -71,7 +71,6 @@ public class RoomBuilderTest {
      */
     @Test
     public void isCollisionDetectedCorrectly() {
-        // test cases are borders 
 
         assertEquals(true, testRoomBuilder.collisionCheck(testRoomCornerDown));
         assertEquals(true, testRoomBuilder.collisionCheck(testRoomCornerDownOther));
@@ -85,15 +84,12 @@ public class RoomBuilderTest {
 
         testRoomBuilder.addRooms(rooms);
         
-        char uniChar = '\u2588';
-        String block = String.valueOf(uniChar);
-        
         assertEquals(true, testRoomBuilder.collisionCheck(testRoomMiddle));
-        assertEquals(block, testDungeonArea.tiles[0][0].content);
-        assertEquals(block, testDungeonArea.tiles[testDungeonArea.areaHeight - 5][0].content); 
-        assertEquals(" ", testDungeonArea.tiles[testDungeonArea.areaHeight - 15][15].content);
-        assertEquals("w", testDungeonArea.tiles[testDungeonArea.areaHeight - 16][15].content); 
-        assertEquals(block, testDungeonArea.tiles[testDungeonArea.areaHeight - 17][15].content); 
+        assertEquals(0, testDungeonArea.tiles[0][0].content);
+        assertEquals(0, testDungeonArea.tiles[testDungeonArea.areaHeight - 5][0].content); 
+        assertEquals(1, testDungeonArea.tiles[testDungeonArea.areaHeight - 15][15].content);
+        assertEquals(2, testDungeonArea.tiles[testDungeonArea.areaHeight - 16][15].content); 
+        assertEquals(0, testDungeonArea.tiles[testDungeonArea.areaHeight - 17][15].content); 
 
     }
     
