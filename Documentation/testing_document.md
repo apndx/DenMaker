@@ -1,6 +1,10 @@
 # Unit testing
 
-[Unit testing 28th September 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco280918.jpg). Unit tests need to be improved, more test cases need to be created, especially the logic tests (integration) are still lacking in depth and usefulness.
+[Unit testing 28th September 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco280918.jpg). 
+[Unit testing 12th October 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco121018.jpg). 
+
+Unit tests need to be improved, more test cases need to be created, especially the logic tests (integration) are still lacking in depth and usefulness.
+
 
 # Manual testing
 
@@ -300,20 +304,150 @@ Trimming dead ends: 22.8 ms
 
 -----------------
 
+This test is 12.10.2018 after debugging OwnArrayList and using my new default benchmark class:
 
 
+Running default test round... Please wait for the results.
+
+Next two rounds: 5 different dens are created with these parametres: 20 room adding attempts, height 49, width 149.
+
+This result is the average result of 5 testrounds.
+Area height: 49
+Area width: 149
+Room count: 10.8
+Adding rooms: 0.6 ms
+Making maze: 11.8 ms
+Opening entrances: 1.4 ms
+Trimming dead ends: 2.2 ms
+
+This result is the average result of 5 testrounds.
+Area height: 49
+Area width: 149
+Room count: 10.2
+Adding rooms: 1.4 ms
+Making maze: 2.4 ms
+Opening entrances: 0.8 ms
+Trimming dead ends: 0.2 ms
+
+------------------
+
+Next two rounds: 5 different dens are created with these parametres: 100 room adding attempts, height 99, width 199.
+
+This result is the average result of 5 testrounds.
+Area height: 99
+Area width: 199
+Room count: 45.0
+Adding rooms: 0.2 ms
+Making maze: 4.4 ms
+Opening entrances: 2.2 ms
+Trimming dead ends: 0.4 ms
+
+This result is the average result of 5 testrounds.
+Area height: 99
+Area width: 199
+Room count: 45.4
+Adding rooms: 0.4 ms
+Making maze: 6.8 ms
+Opening entrances: 3.6 ms
+Trimming dead ends: 0.6 ms
+
+-------------
+
+Next round: 5 different dens are created with these parametres: 999 room adding attempts, height 999, width 999.
+(This might take a while).
+
+This result is the average result of 5 testrounds.
+Area height: 999
+Area width: 999
+Room count: 810.8
+Adding rooms: 2.2 ms
+Making maze: 2569.6 ms
+Opening entrances: 3059.4 ms
+Trimming dead ends: 23.6 ms
+
+----------------
+
+And another try (12.10.2018):
 
 
+Running default test round... Please wait for the results.
 
+Next two rounds: 5 different dens are created with these parametres: 20 room adding attempts, height 49, width 149.
 
+This result is the average result of 5 testrounds.
+Area height: 49
+Area width: 149
+Room count: 10.2
+Adding rooms: 2.2 ms
+Making maze: 3.4 ms
+Opening entrances: 0.8 ms
+Trimming dead ends: 0.4 ms
 
+This result is the average result of 5 testrounds.
+Area height: 49
+Area width: 149
+Room count: 10.6
+Adding rooms: 0.2 ms
+Making maze: 1.2 ms
+Opening entrances: 0.2 ms
+Trimming dead ends: 0.4 ms
 
+----------------------
 
+Next two rounds: 5 different dens are created with these parametres: 100 room adding attempts, height 99, width 199.
+
+This result is the average result of 5 testrounds.
+Area height: 99
+Area width: 199
+Room count: 42.6
+Adding rooms: 0.0 ms
+Making maze: 4.6 ms
+Opening entrances: 1.6 ms
+Trimming dead ends: 0.6 ms
+
+This result is the average result of 5 testrounds.
+Area height: 99
+Area width: 199
+Room count: 42.2
+Adding rooms: 0.0 ms
+Making maze: 5.4 ms
+Opening entrances: 2.6 ms
+Trimming dead ends: 0.0 ms
+
+-----------------------------
+
+Next round: 5 different dens are created with these parametres: 999 room adding attempts, height 999, width 999.
+(This might take a while).
+
+This result is the average result of 5 testrounds.
+Area height: 999
+Area width: 999
+Room count: 804.4
+Adding rooms: 2.4 ms
+Making maze: 2543.6 ms
+Opening entrances: 3008.6 ms
+Trimming dead ends: 30.2 ms
+
+------------
 
 
 ## Screen shots of results
 
 
-# How to re-test
+# How to re-test 
 
-Performance tests can be done from the text user interface by choosing the menu option 2. 
+## Performance
+
+Performance tests can be done from the text user interface by choosing the menu option 2. After this you can choose, if you want to run the default test, or modify the parametres.
+
+## Unit tests
+
+The jacoco test report can also be created from command line from the code root folder:
+
+```
+mvn jacoco:report
+```
+
+After that the report can be opened with a browser from a file _target/site/jacoco/index.html_
+
+
