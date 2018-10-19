@@ -41,6 +41,19 @@ Minimum heap nor a queue were not needed as I first had planned. An arraylist wi
 1. Main - starts the program textUI 
 2. TextUI - Menu options: 1. Create a new Den, 2. Test mode, 3. Quit
 
+
+
+### JavaDoc
+
+JavaDoc can be generated with a command:
+
+```
+mvn javadoc:javadoc
+```
+
+After this the JavaDoc can be browsed from the file _target/site/apidocs/index.html_
+
+
 # Algorithms
 
 
@@ -52,6 +65,18 @@ Minimum heap nor a queue were not needed as I first had planned. An arraylist wi
 # Improvement suggestions
 
 At the moment some rooms may remain isolated, this can happen when the amount of rooms in the dungeon increases but area size remains the same.
+
+
+### Creating jar from the project
+Command:
+
+```
+mvn package
+```
+
+Generates to the _target_ forder a jar -file  _DenMaker-1.0-SNAPSHOT.jar_
+
+
 
 # Sources
 

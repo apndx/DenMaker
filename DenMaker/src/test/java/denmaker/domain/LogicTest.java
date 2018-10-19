@@ -54,8 +54,8 @@ public class LogicTest {
 
         testLogic.changeArea(20, 30);
 
-        assertEquals(20, testLogic.dungeonArea.areaHeight);
-        assertEquals(30, testLogic.dungeonArea.areaWidth);
+        assertEquals(20, testLogic.denArea.areaHeight);
+        assertEquals(30, testLogic.denArea.areaWidth);
 
     }
 
@@ -63,15 +63,15 @@ public class LogicTest {
     public void doesRoomBuildingWorkCorrectly() {
 
         testLogic.buildRooms(10);
-        Tile tileToTest = testLogic.dungeonArea.roomList.get(0).roomWalls.get(0);
+        Tile tileToTest = testLogic.denArea.roomList.get(0).roomWalls.get(0);
         assertEquals(2, tileToTest.content);
 
     }
 
-      @Test
+    @Test
     public void doTheToolsWorkWellTogether() {
 
-        testLogic.dungeonArea = new Area(10, 10);
+        testLogic.denArea = new Area(10, 10);
         
         Room testRoomFull = new Room(5, 5, 1, 1);
         OwnArrayList<Room> testRooms = new OwnArrayList<>();
@@ -82,10 +82,18 @@ public class LogicTest {
         testLogic.getOutOfTheBox();
  
     
-        assertEquals(20, testLogic.dungeonArea.roomList.get(0).roomWalls.size());
- 
-        
+        assertEquals(20, testLogic.denArea.roomList.get(0).roomWalls.size());
+     
     }
 
+    @Test
+    public void isStringConversionWorking() {
+        
+        testLogic.denArea = new Area(10, 10);
+        
+
+    }
+    
+    
 
 }

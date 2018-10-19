@@ -26,8 +26,10 @@
 | 10.10 | 2,5 h| Testing OwnArrayList performance, randomgenerator |
 | 11.10 | 1 h| Changing tile content to integer to optimise |
 | 12.10 | 3,5 h| Reading peer review, fixing tests, making a class for default performance test option, testing OwnArrayList, week report, adding to testing document|
+| 17.10 | 1 h| Course demo, creating UML-diagram with EasyUML from Netbeans |
+| 18.10 | 3 h| Refactoring benchmark, JavaDoc, benchmark tests |
 
-Tot 62 h
+Tot 66 h
 
 
 

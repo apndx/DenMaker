@@ -90,7 +90,7 @@ public class DenMakerUi {
         System.out.println("Lets trim the dead ends");
         logic.drawArea();
         System.out.println(logic.toString());
-        System.out.println(logic.benchmark.printResults(logic.dungeonArea.performance));
+        System.out.println(logic.benchmark.printResults(logic.denArea.performance));
     }
 
     /**

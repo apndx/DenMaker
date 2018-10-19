@@ -16,3 +16,4 @@ Project for datastructure and algorithm course at the University of Helsinki. De
 * [Week Report 4](https://github.com/apndx/DenMaker/blob/master/Documentation/week_report_4.md)
 * [Week Report 5](https://github.com/apndx/DenMaker/blob/master/Documentation/week_report_5.md)
 * [Week Report 6](https://github.com/apndx/DenMaker/blob/master/Documentation/week_report_6.md)
+* [Week Report 7](https://github.com/apndx/DenMaker/blob/master/Documentation/week_report_7.md)
