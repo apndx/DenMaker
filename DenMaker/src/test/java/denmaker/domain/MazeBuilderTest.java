@@ -26,6 +26,8 @@ public class MazeBuilderTest {
     public Room testRoomFull;
     public OwnArrayList<Room> testRooms;
 
+    public Logic testLogic = new Logic();
+
     public MazeBuilderTest() {
         this.testDungeonArea = new Area();
         this.testMazeBuilder = new MazeBuilder(testDungeonArea);
@@ -64,16 +66,53 @@ public class MazeBuilderTest {
 
     @Test
     public void buildMazeTest() {
-        testDungeonArea = new Area(10, 10);
-        testRoomBuilder.addRooms(testRooms);
+        this.testDungeonArea = new Area(10, 10);
+        this.testRoomBuilder.addRooms(testRooms);
 
         assertEquals(1, testMazeBuilder.build().tiles[1][8].content);
     }
-    
+
     @Test
     public void deadEndTester() {
+
+        this.testLogic.changeArea(10, 10);
+
+        assertEquals(0, this.testLogic.denArea.tiles[1][6].content);
+        assertEquals(0, this.testLogic.denArea.tiles[1][7].content);
+        assertEquals(0, this.testLogic.denArea.tiles[1][8].content);
+        assertEquals(0, this.testLogic.denArea.tiles[2][7].content);
+        assertEquals(0, this.testLogic.denArea.tiles[3][7].content);
+        assertEquals(0, this.testLogic.denArea.tiles[3][6].content);
+
+        //room
+        this.testLogic.denArea.tiles[1][4].setContent(1);
+        this.testLogic.denArea.tiles[1][5].setContent(1);
+        this.testLogic.denArea.tiles[2][4].setContent(1);
+        this.testLogic.denArea.tiles[2][5].setContent(1);
+        this.testLogic.denArea.tiles[3][4].setContent(1);
+        this.testLogic.denArea.tiles[3][5].setContent(1);
+        //corridor
+        this.testLogic.denArea.tiles[1][6].setContent(1);
+        this.testLogic.denArea.tiles[1][7].setContent(1);
+        this.testLogic.denArea.tiles[1][8].setContent(1);
+        this.testLogic.denArea.tiles[2][7].setContent(1);
+        this.testLogic.denArea.tiles[3][7].setContent(1);
+        this.testLogic.denArea.tiles[3][6].setContent(1);
+
+        assertEquals(1, this.testLogic.denArea.tiles[1][6].content);
+        assertEquals(1, this.testLogic.denArea.tiles[1][7].content);
+        assertEquals(1, this.testLogic.denArea.tiles[1][8].content);
+        assertEquals(1, this.testLogic.denArea.tiles[2][7].content);
+        assertEquals(1, this.testLogic.denArea.tiles[3][7].content);
+        assertEquals(1, this.testLogic.denArea.tiles[3][6].content);
+
         
-        
+        assertEquals(3, this.testLogic.mazeBuilder.deadEndHelper(this.testLogic.denArea.tiles[1][8]));
+        assertEquals(1, this.testLogic.mazeBuilder.deadEndHelper(this.testLogic.denArea.tiles[1][7]));
+        assertEquals(2, this.testLogic.mazeBuilder.deadEndHelper(this.testLogic.denArea.tiles[1][6]));
+
+        testMazeBuilder.deadEndExterminator();
+        assertEquals(0, testDungeonArea.tiles[1][8].content);
     }
 
 }

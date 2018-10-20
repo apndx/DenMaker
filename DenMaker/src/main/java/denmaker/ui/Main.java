@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 /**
  * Main class - creates a Scanner and TextUI, starts the application
- * 
+ *
  * @author apndx
  */
 public class Main {
@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
         DenMakerUi denMakerUi = new DenMakerUi(reader);
-        denMakerUi.start();       
+        denMakerUi.start();
     }
 
 }

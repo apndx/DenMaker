@@ -190,7 +190,7 @@ public class MazeBuilder {
                     continue;
                 }
                 try {
-                    Tile neighbor = dungeonArea.tiles[underScrutiny.y + k][underScrutiny.x + l];
+                    Tile neighbor = this.dungeonArea.tiles[underScrutiny.y + k][underScrutiny.x + l];
                     if (neighbor.content == 0) {
                         deadCount++;
                     }
