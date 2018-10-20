@@ -430,6 +430,78 @@ Trimming dead ends: 30.2 ms
 
 ------------
 
+I continued performance testin 20th October 2018.
+Very soon I realised that I will make my life a lot easier, if I change the parametres to scale better than the ones I have used previously.
+
+These are the new results:
+
+--------------
+
+Running default test round... Please wait for the results.
+
+Next two rounds: 5 different dens are created with these parametres: 20 room adding attempts, height 49, width 149.
+
+This result is the average result of 5 testrounds.
+Area height: 49
+Area width: 149
+Room count: 11.2
+Adding rooms: 2.2 ms
+Making maze: 9.6 ms
+Opening entrances: 0.8 ms
+Trimming dead ends: 1.6 ms
+
+This result is the average result of 5 testrounds.
+Area height: 49
+Area width: 149
+Room count: 9.8
+Adding rooms: 1.4 ms
+Making maze: 4.2 ms
+Opening entrances: 0.0 ms
+Trimming dead ends: 1.0 ms
+
+Next two rounds: 5 different dens are created with these parametres: 200 room adding attempts, height 149, width 490.
+
+This result is the average result of 5 testrounds.
+Area height: 149
+Area width: 490
+Room count: 119.0
+Adding rooms: 1.0 ms
+Making maze: 29.8 ms
+Opening entrances: 24.0 ms
+Trimming dead ends: 1.6 ms
+
+This result is the average result of 5 testrounds.
+Area height: 149
+Area width: 490
+Room count: 118.0
+Adding rooms: 0.2 ms
+Making maze: 29.4 ms
+Opening entrances: 21.0 ms
+Trimming dead ends: 1.2 ms
+
+Next two rounds: 5 different dens are created with these parametres: 2000 room adding attempts, height 490, width 1490.
+(This might take a while).
+
+This result is the average result of 5 testrounds.
+Area height: 490
+Area width: 1490
+Room count: 1246.6
+Adding rooms: 5.6 ms
+Making maze: 1015.8 ms
+Opening entrances: 3165.0 ms
+Trimming dead ends: 21.0 ms
+
+This result is the average result of 5 testrounds.
+Area height: 490
+Area width: 1490
+Room count: 1232.0
+Adding rooms: 3.6 ms
+Making maze: 938.2 ms
+Opening entrances: 3135.8 ms
+Trimming dead ends: 16.6 ms
+
+
+
 
 ## Screen shots of results
 
