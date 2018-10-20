@@ -29,7 +29,7 @@
 | 17.10 | 1 h| Course demo, creating UML-diagram with EasyUML from Netbeans |
 | 18.10 | 3 h| Refactoring benchmark, JavaDoc, benchmark tests |
 | 19.10 | 1,5 h| UnitTesting logic, area, ownarreylist, tile, room |
-11:50 - tests for mazebuilder
+11:50 - tests for mazebuilder. testing graph, analysing results
 
 Tot 67,5 h
 

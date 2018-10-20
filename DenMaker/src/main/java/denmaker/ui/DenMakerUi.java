@@ -112,12 +112,13 @@ public class DenMakerUi {
                 System.out.println("Next two rounds: 5 different dens are created with these parametres: 20 room adding attempts, height 49, width 149." + "\n");
                 logic.testRound(20, 5, 49, 149);
                 logic.testRound(20, 5, 49, 149);
-                System.out.println("Next two rounds: 5 different dens are created with these parametres: 100 room adding attempts, height 99, width 199." + "\n");
-                logic.testRound(100, 5, 99, 199);
-                logic.testRound(100, 5, 99, 199);
-                System.out.println("Next round: 5 different dens are created with these parametres: 999 room adding attempts, height 999, width 999.");
+                System.out.println("Next two rounds: 5 different dens are created with these parametres: 200 room adding attempts, height 149, width 490." + "\n");
+                logic.testRound(200, 5, 149, 490);
+                logic.testRound(200, 5, 149, 490);
+                System.out.println("Next two rounds: 5 different dens are created with these parametres: 2000 room adding attempts, height 490, width 1490.");
                 System.out.println("(This might take a while)." + "\n");
-                logic.testRound(999, 5, 999, 999);
+                logic.testRound(2000, 5, 490, 1490);
+                logic.testRound(2000, 5, 490, 1490);
                 break;
 
             } else if (chosen.matches("2")) {
