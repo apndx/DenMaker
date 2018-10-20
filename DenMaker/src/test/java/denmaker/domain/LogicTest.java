@@ -69,31 +69,63 @@ public class LogicTest {
     }
 
     @Test
-    public void doTheToolsWorkWellTogether() {
+    public void doesEntranceOpenCorrectly() {
 
         testLogic.denArea = new Area(10, 10);
-        
+
         Room testRoomFull = new Room(5, 5, 1, 1);
         OwnArrayList<Room> testRooms = new OwnArrayList<>();
         testRooms.add(testRoomFull);
-        
+
         testLogic.buildRooms(testRooms);
         testLogic.buildMaze();
         testLogic.getOutOfTheBox();
- 
-    
+
         assertEquals(20, testLogic.denArea.roomList.get(0).roomWalls.size());
-     
+
+        //tests that getOutOfTheBox changes one of the roomwalls to an entrance
+        int count = 0;
+        for (int i = 0; i < testLogic.denArea.roomList.get(0).roomWalls.size(); i++) {
+
+            if (testLogic.denArea.roomList.get(0).roomWalls.get(i).content==1) {
+                count++;
+            }            
+        }
+       assertEquals(1, count);
+        
     }
 
     @Test
     public void isStringConversionWorking() {
-        
+
+        char uniChar = '\u2588';
+        String block = String.valueOf(uniChar); // ascii block
+
         testLogic.denArea = new Area(10, 10);
+
+        testLogic.denArea.tiles[1][1].content = 1;
+        testLogic.denArea.tiles[8][8].content = 1;
+        testLogic.denArea.tiles[3][3].content = 2;
+        testLogic.denArea.tiles[4][4].content = 2;
+
+        assertEquals(0, testLogic.denArea.tiles[0][0].content);
+        assertEquals(0, testLogic.denArea.tiles[1][7].content);
+        assertEquals(0, testLogic.denArea.tiles[9][9].content);
+        assertEquals(1, testLogic.denArea.tiles[1][1].content);
+        assertEquals(1, testLogic.denArea.tiles[8][8].content);
+        assertEquals(2, testLogic.denArea.tiles[3][3].content);
+        assertEquals(2, testLogic.denArea.tiles[4][4].content);
         
+        String[][] testStringDen = testLogic.contentToString();
+
+        assertEquals(block, testStringDen[0][0]);
+        assertEquals(block, testStringDen[1][7]);
+        assertEquals(block, testStringDen[9][9]);
+        assertEquals(" ", testStringDen[1][1]);
+        assertEquals(" ", testStringDen[8][8]);
+        assertEquals("+", testStringDen[3][3]);
+        assertEquals("+", testStringDen[4][4]);
 
     }
-    
-    
 
 }

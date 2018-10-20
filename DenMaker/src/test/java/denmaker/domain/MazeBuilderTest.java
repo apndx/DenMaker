@@ -30,7 +30,7 @@ public class MazeBuilderTest {
         this.testDungeonArea = new Area();
         this.testMazeBuilder = new MazeBuilder(testDungeonArea);
         this.testRoomBuilder = new RoomBuilder(testDungeonArea);
-        this.testRoomFull = new Room(5, 5, 1, 1);
+        this.testRoomFull = new Room(5, 5, 1, 1); //height, width, starty, startx
         this.testRooms = new OwnArrayList<>();
         testRooms.add(testRoomFull);
     }
@@ -55,6 +55,7 @@ public class MazeBuilderTest {
     public void startingPointDetectedCorrectly() {
 
         testDungeonArea.tiles[2][2].setContent(1);
+        assertEquals(1, testMazeBuilder.emptyFinder(0, 0).y);
         assertEquals(4, testMazeBuilder.emptyFinder(0, 0).x);
         assertEquals(2, testMazeBuilder.emptyFinder(2, 2).y);
         assertEquals(4, testMazeBuilder.emptyFinder(2, 2).x);
@@ -67,7 +68,12 @@ public class MazeBuilderTest {
         testRoomBuilder.addRooms(testRooms);
 
         assertEquals(1, testMazeBuilder.build().tiles[1][8].content);
-
+    }
+    
+    @Test
+    public void deadEndTester() {
+        
+        
     }
 
 }

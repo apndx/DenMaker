@@ -28,8 +28,11 @@
 | 12.10 | 3,5 h| Reading peer review, fixing tests, making a class for default performance test option, testing OwnArrayList, week report, adding to testing document|
 | 17.10 | 1 h| Course demo, creating UML-diagram with EasyUML from Netbeans |
 | 18.10 | 3 h| Refactoring benchmark, JavaDoc, benchmark tests |
+| 19.10 | 1,5 h| UnitTesting logic, area, ownarreylist, tile, room |
+19:45 -
 
-Tot 66 h
+
+Tot 67,5 h
 
 
 

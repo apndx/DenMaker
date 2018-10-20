@@ -5,8 +5,11 @@
  */
 package denmaker.domain;
 
+import java.util.Objects;
+
 /**
- * Makes a new Tile. Content (first int, before printing changed to string): 0 or "Unicode \u2588"=solid, 1 or " "=corridor or room,  2 or "w"=wall (of a
+ * Makes a new Tile. Content (first int, before printing changed to string): 0
+ * or "Unicode \u2588"=solid, 1 or " "=corridor or room, 2 or "w"=wall (of a
  * room)
  *
  * @author apndx
@@ -68,6 +71,47 @@ public class Tile {
 
     public void setContent(int content) {
         this.content = content;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + this.content;
+        hash = 83 * hash + this.y;
+        hash = 83 * hash + this.x;
+        hash = 83 * hash + Objects.hashCode(this.parent);
+        hash = 83 * hash + this.region;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Tile other = (Tile) obj;
+        if (this.content != other.content) {
+            return false;
+        }
+        if (this.y != other.y) {
+            return false;
+        }
+        if (this.x != other.x) {
+            return false;
+        }
+        if (this.region != other.region) {
+            return false;
+        }
+        if (!Objects.equals(this.parent, other.parent)) {
+            return false;
+        }
+        return true;
     }
 
 }

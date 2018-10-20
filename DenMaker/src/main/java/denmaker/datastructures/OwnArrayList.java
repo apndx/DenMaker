@@ -52,9 +52,10 @@ public class OwnArrayList<T> {
     }
 
     /**
-     * Grows the list
+     * Is the object on the list?
      *
-     * @param value object to add
+     * @param value object to search
+     * @return true if found, false if not
      */
     public boolean includes(T value) {
         for (int i = 0; i < this.size; i++) {
@@ -130,9 +131,8 @@ public class OwnArrayList<T> {
         return this.removeCount;
     }
 
-      public int valuesLenght() {
+    public int valuesLenght() {
         return this.valuesLenght();
     }
 
-    
 }

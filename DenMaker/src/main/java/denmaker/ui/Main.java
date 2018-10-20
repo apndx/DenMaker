@@ -17,7 +17,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
         DenMakerUi denMakerUi = new DenMakerUi(reader);
-        denMakerUi.start();
+        denMakerUi.start();       
     }
 
 }

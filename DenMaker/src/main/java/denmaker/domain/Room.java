@@ -7,6 +7,7 @@ package denmaker.domain;
 
 //import java.util.ArrayList;
 import denmaker.datastructures.OwnArrayList;
+import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -24,7 +25,6 @@ public class Room {
     public int width;
     public int starty;
     public int startx;
-    //public ArrayList<Tile> roomWalls;
     public OwnArrayList<Tile> roomWalls;
 
     public Room(int height, int width, int starty, int startx) {
@@ -78,6 +78,49 @@ public class Room {
             dungeonArea.tiles[i][this.startx + this.width].content = 2;
         }
         return dungeonArea;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 71 * hash + this.height;
+        hash = 71 * hash + this.width;
+        hash = 71 * hash + this.starty;
+        hash = 71 * hash + this.startx;
+        //hash = 71 * hash + Objects.hashCode(this.roomWalls);
+        return hash;
+    }
+
+ 
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Room other = (Room) obj;
+        if (this.height != other.height) {
+            return false;
+        }
+        if (this.width != other.width) {
+            return false;
+        }
+        if (this.starty != other.starty) {
+            return false;
+        }
+        if (this.startx != other.startx) {
+            return false;
+        }
+        if (!Objects.equals(this.roomWalls, other.roomWalls)) {
+            return false;
+        }
+        return true;
     }
 
 }

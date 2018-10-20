@@ -78,10 +78,10 @@ public class DenMakerUi {
 
         logic.changeArea(height, width);
         logic.buildRooms(attempts);
-        System.out.println("Dungeon with rooms");
+        System.out.println("A den with rooms");
         logic.drawArea();
         logic.buildMaze();
-        System.out.println("Dungeon with a maze");
+        System.out.println("A den with a maze");
         logic.drawArea();
         logic.getOutOfTheBox();
         System.out.println("Lets open the rooms");
@@ -104,7 +104,6 @@ public class DenMakerUi {
         System.out.println("1. Default test mode");
         System.out.println("2. Manual test mode");
 
-        
         while (true) {
             String chosen = reader.nextLine();
             if (chosen.matches("1")) {
@@ -113,11 +112,11 @@ public class DenMakerUi {
                 System.out.println("Next two rounds: 5 different dens are created with these parametres: 20 room adding attempts, height 49, width 149." + "\n");
                 logic.testRound(20, 5, 49, 149);
                 logic.testRound(20, 5, 49, 149);
-                System.out.println("Next two rounds: 5 different dens are created with these parametres: 100 room adding attempts, height 99, width 199."+ "\n");
+                System.out.println("Next two rounds: 5 different dens are created with these parametres: 100 room adding attempts, height 99, width 199." + "\n");
                 logic.testRound(100, 5, 99, 199);
                 logic.testRound(100, 5, 99, 199);
                 System.out.println("Next round: 5 different dens are created with these parametres: 999 room adding attempts, height 999, width 999.");
-                System.out.println("(This might take a while)."+ "\n");
+                System.out.println("(This might take a while)." + "\n");
                 logic.testRound(999, 5, 999, 999);
                 break;
 
@@ -146,7 +145,7 @@ public class DenMakerUi {
 
     private static int menuHelperHeight(Scanner reader) {
 
-        System.out.println("Let's make the dungeon map, please give measurements.");
+        System.out.println("Let's make the den area, please give measurements.");
         System.out.println("Do you want to change the default height 49?");
         System.out.println("If yes, please type a number that is  between 10 and 999.");
         int height = 49;

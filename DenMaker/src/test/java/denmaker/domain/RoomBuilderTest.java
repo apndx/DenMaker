@@ -26,7 +26,8 @@ public class RoomBuilderTest {
     public Room testRoomCornerDown;
     public Room testRoomCornerDownOther;
     public Room testRoomCornerUp;
-    public Room testRoomMiddle;
+    public Room testRoomMiddle1;
+    public Room testRoomMiddle2;
     public OwnArrayList<Room> rooms;
 
     public RoomBuilderTest() {
@@ -37,11 +38,12 @@ public class RoomBuilderTest {
         this.testRoomCornerDown = new Room(5, 5, 0, 0);
         this.testRoomCornerDownOther = new Room(5, 5, testDungeonArea.areaHeight, testDungeonArea.areaWidth);
         this.testRoomCornerUp = new Room(5, 5, testDungeonArea.areaHeight - 5, 0);
-        this.testRoomMiddle = new Room(5, 5, testDungeonArea.areaHeight - 15, 15);
+        this.testRoomMiddle1 = new Room(5, 5, testDungeonArea.areaHeight - 15, 15);
+        this.testRoomMiddle2 = new Room(5, 5, testDungeonArea.areaHeight - 15, 15);
         this.rooms = new OwnArrayList<>();
         rooms.add(testRoomCornerDown);
         rooms.add(testRoomCornerUp);
-        rooms.add(testRoomMiddle);
+        rooms.add(testRoomMiddle1);
     }
 
     @BeforeClass
@@ -75,7 +77,7 @@ public class RoomBuilderTest {
         assertEquals(true, testRoomBuilder.collisionCheck(testRoomCornerDown));
         assertEquals(true, testRoomBuilder.collisionCheck(testRoomCornerDownOther));
         assertEquals(true, testRoomBuilder.collisionCheck(testRoomCornerUp));
-        assertEquals(false, testRoomBuilder.collisionCheck(testRoomMiddle));
+        assertEquals(false, testRoomBuilder.collisionCheck(testRoomMiddle1));
 
     }
 
@@ -84,7 +86,7 @@ public class RoomBuilderTest {
 
         testRoomBuilder.addRooms(rooms);
         
-        assertEquals(true, testRoomBuilder.collisionCheck(testRoomMiddle));
+        assertEquals(true, testRoomBuilder.collisionCheck(testRoomMiddle1));
         assertEquals(0, testDungeonArea.tiles[0][0].content);
         assertEquals(0, testDungeonArea.tiles[testDungeonArea.areaHeight - 5][0].content); 
         assertEquals(1, testDungeonArea.tiles[testDungeonArea.areaHeight - 15][15].content);
@@ -92,5 +94,11 @@ public class RoomBuilderTest {
         assertEquals(0, testDungeonArea.tiles[testDungeonArea.areaHeight - 17][15].content); 
 
     }
+    
+    @Test
+    public void hashTest() {
+        assertEquals(testRoomMiddle1.hashCode(), testRoomMiddle2.hashCode());
+    }
+    
     
 }

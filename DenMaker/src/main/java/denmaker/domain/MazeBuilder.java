@@ -156,7 +156,7 @@ public class MazeBuilder {
         return null;
     }
 
-    public Area deadEndKiller() {
+    public Area deadEndExterminator() {
 
         for (int y = 1; y < this.dungeonArea.areaHeight - 1; y++) {
             for (int x = 1; x < this.dungeonArea.areaWidth - 1; x++) {
