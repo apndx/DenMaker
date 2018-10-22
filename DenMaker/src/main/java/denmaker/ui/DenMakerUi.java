@@ -172,13 +172,13 @@ public class DenMakerUi {
 
     private static int menuHelperWidth(Scanner reader) {
         System.out.println("Do you want to change the default width 149?");
-        System.out.println("If yes, please type a number that is  between 10 and 999.");
+        System.out.println("If yes, please type a number that is  between 10 and 9999.");
         int width = 149;
 
         while (true) {
             String areaWidth = reader.nextLine();
 
-            if (areaWidth.matches("(\\d){2,3}")) {
+            if (areaWidth.matches("(\\d){2,4}")) {
                 width = Integer.parseInt(areaWidth);
                 break;
             } else if (areaWidth.matches("")) {
@@ -197,10 +197,10 @@ public class DenMakerUi {
     private static int menuHelperRoomAttempts(Scanner reader) {
 
         System.out.println("Do you want to change the default 20 room adding attempts?");
-        System.out.println("If yes, please type a number that is  between 10 and 999.");
+        System.out.println("If yes, please type a number that is  between 10 and 9999.");
         int attempts = 20;
         String roomAttempts = reader.nextLine();
-        if (roomAttempts.matches("(\\d){2,3}")) {
+        if (roomAttempts.matches("(\\d){2,4}")) {
             attempts = Integer.parseInt(roomAttempts);
         }
         return attempts;
@@ -209,7 +209,7 @@ public class DenMakerUi {
     private static int menuHelperTestAmount(Scanner reader) {
 
         System.out.println("Do you want to change the default 5 test rounds?");
-        System.out.println("If yes, please type a number that is  between 1 and 20.");
+        System.out.println("If yes, please type a number that is  between 1 and 99.");
         int rounds = 5;
         String testRounds = reader.nextLine();
         if (testRounds.matches("(\\d){1,2}")) {

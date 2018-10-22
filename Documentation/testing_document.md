@@ -2,6 +2,7 @@
 
 [Unit testing 28th September 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco280918.jpg). 
 [Unit testing 12th October 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco121018.jpg). 
+[Unit testing 22th October 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco221018.jpg). 
 
 Unit tests need to be improved, more test cases need to be created, especially the logic tests (integration) are still lacking in depth and usefulness.
 
@@ -12,7 +13,7 @@ The program has been tested manually quite a lot, as the prints of the area give
 
 # Performance testing
 
-First I wanted to get some test results, before I replace the ArrayList and Random Generator with my own versions.
+First I wanted to get some test results, before I replaced the ArrayList and Random Generator with my own versions.
 
 I made a testing option to the text UI. It takes dungeon measurements, the amount of rooms and amount of test rounds as parametres.
 
@@ -304,7 +305,7 @@ Trimming dead ends: 22.8 ms
 
 -----------------
 
-This test is 12.10.2018 after debugging OwnArrayList and using my new default benchmark class:
+### This test is 12.10.2018 after debugging OwnArrayList and using my new default benchmark class:
 
 
 Running default test round... Please wait for the results.
@@ -367,7 +368,7 @@ Trimming dead ends: 23.6 ms
 
 ----------------
 
-And another try (12.10.2018):
+### And another try (12.10.2018):
 
 
 Running default test round... Please wait for the results.
@@ -501,9 +502,112 @@ Opening entrances: 3135.8 ms
 Trimming dead ends: 16.6 ms
 
 
+--------------------
+## Another test round 22.10.2018
+
+Running default test round... Please wait for the results.
+
+Next two rounds: 5 different dens are created with these parametres: 20 room adding attempts, height 49, width 149.
+
+This result is the average result of 5 testrounds.
+Area height: 49
+Area width: 149
+Room count: 9.6
+Adding rooms: 2.2 ms
+Making maze: 13.0 ms
+Opening entrances: 1.0 ms
+Trimming dead ends: 0.8 ms
+
+This result is the average result of 5 testrounds.
+Area height: 49
+Area width: 149
+Room count: 10.4
+Adding rooms: 1.2 ms
+Making maze: 1.6 ms
+Opening entrances: 0.6 ms
+Trimming dead ends: 0.4 ms
+
+Next two rounds: 5 different dens are created with these parametres: 200 room adding attempts, height 149, width 490.
+
+This result is the average result of 5 testrounds.
+Area height: 149
+Area width: 490
+Room count: 120.8
+Adding rooms: 0.4 ms
+Making maze: 34.2 ms
+Opening entrances: 21.4 ms
+Trimming dead ends: 1.8 ms
+
+This result is the average result of 5 testrounds.
+Area height: 149
+Area width: 490
+Room count: 121.6
+Adding rooms: 1.0 ms
+Making maze: 35.8 ms
+Opening entrances: 23.8 ms
+Trimming dead ends: 1.2 ms
+
+Next two rounds: 5 different dens are created with these parametres: 2000 room adding attempts, height 490, width 1490.
+(This might take a while).
+
+This result is the average result of 5 testrounds.
+Area height: 490
+Area width: 1490
+Room count: 1231.2
+Adding rooms: 6.8 ms
+Making maze: 953.6 ms
+Opening entrances: 3388.0 ms
+Trimming dead ends: 22.2 ms
+
+This result is the average result of 5 testrounds.
+Area height: 490
+Area width: 1490
+Room count: 1245.4
+Adding rooms: 3.4 ms
+Making maze: 912.2 ms
+Opening entrances: 3453.4 ms
+Trimming dead ends: 15.4 ms
+
+### Graphs of the two performance test rounds
+
+<img src="https://github.com/apndx/DenMaker/blob/master/Documentation/performancetest201018.jpg" width="600">
+
+<img src="https://github.com/apndx/DenMaker/blob/master/Documentation/performancetest221018.jpg" width="600">
+
+### Analysis of the performance
+
+The room creation and trimmig seem to scale quite well, seems that the time requirement is more or less linear O(n) for these.
+
+The maze creation does not work as well, the time requirement seems to be around O(n^2). 
+
+The entrance creation seems to suffer most when the numbers get bigger. When te room amount rises from 120 to over 1200, and is ten times bigger, the amount of time needed is 150 times higher, so the time requirement is even more than O(n^2), 
 
 
-## Screen shots of results
+## Screen shots of default maze:
+
+Area height: 49
+Area width: 149
+Room count: 10
+Adding rooms: 0.0 ms
+Making maze: 5.0 ms
+Opening entrances: 1.0 ms
+Trimming dead ends: 0.0 ms
+
+A Den with rooms
+
+<img src="https://github.com/apndx/DenMaker/blob/master/Documentation/den_with_rooms.jpg" width="600">
+
+A Den with mazes
+
+<img src="https://github.com/apndx/DenMaker/blob/master/Documentation/den_with_maze.jpg" width="600">
+
+A Den with entrances
+
+<img src="https://github.com/apndx/DenMaker/blob/master/Documentation/den_with_entrances.jpg" width="600">
+
+A trimmed Den
+
+<img src="https://github.com/apndx/DenMaker/blob/master/Documentation/den_trimmed.jpg" width="600">
 
 
 # How to re-test 
@@ -514,7 +618,7 @@ Performance tests can be done from the text user interface by choosing the menu 
 
 ## Unit tests
 
-The jacoco test report can also be created from command line from the code root folder:
+The jacoco test report can be created from command line from the code root folder:
 
 ```
 mvn jacoco:report

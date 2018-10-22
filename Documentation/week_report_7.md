@@ -19,7 +19,6 @@ After that I continued performance testing. Very soon I realised, that the param
 I decided to create another testround that has linearly rising amount of area tiles, and same density of rooms in all scales.
 
 
-
 ### What did I learn?
  
 Testing should be planned better before implementation.
