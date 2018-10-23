@@ -15,11 +15,11 @@ import denmaker.datastructures.OwnArrayList;
  */
 public class RoomBuilder {
 
-    public Area dungeonArea;
+    public Area denArea;
 
     public RoomBuilder(Area dungeonArea) {
 
-        this.dungeonArea = dungeonArea;
+        this.denArea = dungeonArea;
     }
 
     /**
@@ -31,10 +31,10 @@ public class RoomBuilder {
         OwnArrayList<Room> roomAttempts = new OwnArrayList<>();
 
         for (int i = 0; i < attempts; i++) {
-            roomAttempts.add(new Room(dungeonArea.areaHeight, dungeonArea.areaWidth));
+            roomAttempts.add(new Room(denArea.areaHeight, denArea.areaWidth));
         }
         addRooms(roomAttempts);
-        return dungeonArea;
+        return denArea;
     }
 
     /**
@@ -47,21 +47,21 @@ public class RoomBuilder {
 
         for (int i = 0; i < rooms.size(); i++) {
             if (!collisionCheck(rooms.get(i))) {
-                dungeonArea.roomList.add(rooms.get(i));
+                denArea.roomList.add(rooms.get(i));
                 addRoomHelper(rooms.get(i));
-                dungeonArea = rooms.get(i).addRoomWalls(dungeonArea);
+                denArea = rooms.get(i).addRoomWalls(denArea);
             }
         }
-        return dungeonArea;
+        return denArea;
     }
 
     private void addRoomHelper(Room roomAttempt) {
         // room does not collide, let's put it in!
-        dungeonArea.seperateRooms++;
+        denArea.seperateRooms++;
         for (int y = roomAttempt.starty; y < roomAttempt.starty + roomAttempt.height; y++) {
             for (int x = roomAttempt.startx; x < roomAttempt.startx + roomAttempt.width; x++) {
-                dungeonArea.tiles[y][x].content = 1;
-                dungeonArea.tiles[y][x].region = dungeonArea.roomList.size();
+                denArea.tiles[y][x].content = 1;
+                denArea.tiles[y][x].region = denArea.roomList.size();
             }
         }
     }
@@ -72,13 +72,13 @@ public class RoomBuilder {
      */
     public boolean collisionCheck(Room roomAttempt) {
 
-        Tile[][] tiles = dungeonArea.tiles;
+        Tile[][] tiles = denArea.tiles;
         int startY = roomAttempt.starty;
         int startX = roomAttempt.startx;
         int height = roomAttempt.height;
         int width = roomAttempt.width;
 
-        if (startY + height > dungeonArea.areaHeight - 1 || startX + width > dungeonArea.areaWidth - 1) {
+        if (startY + height > denArea.areaHeight - 1 || startX + width > denArea.areaWidth - 1) {
             return true;
         }
 

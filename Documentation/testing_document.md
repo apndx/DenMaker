@@ -1,15 +1,15 @@
 # Unit testing
 
-[Unit testing 28th September 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco280918.jpg). 
-[Unit testing 12th October 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco121018.jpg). 
-[Unit testing 22th October 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco221018.jpg). 
+* [Unit testing 28th September 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco280918.jpg). 
+* [Unit testing 12th October 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco121018.jpg). 
+* [Unit testing 22th October 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco221018.jpg). 
 
-Unit tests need to be improved, more test cases need to be created, especially the logic tests (integration) are still lacking in depth and usefulness.
+Unit tests need to be improved, more test cases need to be created, especially the logic tests (integration testing) are still lacking in depth and usefulness.
 
 
 # Manual testing
 
-The program has been tested manually quite a lot, as the prints of the area give a quick overall idea of how well the dungeon generation is working at the moment.
+The program has been tested manually quite a lot during the whole project, as the prints of the area give a quick overall idea of how well the dungeon generation is working at the moment. This also serves as a way to see, if the user interface works as it should.
 
 # Performance testing
 
@@ -305,7 +305,11 @@ Trimming dead ends: 22.8 ms
 
 -----------------
 
-### This test is 12.10.2018 after debugging OwnArrayList and using my new default benchmark class:
+### Test round 12.10.2018 
+
+This test round has been made after debugging OwnArrayList and using my new default benchmark class:
+
+------------------------
 
 
 Running default test round... Please wait for the results.
@@ -368,7 +372,7 @@ Trimming dead ends: 23.6 ms
 
 ----------------
 
-### And another try (12.10.2018):
+### And another try 12.10.2018
 
 
 Running default test round... Please wait for the results.
@@ -431,8 +435,9 @@ Trimming dead ends: 30.2 ms
 
 ------------
 
-I continued performance testin 20th October 2018.
-Very soon I realised that I will make my life a lot easier, if I change the parametres to scale better than the ones I have used previously.
+### Test round 20.10.2018
+
+I continued performance testing 20th October 2018. Very soon I realised that I will make my life a lot easier, if I change the parametres to scale better than the ones I have used previously.
 
 These are the new results:
 
@@ -460,6 +465,8 @@ Making maze: 4.2 ms
 Opening entrances: 0.0 ms
 Trimming dead ends: 1.0 ms
 
+-----------
+
 Next two rounds: 5 different dens are created with these parametres: 200 room adding attempts, height 149, width 490.
 
 This result is the average result of 5 testrounds.
@@ -479,6 +486,8 @@ Adding rooms: 0.2 ms
 Making maze: 29.4 ms
 Opening entrances: 21.0 ms
 Trimming dead ends: 1.2 ms
+
+-----------
 
 Next two rounds: 5 different dens are created with these parametres: 2000 room adding attempts, height 490, width 1490.
 (This might take a while).
@@ -503,7 +512,7 @@ Trimming dead ends: 16.6 ms
 
 
 --------------------
-## Another test round 22.10.2018
+### Another test round 22.10.2018
 
 Running default test round... Please wait for the results.
 
@@ -527,6 +536,8 @@ Making maze: 1.6 ms
 Opening entrances: 0.6 ms
 Trimming dead ends: 0.4 ms
 
+--------------
+
 Next two rounds: 5 different dens are created with these parametres: 200 room adding attempts, height 149, width 490.
 
 This result is the average result of 5 testrounds.
@@ -546,6 +557,8 @@ Adding rooms: 1.0 ms
 Making maze: 35.8 ms
 Opening entrances: 23.8 ms
 Trimming dead ends: 1.2 ms
+
+----------------
 
 Next two rounds: 5 different dens are created with these parametres: 2000 room adding attempts, height 490, width 1490.
 (This might take a while).
@@ -574,9 +587,25 @@ Trimming dead ends: 15.4 ms
 
 <img src="https://github.com/apndx/DenMaker/blob/master/Documentation/performancetest221018.jpg" width="600">
 
-### Analysis of the performance
+### Analyse of the algorithms
 
-The room creation and trimmig seem to scale quite well, seems that the time requirement is more or less linear O(n) for these.
+#### RoomBuilder
+
+* Affecting parametres: how many room adding attempts
+
+For every room the algorithm creates a room, checks all the coordinates within the room, mostly 13 x 20 = 260. If the area is free, all the coordinates are changed so that they make a room, again max 260. After this the surrounding walls are changed to walltiles, this takes max 2 x 18 + 2 x 11 = 58 rows. The other rows make around 20 lines, so all together the requirement is around around 600 codelines / room.
+
+Every room has the same maximum, so this makes the time requirement linear, O(n).
+
+
+#### MazeBuilder
+
+
+
+
+### Analysis of the performance tests
+
+The performance testing suggests that room creation and trimmig seem to scale quite well, seems that the time requirement is more or less linear O(n) for these.
 
 The maze creation does not work as well, the time requirement seems to be around O(n^2). 
 
@@ -614,7 +643,7 @@ A trimmed Den
 
 ## Performance
 
-Performance tests can be done from the text user interface by choosing the menu option 2. After this you can choose, if you want to run the default test, or modify the parametres.
+Performance tests can be done from the text user interface by choosing the menu option 2. After this you can choose if you want to run the default test, or modify the parametres.
 
 ## Unit tests
 

@@ -5,7 +5,6 @@
  */
 package denmaker.domain;
 
-//import java.util.ArrayList;
 import denmaker.datastructures.OwnArrayList;
 
 /**
@@ -16,13 +15,13 @@ import denmaker.datastructures.OwnArrayList;
  */
 public class MazeBuilder {
 
-    public Area dungeonArea;
+    public Area denArea;
     public int ynow;
     public int xnow;
     public int mazeRegion;
 
     public MazeBuilder(Area dungeonArea) {
-        this.dungeonArea = dungeonArea;
+        this.denArea = dungeonArea;
         this.ynow = 1;
         this.xnow = 1;
         this.mazeRegion = 0;
@@ -43,8 +42,8 @@ public class MazeBuilder {
             Tile start = emptyFinder(ynow, xnow);
 
             mazeRegion--;
-            dungeonArea.tiles[start.y][start.x].content = 1;
-            dungeonArea.tiles[start.y][start.x].region = mazeRegion;
+            denArea.tiles[start.y][start.x].content = 1;
+            denArea.tiles[start.y][start.x].region = mazeRegion;
             //neighbour check  
             for (int i = -1; i <= 1; i++) {
                 for (int j = -1; j <= 1; j++) {
@@ -52,7 +51,7 @@ public class MazeBuilder {
                     if (i == 0 && j == 0 || i != 0 && j != 0) {
                         continue;
                     }
-                    Tile neighbor = dungeonArea.tiles[start.y + i][start.x + j];
+                    Tile neighbor = denArea.tiles[start.y + i][start.x + j];
 
                     try {
                         if (neighbor.content == 1) {
@@ -70,12 +69,12 @@ public class MazeBuilder {
 
                 Tile next = neighbors.get((int) (Math.random() * neighbors.size()));
                 neighbors.remove(next);
-                Tile facing = next.checkOpposite(dungeonArea);
+                Tile facing = next.checkOpposite(denArea);
 
                 try {
                     // if both tiles are wall tiles and not on the edges
                     if (next.content == 0) {
-                        if (facing.content == 0 && facing.y < dungeonArea.areaHeight - 1 && facing.x < dungeonArea.areaWidth - 1) {
+                        if (facing.content == 0 && facing.y < denArea.areaHeight - 1 && facing.x < denArea.areaWidth - 1) {
 
                             next.content = 1;
                             next.region = mazeRegion;
@@ -90,7 +89,7 @@ public class MazeBuilder {
                                     if (k == 0 && l == 0 || k != 0 && l != 0) {
                                         continue;
                                     }
-                                    Tile neighbor2 = dungeonArea.tiles[facing.y + k][facing.x + l];
+                                    Tile neighbor2 = denArea.tiles[facing.y + k][facing.x + l];
 
                                     try {
                                         if (neighbor2.content == 1) {
@@ -112,7 +111,7 @@ public class MazeBuilder {
                 break;
             }
         }
-        return this.dungeonArea;
+        return this.denArea;
     }
 
     /**
@@ -126,26 +125,26 @@ public class MazeBuilder {
     public Tile emptyFinder(int y, int x) {
 
         //if we get bad parametres, we change them to default starting point
-        if (y < 1 || x < 1 || y > dungeonArea.areaHeight - 2 || x > dungeonArea.areaWidth - 2) {
+        if (y < 1 || x < 1 || y > denArea.areaHeight - 2 || x > denArea.areaWidth - 2) {
             y = 1;
             x = 1;
         }
 
-        for (int i = y; i < dungeonArea.tiles.length - 2; i++) {
-            for (int j = x; j < dungeonArea.tiles[i].length - 2; j++) {
+        for (int i = y; i < denArea.tiles.length - 2; i++) {
+            for (int j = x; j < denArea.tiles[i].length - 2; j++) {
 
-                Tile tileNow = dungeonArea.tiles[i][j];
+                Tile tileNow = denArea.tiles[i][j];
 
                 if (tileNow.content == 0) {
 
-                    if (dungeonArea.tiles[i + 1][j].content == 0
-                            && dungeonArea.tiles[i][j - 1].content == 0
-                            && dungeonArea.tiles[i][j + 1].content == 0
-                            && dungeonArea.tiles[i - 1][j].content == 0
-                            && dungeonArea.tiles[i - 1][j - 1].content == 0
-                            && dungeonArea.tiles[i - 1][j + 1].content == 0
-                            && dungeonArea.tiles[i + 1][j - 1].content == 0
-                            && dungeonArea.tiles[i + 1][j + 1].content == 0) {
+                    if (denArea.tiles[i + 1][j].content == 0
+                            && denArea.tiles[i][j - 1].content == 0
+                            && denArea.tiles[i][j + 1].content == 0
+                            && denArea.tiles[i - 1][j].content == 0
+                            && denArea.tiles[i - 1][j - 1].content == 0
+                            && denArea.tiles[i - 1][j + 1].content == 0
+                            && denArea.tiles[i + 1][j - 1].content == 0
+                            && denArea.tiles[i + 1][j + 1].content == 0) {
                         ynow = y;
                         xnow = x;
                         return tileNow;
@@ -158,12 +157,12 @@ public class MazeBuilder {
 
     public Area deadEndExterminator() {
 
-        for (int y = 1; y < this.dungeonArea.areaHeight - 1; y++) {
-            for (int x = 1; x < this.dungeonArea.areaWidth - 1; x++) {
+        for (int y = 1; y < this.denArea.areaHeight - 1; y++) {
+            for (int x = 1; x < this.denArea.areaWidth - 1; x++) {
 
-                if (this.dungeonArea.tiles[y][x].content == 1) {
+                if (this.denArea.tiles[y][x].content == 1) {
 
-                    Tile underScrutiny = this.dungeonArea.tiles[y][x];
+                    Tile underScrutiny = this.denArea.tiles[y][x];
 
                     while (true) {
                         int deadCount = deadEndHelper(underScrutiny);
@@ -178,7 +177,7 @@ public class MazeBuilder {
                 }
             }
         }
-        return this.dungeonArea;
+        return this.denArea;
     }
 
     public int deadEndHelper(Tile underScrutiny) {
@@ -190,7 +189,7 @@ public class MazeBuilder {
                     continue;
                 }
                 try {
-                    Tile neighbor = this.dungeonArea.tiles[underScrutiny.y + k][underScrutiny.x + l];
+                    Tile neighbor = this.denArea.tiles[underScrutiny.y + k][underScrutiny.x + l];
                     if (neighbor.content == 0) {
                         deadCount++;
                     }

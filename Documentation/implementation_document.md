@@ -15,32 +15,38 @@ Den-making phases:
 
 The program consist of three parts:
 
-1. Datastructures
+1. Datastructures 
 2. Domain
 3. UI
 
+## UML-graph
+
+[The structure of the program](https://github.com/apndx/DenMaker/blob/master/Documentation/UML_attributes.png)
+
+
 ### Datastructures
 
-1. ArrayList - used in almost every class to some extent (home made implementation still under construction)
-2. Random Generator - used to determine room sizes, and to which direction to continue the maze (home made implementation still under construction)
+1. ArrayList - used in almost every class to some extent
 
-Minimum heap nor a queue were not needed as I first had planned. An arraylist with randomness was used to replace these.
+Minimum heap nor a queue were not needed as I first had planned. An arraylist with randomness was used to replace these. Also the Java random generator was used in the end instead of a home made version.
 
 
 ### Domain
 
-1. Tile 
-2. Room
-3. Area
-4. Logic
-5. Roombuilder
-6. Mazebuilder
+The domain package contains the building blocks and tools for den making.
+
+1. Tile - Each Area coordinate has a Tile, that has content, x- and y-coordinates, a parent (null at first) and region
+2. Room - Room has height, width, starty and startx (up-left-corner of the room) and a list of roomwalls.
+3. Area - Area has height, width, two dimensional Array of tiles, list of rooms, how many separete roomregions there are and a list or performance values about the creation process.
+4. Logic - Logic has an Area, RoomBuilder, Mazebuilder and a Benchmark, and is generally working between the userinterface and other parts of the program.
+5. Roombuilder - has the Area that is under construction. Function of the class is to add the rooms to the area.
+6. Mazebuilder - has the Area that is under construction, also current coordinates and mazeregion.
+7. Benchmark - has the logic, as it is needed for testing all the functions. Also has lists form testresults lists, and average performances. 
   
 ### UI
 
 1. Main - starts the program textUI 
 2. TextUI - Menu options: 1. Create a new Den, 2. Test mode, 3. Quit
-
 
 
 ### JavaDoc

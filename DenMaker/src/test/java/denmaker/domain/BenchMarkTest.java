@@ -49,7 +49,7 @@ public class BenchMarkTest {
         this.testLogic.benchmark.testLooper(2, 2, 100, 100); // roomattempts, testruns, height, width
         this.testLogic.benchmark.averageCounter(2);          // testruns
         assertEquals(2, testLogic.benchmark.testResults.size());    
-        assertEquals(0.0, (testLogic.benchmark.roomAmountSum/2), 2); 
+        assertEquals(0.0, (testLogic.benchmark.averagePerformance.get(0)/2), 2); 
     }
 
     

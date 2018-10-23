@@ -36,8 +36,8 @@ public class Logic {
      */
     public void changeArea(int height, int width) {
         this.denArea = new Area(height, width);
-        this.roomBuilder.dungeonArea = this.denArea;
-        this.mazeBuilder.dungeonArea = this.denArea;
+        this.roomBuilder.denArea = this.denArea;
+        this.mazeBuilder.denArea = this.denArea;
     }
 
     /**

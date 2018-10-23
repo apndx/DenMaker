@@ -17,23 +17,12 @@ public class Benchmark {
     public Logic logic;
     public OwnArrayList<OwnArrayList> testResults;  // Each area has a list of performance values, this is a list of those lists
     public OwnArrayList<Double> averagePerformance;
-    public double roomAmountSum;
-    public double roomSum;
-    public double mazeSum;
-    public double entranceSum;
-    public double trimSum;
 
     public Benchmark(Logic logic) {
 
         this.logic = logic;
         this.testResults = new OwnArrayList<>();
         this.averagePerformance = new OwnArrayList<>(); // 0 room amount, 1 room time, 2 maze time, 3 entrances time, 4 trimming time
-        this.roomAmountSum = 0;
-        this.roomSum = 0;
-        this.mazeSum = 0;
-        this.entranceSum = 0;
-        this.trimSum = 0;
-
     }
 
     /**
@@ -83,6 +72,12 @@ public class Benchmark {
      *
      */
     public void averageCounter(int howMany) {
+
+        double roomAmountSum = 0;
+        double roomSum = 0;
+        double mazeSum = 0;
+        double entranceSum = 0;
+        double trimSum = 0;
 
         for (int i = 0; i < testResults.size(); i++) {
             OwnArrayList<Double> listToCheck = testResults.get(i);

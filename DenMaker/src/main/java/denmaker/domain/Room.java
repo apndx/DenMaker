@@ -5,9 +5,7 @@
  */
 package denmaker.domain;
 
-//import java.util.ArrayList;
 import denmaker.datastructures.OwnArrayList;
-import java.util.Objects;
 import java.util.Random;
 
 /**
@@ -87,11 +85,8 @@ public class Room {
         hash = 71 * hash + this.width;
         hash = 71 * hash + this.starty;
         hash = 71 * hash + this.startx;
-        //hash = 71 * hash + Objects.hashCode(this.roomWalls);
         return hash;
     }
-
- 
 
     @Override
     public boolean equals(Object obj) {
@@ -116,9 +111,7 @@ public class Room {
         }
         if (this.startx != other.startx) {
             return false;
-        }
-        if (!Objects.equals(this.roomWalls, other.roomWalls)) {
-            return false;
+
         }
         return true;
     }

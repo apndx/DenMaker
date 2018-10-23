@@ -31,9 +31,9 @@
 | 19.10 | 1,5 h| UnitTesting logic, area, ownarreylist, tile, room |
 | 20.10 | 4 h| UnitTests for mazebuilder. Performance testing, graph and analysis of results |
 | 22.10 | 2 h| Performance testing, graph and analysis of results |
+| 23.10 | 3 h| User manual, estimating algorithm time requirements from the code |
 
-
-Tot 73,5 h
+Tot 76,5 h
 
 
 
