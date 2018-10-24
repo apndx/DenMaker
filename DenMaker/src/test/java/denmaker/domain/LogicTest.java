@@ -71,7 +71,7 @@ public class LogicTest {
     @Test
     public void doesEntranceOpenCorrectly() {
 
-        testLogic.denArea = new Area(10, 10);
+        testLogic.changeArea(10, 10);
 
         Room testRoomFull = new Room(5, 5, 1, 1);
         OwnArrayList<Room> testRooms = new OwnArrayList<>();
@@ -80,6 +80,7 @@ public class LogicTest {
         testLogic.buildRooms(testRooms);
         testLogic.buildMaze();
         testLogic.getOutOfTheBox();
+        testLogic.drawArea();
 
         assertEquals(20, testLogic.denArea.roomList.get(0).roomWalls.size());
 
