@@ -155,7 +155,7 @@ public class MazeBuilder {
         return null;
     }
 
-    public Area deadEndExterminator() {
+    public Area deadEndTrimmer() {
 
         for (int y = 1; y < this.denArea.areaHeight - 1; y++) {
             for (int x = 1; x < this.denArea.areaWidth - 1; x++) {

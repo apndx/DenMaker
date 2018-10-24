@@ -76,25 +76,24 @@ public class Area {
                 int x = toMakeEntranceOf.x;
 
                 try {
-                    // do top roomtile have other region empty behind the wall?
+                    // do top roomtile have maze behind the wall?
                     if (this.tiles[y + 1][x].content == 1 && this.tiles[y - 1][x].content == 1
-                            && this.tiles[y + 1][x].region != this.tiles[y - 1][x].region) {
+                            && this.tiles[y - 1][x].region < 0) {
                         toMakeEntranceOf.region = this.tiles[y - 1][x].region;
                         potentialEntrances.add(toMakeEntranceOf);
-
                     } // left
                     else if (this.tiles[y][x + 1].content == 1 && this.tiles[y][x - 1].content == 1
-                            && this.tiles[y][x + 1].region != this.tiles[y][x - 1].region) {
+                            && this.tiles[y][x - 1].region < 0) {
                         toMakeEntranceOf.region = this.tiles[y][x - 1].region;
                         potentialEntrances.add(toMakeEntranceOf);
                     } // bottom 
                     else if (this.tiles[y + 1][x].content == 1 && this.tiles[y - 1][x].content == 1
-                            && this.tiles[y + 1][x].region != this.tiles[y - 1][x].region) {
+                            && this.tiles[y - 1][x].region < 0) {
                         toMakeEntranceOf.region = this.tiles[y - 1][x].region;
                         potentialEntrances.add(toMakeEntranceOf);
                     } // right
                     else if (this.tiles[y][x - 1].content == 1 && this.tiles[y][x + 1].content == 1
-                            && this.tiles[y][x - 1].region != this.tiles[y][x + 1].region) {
+                            && this.tiles[y][x + 1].region < 0) {
                         toMakeEntranceOf.region = this.tiles[y][x + 1].region;
                         potentialEntrances.add(toMakeEntranceOf);
                     }
@@ -107,7 +106,6 @@ public class Area {
 
                 Tile entrance = potentialEntrances.get((int) (Math.random() * potentialEntrances.size()));
                 entrance.content = 1;
-                regionChanger(entrance.region, this.tiles[toGetOutOf.starty][toGetOutOf.startx].region);
 
             } else {
                 // corner cases, these are checked if the previous ones do not work
@@ -142,25 +140,8 @@ public class Area {
                 if (cornerEntrances.size() != 0) {
                     Tile entranceCorner = cornerEntrances.get((int) (Math.random() * cornerEntrances.size()));
                     entranceCorner.content = 1;
-                    regionChanger(entranceCorner.region, this.tiles[toGetOutOf.starty][toGetOutOf.startx].region);
                 }
             }
         }
     }
-
-    public void regionChanger(int regionToRemove, int regionToSpread) {
-
-        for (int i = 1; i < this.tiles.length - 2; i++) {
-            for (int j = 1; j < this.tiles[i].length - 2; j++) {
-
-                if (this.tiles[i][j].region == regionToRemove) {
-                    this.tiles[i][j].region = regionToSpread;
-                }
-            }
-        }
-        if (regionToRemove > 0) {
-            seperateRooms--;
-        }
-    }
-
 }

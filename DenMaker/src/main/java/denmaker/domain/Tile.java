@@ -27,7 +27,7 @@ public class Tile {
         this.y = y;
         this.x = x;
         this.parent = parent;
-        this.region = 0; // 0: no region, negative: lonely corridor, positive: connected to room
+        this.region = 0; // 0: no region, negative: maze corridor
     }
 
     public void setParent(Tile parent) {

@@ -32,8 +32,10 @@
 | 20.10 | 4 h| UnitTests for mazebuilder. Performance testing, graph and analysis of results |
 | 22.10 | 2 h| Performance testing, graph and analysis of results |
 | 23.10 | 3 h| User manual, estimating algorithm time requirements from the code |
+| 24.10 | 3,5 h| Estimating time requirements from code, making some improvements to performance|
 
-Tot 76,5 h
+
+Tot 80 h
 
 
 

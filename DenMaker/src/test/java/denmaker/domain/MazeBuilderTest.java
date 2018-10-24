@@ -111,7 +111,7 @@ public class MazeBuilderTest {
         assertEquals(1, this.testLogic.mazeBuilder.deadEndHelper(this.testLogic.denArea.tiles[1][7]));
         assertEquals(2, this.testLogic.mazeBuilder.deadEndHelper(this.testLogic.denArea.tiles[1][6]));
 
-        testMazeBuilder.deadEndExterminator();
+        testMazeBuilder.deadEndTrimmer();
         assertEquals(0, testDungeonArea.tiles[1][8].content);
     }
 

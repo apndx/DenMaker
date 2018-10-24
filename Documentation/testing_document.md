@@ -581,38 +581,96 @@ Making maze: 912.2 ms
 Opening entrances: 3453.4 ms
 Trimming dead ends: 15.4 ms
 
-### Graphs of the two performance test rounds
+### Graphs of performance tests 20-22.10.2018
 
 <img src="https://github.com/apndx/DenMaker/blob/master/Documentation/performancetest201018.jpg" width="600">
 
 <img src="https://github.com/apndx/DenMaker/blob/master/Documentation/performancetest221018.jpg" width="600">
 
-### Analyse of the algorithms
-
-#### RoomBuilder
-
-* Affecting parametres: how many room adding attempts
-
-For every room the algorithm creates a room, checks all the coordinates within the room, mostly 13 x 20 = 260. If the area is free, all the coordinates are changed so that they make a room, again max 260. After this the surrounding walls are changed to walltiles, this takes max 2 x 18 + 2 x 11 = 58 rows. The other rows make around 20 lines, so all together the requirement is around around 600 codelines / room.
-
-Every room has the same maximum, so this makes the time requirement linear, O(n).
-
-
-#### MazeBuilder
-
-
-
-
-### Analysis of the performance tests
+### Analysis of the performance tests 20-22.10.2018
 
 The performance testing suggests that room creation and trimmig seem to scale quite well, seems that the time requirement is more or less linear O(n) for these.
 
-The maze creation does not work as well, the time requirement seems to be around O(n^2). 
+The maze creation does not work as well, the time requirement seems to be around O(n^2).
 
-The entrance creation seems to suffer most when the numbers get bigger. When te room amount rises from 120 to over 1200, and is ten times bigger, the amount of time needed is 150 times higher, so the time requirement is even more than O(n^2), 
+The entrance creation seems to suffer most when the numbers get bigger. When te room amount rises from 120 to over 1200, and is ten times bigger, the amount of time needed is 150 times higher, so the time requirement seems to bee O(x * n^2) = O(n^2), not as high as O(n^3) though. 
 
+### Test round 24.10.2018
+
+After going through the code for Entrance opening process, I found the culprit for the rapidly escalating poor performance: it was the region changer. As it function was not yet completed, I decided to leave it out. The performance was improved, and the deterioration in the cave formation was not too alarming. There were stranded caves before, and now maybe a couple more that previously. I decided to get rid of a method that made changes to the regions during entrance opening. Instead I made the entrance opening method to strongly prefere opening the entrances between rooms and maze-corridors. This improved the entrance opening performance significantly and also reduced the amount of stranded rooms.
+
+---------------------------
+
+Running default test round... Please wait for the results.
+
+Next two rounds: 5 different dens are created with these parametres: 20 room adding attempts, height 49, width 149.
+
+This result is the average result of 5 testrounds.
+Area height: 49
+Area width: 149
+Room count: 9.0
+Adding rooms: 1.8 ms
+Making maze: 13.4 ms
+Opening entrances: 0.2 ms
+Trimming dead ends: 1.6 ms
+
+This result is the average result of 5 testrounds.
+Area height: 49
+Area width: 149
+Room count: 11.4
+Adding rooms: 1.0 ms
+Making maze: 4.8 ms
+Opening entrances: 0.0 ms
+Trimming dead ends: 0.4 ms
+
+Next two rounds: 5 different dens are created with these parametres: 200 room adding attempts, height 149, width 490.
+
+This result is the average result of 5 testrounds.
+Area height: 149
+Area width: 490
+Room count: 118.0
+Adding rooms: 0.8 ms
+Making maze: 37.6 ms
+Opening entrances: 1.4 ms
+Trimming dead ends: 1.6 ms
+
+This result is the average result of 5 testrounds.
+Area height: 149
+Area width: 490
+Room count: 119.2
+Adding rooms: 0.2 ms
+Making maze: 34.0 ms
+Opening entrances: 1.4 ms
+Trimming dead ends: 2.0 ms
+
+Next two rounds: 5 different dens are created with these parametres: 2000 room adding attempts, height 490, width 1490.
+(This might take a while).
+
+This result is the average result of 5 testrounds.
+Area height: 490
+Area width: 1490
+Room count: 1228.4
+Adding rooms: 3.2 ms
+Making maze: 892.6 ms
+Opening entrances: 3.2 ms
+Trimming dead ends: 16.0 ms
+
+This result is the average result of 5 testrounds.
+Area height: 490
+Area width: 1490
+Room count: 1252.6
+Adding rooms: 3.4 ms
+Making maze: 921.2 ms
+Opening entrances: 3.0 ms
+Trimming dead ends: 15.2 ms
+
+### Graphs of performance test 24.10.2018
+
+<img src="https://github.com/apndx/DenMaker/blob/master/Documentation/performancetest241018.jpg" width="600">
 
 ## Screen shots of default maze:
+
+Here are some printouts to make it more tangible how the caves look like. These prints are made with the default cave:
 
 Area height: 49
 Area width: 149

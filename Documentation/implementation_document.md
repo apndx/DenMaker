@@ -60,12 +60,54 @@ mvn javadoc:javadoc
 After this the JavaDoc can be browsed from the file _target/site/apidocs/index.html_
 
 
-# Algorithms
+### Analyse of the algorithms
+
+After benchmarking I decided to see how the results compare with an analysis of the code.
 
 
+#### RoomBuilder
 
-# Complexity and performance
+* Affecting parametres: how many room adding attempts
+* Methods used: RoomBuilder.addRooms()
 
+For every room the algorithm creates a room, checks all the coordinates within the room, mostly 13 x 20 = 260. If the area is free, all the coordinates are changed so that they make a room, again max 260. After this the surrounding walls are changed to walltiles, this takes max 2 x 18 + 2 x 11 = 58 rows. The other rows make around 20 lines, so all together the requirement is around around 600 codelines / room.
+
+Every room has the same maximum, so this makes the time requirement linear, O(n).
+
+#### MazeBuilder
+
+* Affecting parametres: how many Tiles in the Den Area
+* Methods used: MazeBuilder.emptyFinder(), MazeBuilder.build(), tile.checkOpposite(), Area.solidifyWalls()
+
+In the worst scenario emptyFinder method (finds the starting point of the maze) will have to check every tile of the area, so it has a time requirement on O(n).
+
+The mazebuilding starts finding neighbor tiles, each tile has maximum of four neighbors. The neighbors are stored in an OwnArraylist, which (usually) takes a costant time O(1). After that a random Tile is chosen and removed from OwnArrayList, and in the worst scenario all neighbors on the list need to be moved to the left. A Tile facing the chosen neighbor is found next in constant time. If some conditions are met, there are a few rows of operations, and again a neighbor search, again new neighbors are added to the list if they are still solid. 
+
+In the end wall sodifying changes the Tile content of every room wall Tile, this takes max 58 code rows /room, so the time requirement for this is linear O(n).
+
+When we calculate all these parts together, we get O(n) + O(m + 4n2n) (this is about the average amount of neighbors on the list) + O(n), and this makes the time requirement O(n^2).
+
+For a regular Prim algorithm the time requirement is O(n + m log n) where n is the amount of tiles and m the amount of edges, and the data structure in use is a heap.
+
+I think my algoritghm is slowed down by OwnArrayList, and on a hindsight I really should have implemented a heap to do the job here.
+
+### Opening the entrances in Area 
+
+* Affecting parametres: amount of rooms on the area
+* Methods used: Area.outOfTheBox() 
+
+This method tries to find an entrance for each room. 
+
+In the worst scenario, the method checks each room wall tile once, and for corner tiles two times. This makes the method time requirement linear O(n) where the parameter is the amount of rooms in the area. This seems to be in correlation with the tests, after the unefficient regioncombiner has been removed.
+
+### Trimming the maze
+
+* Affecting parametres: Tile amount
+* Methods used: MazeBuilder.deadEndTrimmer(), deadEndHelper()
+
+The method goes through all tiles of the area. If the tile has four or three solid tiles surrounding it, it is a dead end. Then deadends are removed recursively, until there come's an tile, that has less than three solid blocks surrounding it.
+
+The time requirement is quite hard to grasp, as the recursive operations can be quite long and happen quite often, and it is only done when a dead end is found. However, the benchmark testing seems to suggest that the performance of this algorith is near linear, so I guess these operations are rare enough. O(n) it might be then.
 
 
 # Improvement suggestions

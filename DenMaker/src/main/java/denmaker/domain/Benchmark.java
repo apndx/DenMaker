@@ -60,7 +60,7 @@ public class Benchmark {
             logic.buildRooms(attempts);
             logic.buildMaze();
             logic.getOutOfTheBox();
-            logic.killDeadEnds();
+            logic.trimDeadEnds();
             testResults.add(logic.denArea.performance);
         }
     }

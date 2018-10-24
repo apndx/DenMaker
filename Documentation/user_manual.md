@@ -12,7 +12,7 @@ java -jar DenMaker.jar
 
 ## Text User Interface
 
-The program starts from a main menu. Here you can choose to make an ASCII presentation of the Den making process (1), or run a test round to test performance (2). You can also quit the program (3).
+The program starts from a main menu. Here you can choose to make an ASCII presentation of the den making process (1), or run a test round to test performance (2). You can also quit the program (3).
 
 ```
 Welcome to DenMaker!
@@ -25,7 +25,7 @@ What to do next?
 
 ```
 
-### Let's go through the option 1 first.
+### Option 1, Den making
 
 ```
 1. Create a new Den
@@ -47,7 +47,7 @@ After the parametres are given, the program prints four scenes from the den maki
 
 After the printouts there is some statistic data from the creation, and you can choose again from the main menu how to continue.
 
-### Test mode, option 2
+### Option 2, Test mode
 
 ```
 2. Test mode

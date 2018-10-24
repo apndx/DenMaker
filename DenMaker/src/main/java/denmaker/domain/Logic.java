@@ -145,9 +145,9 @@ public class Logic {
     /**
      * Trims dead ends
      */
-    public void killDeadEnds() {
+    public void trimDeadEnds() {
         long start = System.currentTimeMillis();
-        this.denArea = mazeBuilder.deadEndExterminator();
+        this.denArea = mazeBuilder.deadEndTrimmer();
         long stop = System.currentTimeMillis();
         howLong(start, stop);
     }
