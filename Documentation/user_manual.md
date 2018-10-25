@@ -1,6 +1,6 @@
 # Manual
 
-Load the file [DenMaker.jar](https://github.com/apndx/DenMaker..) not there yet
+Load the file [DenMaker.jar](https://github.com/apndx/DenMaker/releases).
 
 ## Starting the program
 
