@@ -20,7 +20,9 @@ I made a testing option to the text UI. It takes dungeon measurements, the amoun
 
 ## Test results
 
-### These performance resulst are from tests that have been made 5.10.2018 using imported Java ArrayList and Random generator.
+### Test round 5.10.2018 
+
+These performance resulst are from tests that have been made 5.10.2018 using imported Java ArrayList and Random generator.
 
 ---------------
 
@@ -88,7 +90,9 @@ The opening entrances algorithm seems to be working quite slowly when the area s
 
 ----------------
 
-### These performance resulst are from tests that have been made 10.10.2018 using my first version of OwnArrayList
+### Test round 10.10.2018 
+
+These performance resulst are from tests that have been made 10.10.2018 using my first version of OwnArrayList
 
 Area height: 49
 Area width: 149

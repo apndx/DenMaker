@@ -1,14 +1,13 @@
 # Project implementation
 
-The project has followed mostly well the [initial plan](https://github.com/apndx/DenMaker/blob/master/Documentation/design_document.md)
+The project has followed the [initial plan](https://github.com/apndx/DenMaker/blob/master/Documentation/design_document.md) quite nicely.
 
-The user can choose either a denmaking with drawing, or test option in the main manu.
-Den-making phases: 
+The user can choose in the main manu either to create a Den with a print out of the result, or test algorithm performance times. Den-making phases: 
 
 1. First there is an area that is all solid, user can give width and height as parametres
 2. Random rooms are added, user can give amount of room adding attempts as a parameter
-3. Solid matter is filled with a maze, the algoright for this is a variation of a Prim
-4. Rooms are connected to the dungeon
+3. Solid matter is filled with a maze, the algoritm for this is a variation of a Prim
+4. Rooms are connected to the den
 5. Dead ends are trimmed
 
 ## Package structure
@@ -26,7 +25,7 @@ The program consist of three parts:
 
 ### Datastructures
 
-1. ArrayList - used in almost every class to some extent
+1. OwnArrayList - used in almost every class to some extent
 
 Minimum heap nor a queue were not needed as I first had planned. An arraylist with randomness was used to replace these. Also the Java random generator was used in the end instead of a home made version.
 
@@ -47,17 +46,6 @@ The domain package contains the building blocks and tools for den making.
 
 1. Main - starts the program textUI 
 2. TextUI - Menu options: 1. Create a new Den, 2. Test mode, 3. Quit
-
-
-### JavaDoc
-
-JavaDoc can be generated with a command:
-
-```
-mvn javadoc:javadoc
-```
-
-After this the JavaDoc can be browsed from the file _target/site/apidocs/index.html_
 
 
 ### Analyse of the algorithms
@@ -93,7 +81,7 @@ I think my algoritghm is slowed down by OwnArrayList, and on a hindsight I reall
 
 The Mazebuilder requires space for its neighbor lists, which can be four times the amount of tiles of the area, which makes it linear O(n) where the n is the amount of tiles. Mazebuilder makes the maze building search in the area, which it gets from the logic where it again returns it after the maze is built. 
 
-### Opening the entrances in Area 
+#### Opening the entrances in Area 
 
 * Affecting parametres: amount of rooms on the area
 * Methods used: Area.outOfTheBox() 
@@ -104,7 +92,7 @@ In the worst scenario, the method checks each room wall tile once, and for corne
 
 As space requirement goes, outOfTheBox -method uses the roomList of the area and makes a new Tile list of potentia entrances. The size of this debends of the amount of rooms, and is max 58 tiles / room. This makes the space requirement linear O(n) where the n is the amount of rooms.
 
-### Trimming the maze
+#### Trimming the maze
 
 * Affecting parametres: Tile amount
 * Methods used: MazeBuilder.deadEndTrimmer(), MazeBuilder.deadEndHelper()
@@ -116,12 +104,9 @@ The time requirement is quite hard to grasp, as the operations in the while loop
 Space requirement for trimming is O(1), as this method does not need to save other than a couple of tiles and variables.
 
 
-# Improvement suggestions
+### Useful functions for a project clone
 
-At the moment some rooms may remain isolated, this is more likely to happen in a very crowded area where there are a lot of rooms next to each other. It would be good to properly address this, and for example make a union find structure to guarantee the integrity of the den. Some of the den functions could be seperated as their own classes, now it is a bit messy where everything happens. Also the unit testing could be improved.
-
-
-### Creating jar from the project
+#### Creating jar from the project
 
 Command:
 
@@ -132,8 +117,23 @@ mvn package
 Generates to the _target_ forder a jar -file  _DenMaker-1.0-SNAPSHOT.jar_
 
 
+#### JavaDoc
 
-# Sources
+JavaDoc can be generated with a command:
+
+```
+mvn javadoc:javadoc
+```
+
+After this the JavaDoc can be browsed from the file _target/site/apidocs/index.html_
+
+
+## Improvement suggestions
+
+At the moment some rooms may remain isolated, this is more likely to happen in a very crowded area where there are a lot of rooms next to each other. It would be good to properly address this, and for example make a union find structure to guarantee the integrity of the den. Some of the den functions could be seperated as their own classes, now it is a bit messy where everything happens. Also the unit testing could be improved.
+
+
+## Sources
 
 * [Rooms and Mazes](http://journal.stuffwithstuff.com/2014/12/21/rooms-and-mazes/)
 * [Wikipedia](https://en.wikipedia.org/wiki/Maze_generation_algorithm)
