@@ -155,6 +155,12 @@ public class MazeBuilder {
         return null;
     }
 
+    /**
+     * Trims from the maze the dead ends that do not lead anywhere. Leaves a
+     * little tail in the up left corner.
+     *
+     * @return Area returns the Area that has now been trimmed of dead ends
+     */
     public Area deadEndTrimmer() {
 
         for (int y = 1; y < this.denArea.areaHeight - 1; y++) {
@@ -180,6 +186,12 @@ public class MazeBuilder {
         return this.denArea;
     }
 
+    /**
+     * Finds the dead ends to process
+     *
+     * @param underScrutiny The Tile that is checked
+     * @return int amount of solid Tiles surrounding the Tile under scrutiny
+     */
     public int deadEndHelper(Tile underScrutiny) {
         int deadCount = 0;
         for (int k = -1; k <= 1; k++) {

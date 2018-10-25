@@ -58,7 +58,7 @@ After the printouts there is some statistic data from the creation, and you can 
 
 ```
 
-Test mode is devided to two options. Default test mode will do a default test round that is described in more detail in the [testing document](https://github.com/apndx/DenMaker/blob/master/Documentation/testing_document.md).
+The test mode is devided to two options. Default test mode will do a default test round that is described in more detail in the [testing document](https://github.com/apndx/DenMaker/blob/master/Documentation/testing_document.md).
 
 In the manual test mode you can choose the height, width and the amount of room adding attempts for the tested den area, and also how many test runs to perform. After this the results are given.
 

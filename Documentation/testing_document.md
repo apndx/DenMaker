@@ -3,8 +3,9 @@
 * [Unit testing 28th September 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco280918.jpg). 
 * [Unit testing 12th October 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco121018.jpg). 
 * [Unit testing 22th October 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco221018.jpg). 
+* [Unit testing 25th October 2018](https://github.com/apndx/DenMaker/tree/master/Documentation/jacoco251018.jpg). 
 
-Unit tests need to be improved, more test cases need to be created, especially the logic tests (integration testing) are still lacking in depth and usefulness.
+Unit tests could to be improved, more test cases could to be created, especially the logic tests (integration testing) are still lacking in depth and usefulness.
 
 
 # Manual testing

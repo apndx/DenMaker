@@ -5,7 +5,6 @@
  */
 package denmaker.domain;
 
-//import java.util.ArrayList;
 import denmaker.datastructures.OwnArrayList;
 
 /**

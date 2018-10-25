@@ -8,8 +8,8 @@ package denmaker.domain;
 import denmaker.datastructures.OwnArrayList;
 
 /**
- * Makes a new dungeon area There is a constructor for default area of height 50
- * and width 150 and a constructor for an area that takes height and width as
+ * Makes a new dungeon area There is a constructor for default area of height 49
+ * and width 149 and a constructor for an area that takes height and width as
  * parameters
  *
  * @author apndx

@@ -1,6 +1,6 @@
 # Project implementation
 
-The project has followed quite well the [initial plan](https://github.com/apndx/DenMaker/blob/master/Documentation/design_document.md)
+The project has followed mostly well the [initial plan](https://github.com/apndx/DenMaker/blob/master/Documentation/design_document.md)
 
 The user can choose either a denmaking with drawing, or test option in the main manu.
 Den-making phases: 
@@ -72,7 +72,7 @@ After benchmarking I decided to see how the results compare with an analysis of 
 
 For every room the algorithm creates a room, checks all the coordinates within the room, mostly 13 x 20 = 260. If the area is free, all the coordinates are changed so that they make a room, again max 260. After this the surrounding walls are changed to walltiles, this takes max 2 x 18 + 2 x 11 = 58 rows. The other rows make around 20 lines, so all together the requirement is around around 600 codelines / room.
 
-Every room has the same maximum, so this makes the time requirement linear, O(n).
+Every room has the same maximum, so this makes the time requirement linear, O(n). Also the space requirement is linear O(n), where the n is the amount of rooms that pass the test as suitable one. The rooms are saved in a list, and each room tile is checked. The roombuilder also has the area which it gets from the logic, and after adding the rooms returns the new version to logic. Area object is the place, where the list of added rooms is stored as an arraylist and the tiles are also stored in the area as an twodimensional array. Each of these take linearly more space as the amounts grow.
 
 #### MazeBuilder
 
@@ -91,6 +91,8 @@ For a regular Prim algorithm the time requirement is O(n + m log n) where n is t
 
 I think my algoritghm is slowed down by OwnArrayList, and on a hindsight I really should have implemented a heap to do the job here.
 
+The Mazebuilder requires space for its neighbor lists, which can be four times the amount of tiles of the area, which makes it linear O(n) where the n is the amount of tiles. Mazebuilder makes the maze building search in the area, which it gets from the logic where it again returns it after the maze is built. 
+
 ### Opening the entrances in Area 
 
 * Affecting parametres: amount of rooms on the area
@@ -98,24 +100,29 @@ I think my algoritghm is slowed down by OwnArrayList, and on a hindsight I reall
 
 This method tries to find an entrance for each room. 
 
-In the worst scenario, the method checks each room wall tile once, and for corner tiles two times. This makes the method time requirement linear O(n) where the parameter is the amount of rooms in the area. This seems to be in correlation with the tests, after the unefficient regioncombiner has been removed.
+In the worst scenario, the method checks each room wall tile once, and for corner tiles two times. This makes the method time requirement linear O(n) where the parameter is the amount of rooms in the area. This seems to be in correlation with the tests, after the unefficient regionc ombiner has been removed.
+
+As space requirement goes, outOfTheBox -method uses the roomList of the area and makes a new Tile list of potentia entrances. The size of this debends of the amount of rooms, and is max 58 tiles / room. This makes the space requirement linear O(n) where the n is the amount of rooms.
 
 ### Trimming the maze
 
 * Affecting parametres: Tile amount
-* Methods used: MazeBuilder.deadEndTrimmer(), deadEndHelper()
+* Methods used: MazeBuilder.deadEndTrimmer(), MazeBuilder.deadEndHelper()
 
 The method goes through all tiles of the area. If the tile has four or three solid tiles surrounding it, it is a dead end. Then deadends are removed recursively, until there come's an tile, that has less than three solid blocks surrounding it.
 
-The time requirement is quite hard to grasp, as the recursive operations can be quite long and happen quite often, and it is only done when a dead end is found. However, the benchmark testing seems to suggest that the performance of this algorith is near linear, so I guess these operations are rare enough. O(n) it might be then.
+The time requirement is quite hard to grasp, as the operations in the while loop can take quite many rounds and happen quite often debending of the structure of the maze, and it is only done when a dead end is found. However, the benchmark testing seems to suggest that the performance of this algorith is near linear, so I guess these operations are rare enough. O(n) it might be then.
+
+Space requirement for trimming is O(1), as this method does not need to save other than a couple of tiles and variables.
 
 
 # Improvement suggestions
 
-At the moment some rooms may remain isolated, this can happen when the amount of rooms in the dungeon increases but area size remains the same.
+At the moment some rooms may remain isolated, this is more likely to happen in a very crowded area where there are a lot of rooms next to each other. It would be good to properly address this, and for example make a union find structure to guarantee the integrity of the den. Some of the den functions could be seperated as their own classes, now it is a bit messy where everything happens. Also the unit testing could be improved.
 
 
 ### Creating jar from the project
+
 Command:
 
 ```

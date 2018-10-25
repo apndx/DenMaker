@@ -111,7 +111,6 @@ public class Room {
         }
         if (this.startx != other.startx) {
             return false;
-
         }
         return true;
     }

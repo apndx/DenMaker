@@ -33,9 +33,10 @@
 | 22.10 | 2 h| Performance testing, graph and analysis of results |
 | 23.10 | 3 h| User manual, estimating algorithm time requirements from the code |
 | 24.10 | 3,5 h| Estimating time requirements from code, making some improvements to performance|
+| 25.10 | 1,5 h| Finishing touches, space requirement evaluation, code clean up, last javadocs, week raport and jar- creation |
 
 
-Tot 80 h
+Tot 81,5 h
 
 
 
